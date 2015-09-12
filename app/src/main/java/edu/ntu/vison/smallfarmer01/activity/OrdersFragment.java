@@ -1,7 +1,7 @@
 package edu.ntu.vison.smallfarmer01.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,20 +17,23 @@ import edu.ntu.vison.smallfarmer01.model.Order;
 /**
  * Created by Vison on 2015/9/11.
  */
-public class OrdersActivity extends AppCompatActivity {
+public class OrdersFragment extends Fragment {
     OrdersAdapter mOrdersAdapter;
     ListView mOrderList;
 
+    public static OrdersFragment newInstance() {
+        Bundle args = new Bundle();
+
+        OrdersFragment fragment = new OrdersFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orders);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_orders, container, false);
 
-        mOrdersAdapter = new OrdersAdapter(new ApiService());
-        mOrderList = (ListView) findViewById(R.id.orderList);
-        mOrderList.setAdapter(mOrdersAdapter);
-
-        mOrdersAdapter.loadOrdersData();
+        return view;
     }
 
     private class OrdersAdapter extends BaseAdapter {
@@ -68,7 +71,7 @@ public class OrdersActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
-                view = LayoutInflater.from(OrdersActivity.this).inflate(R.layout.activity_orders_item, viewGroup, false);
+                view = LayoutInflater.from(OrdersFragment.this.getActivity()).inflate(R.layout.fragment_orders_item, viewGroup, false);
             }
 
             return view;
