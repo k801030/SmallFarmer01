@@ -29,9 +29,16 @@ public class OrdersFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_orders, container, false);
+
+        mOrderList = (ListView) view.findViewById(R.id.orderList);
+        mOrdersAdapter = new OrdersAdapter(new ApiService());
+        mOrderList.setAdapter(mOrdersAdapter);
+
+        mOrdersAdapter.loadOrdersData();
 
         return view;
     }
