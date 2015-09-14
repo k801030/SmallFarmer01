@@ -75,7 +75,7 @@ public class ApiService {
         queue.add(req);
     }
 
-    public void logIn() {
+    public void SignUp() {
 
     }
 
@@ -103,7 +103,7 @@ public class ApiService {
         void onSuccess();
         void onError();
     }
-    interface LogInCallback {
+    interface SignUpCallback {
         void onSuccess();
         void onError();
     }
