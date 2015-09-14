@@ -33,4 +33,7 @@ dependencies {
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     // for image loading
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+
+    // volley for http connection
+    compile 'com.mcxiaoke.volley:library:1.0.19'
 }

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     public class PagerAdapter extends FragmentPagerAdapter {
 
-        private final String[] TITLES = {"尚未通知", "已通知"};
+        private final String[] TITLES = {"管理出貨", "管理帳單"};
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
