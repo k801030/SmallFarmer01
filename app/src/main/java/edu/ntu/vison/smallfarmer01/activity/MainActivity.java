@@ -5,12 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -32,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: check login status
         if (!mUserService.isLogin()) {
-            goToLogInPage();
+            goToSignUpPage();
         }
 
         // init viewPager
@@ -44,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         tabs.setViewPager(pager);
     }
 
-    private void goToLogInPage() {
-        Intent intent = new Intent(this, SignInActivity.class);
+    private void goToSignUpPage() {
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
         finish();
     }
