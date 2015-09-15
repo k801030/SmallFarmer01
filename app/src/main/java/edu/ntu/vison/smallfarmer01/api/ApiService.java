@@ -35,17 +35,20 @@ public class ApiService {
 
     }
 
-    public void signIn(final String email, final String password, final SignInCallback callback) throws JSONException {
+    public void signIn(final String email, final String password, final SignInCallback callback){
         Log.d("TEST" , "LOG");
         String url = getUrlwithField("users/sign_in");
 
         // create json post
         final JSONObject jsonBody = new JSONObject();
         JSONObject jsonUser = new JSONObject();
-        jsonUser.put("email", email);
-        jsonUser.put("password", password);
-        jsonBody.put("user", jsonUser);
-
+        try {
+            jsonUser.put("email", email);
+            jsonUser.put("password", password);
+            jsonBody.put("user", jsonUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         RequestQueue queue = Volley.newRequestQueue(mContext);
         StringRequest req = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -99,21 +102,21 @@ public class ApiService {
 
     /* Callback */
 
-    interface SignInCallback {
+    public interface SignInCallback {
         void onSuccess();
         void onError();
     }
-    interface SignUpCallback {
-        void onSuccess();
-        void onError();
-    }
-
-    interface GetOrdersCallback {
+    public interface SignUpCallback {
         void onSuccess();
         void onError();
     }
 
-    interface GetBillsCallback {
+    public interface GetOrdersCallback {
+        void onSuccess();
+        void onError();
+    }
+
+    public interface GetBillsCallback {
         void onSuccess();
         void onError();
     }

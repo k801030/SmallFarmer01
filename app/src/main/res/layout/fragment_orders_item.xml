@@ -28,25 +28,25 @@
             android:orientation="vertical"
             android:padding="@dimen/fragment_orders_item_text_padding">
             <TextView
-                android:id="@+id/serialTitle"
+                android:id="@+id/serial_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="訂單編號: "
                 android:textSize="17sp" />
             <TextView
-                android:id="@+id/productTitle"
+                android:id="@+id/product_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="產品名稱: "
                 android:textSize="17sp"
-                android:layout_below="@id/serialTitle"/>
+                android:layout_below="@id/serial_title"/>
             <TextView
-                android:id="@+id/numberTitle"
+                android:id="@+id/number_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="訂貨數量: "
                 android:textSize="17sp"
-                android:layout_below="@id/productTitle"/>
+                android:layout_below="@id/product_title"/>
 
             <TextView
                 android:id="@+id/serial"
@@ -55,8 +55,8 @@
                 android:text="123"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:layout_alignTop="@id/serialTitle"
-                android:layout_toRightOf="@id/serialTitle"/>
+                android:layout_alignTop="@id/serial_title"
+                android:layout_toRightOf="@id/serial_title"/>
             <TextView
                 android:id="@+id/product"
                 android:layout_width="wrap_content"
@@ -64,8 +64,8 @@
                 android:text="火龍果"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:layout_alignTop="@id/productTitle"
-                android:layout_toRightOf="@id/productTitle"/>
+                android:layout_alignTop="@id/product_title"
+                android:layout_toRightOf="@id/product_title"/>
             <TextView
                 android:id="@+id/number"
                 android:layout_width="wrap_content"
@@ -73,12 +73,12 @@
                 android:text="5"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_alignTop="@id/numberTitle"
-                android:layout_toRightOf="@id/numberTitle"/>
+                android:layout_alignTop="@id/number_title"
+                android:layout_toRightOf="@id/number_title"/>
         </RelativeLayout>
 
         <Button
-            android:id="@+id/sendButton"
+            android:id="@+id/send_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="出貨"
@@ -87,7 +87,7 @@
 
 
     <View
-        android:id="@+id/horizontalLine"
+        android:id="@+id/horizontal_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#c8c8c8" />

@@ -1,5 +1,6 @@
 package edu.ntu.vison.smallfarmer01.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,16 +15,25 @@ import android.widget.BaseAdapter;
 import com.astuetz.PagerSlidingTabStrip;
 
 import edu.ntu.vison.smallfarmer01.R;
+import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**
  * Created by Vison on 2015/9/12.
  */
 public class MainActivity extends AppCompatActivity {
+    UserService mUserService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mUserService = new UserService(this);
+
+        // TODO: check login status
+        if (!mUserService.isLogin()) {
+            goToLogInPage();
+        }
 
         // init viewPager
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
@@ -33,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(pager);
     }
+
+    private void goToLogInPage() {
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /* Adapter */
 
     public class PagerAdapter extends FragmentPagerAdapter {
 
