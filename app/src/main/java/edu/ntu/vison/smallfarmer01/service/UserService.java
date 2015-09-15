@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public void SignIn(String email, String password, TextValidator textValidator, UserSignInCallback callback) {
-        if (textValidator.checkEmail() && textValidator.checkPassword()) {
+        if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
             String accessToken = "accesstoken";
             saveLoginInfo(accessToken);
             callback.onSuccess();
@@ -40,7 +40,7 @@ public class UserService {
     }
 
     public void SignUp(String firstName, String lastName, String email, String password, TextValidator textValidator, UserSignUpCallback callback) {
-        if (textValidator.checkEmail() && textValidator.checkPassword()) {
+        if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
             callback.onSuccess();
         } else {
             callback.onError();

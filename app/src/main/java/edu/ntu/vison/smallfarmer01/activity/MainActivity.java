@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     public class PagerAdapter extends FragmentPagerAdapter {
 
-        private final String[] TITLES = {"管理出貨", "管理帳單"};
+        private final String[] TITLES = {"管理出貨", "管理帳單", "帳號設定"};
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return OrdersFragment.newInstance();
                 case 1:
+                    return OrdersFragment.newInstance();
+                case 2:
                     return OrdersFragment.newInstance();
                 default:
                     return null;
