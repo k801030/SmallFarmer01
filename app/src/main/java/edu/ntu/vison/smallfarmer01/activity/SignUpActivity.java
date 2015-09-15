@@ -12,29 +12,25 @@ import edu.ntu.vison.smallfarmer01.service.TextValidator;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**
- * Created by Vison on 2015/9/14.
+ * Created by Vison on 2015/9/15.
  */
-public class SignInActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     UserService mUserService;
+    EditText mLastName;
+    EditText mFirstName;
     EditText mEmailText;
     EditText mPasswordText;
-    Button mSignInButton;
+    Button mSignUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_sign_up);
 
         mUserService = new UserService(this);
-
-
-        mEmailText = (EditText) findViewById(R.id.email_text);
-        mPasswordText = (EditText) findViewById(R.id.password_text);
-        mSignInButton = (Button) findViewById(R.id.sign_in_button);
-        mSignInButton.setOnClickListener(new OnClickSignInListener());
-
+        mSignUpButton = (Button) findViewById(R.id.sign_up_button);
+        mSignUpButton.setOnClickListener(new OnSignUpClickListener());
     }
-
 
     private void goToMainPage() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -43,13 +39,16 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     /* Listener */
-    public class OnClickSignInListener implements View.OnClickListener {
+
+    public class OnSignUpClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            String lastName = mLastName.getText().toString();
+            String firstName = mFirstName.getText().toString();
             String email = mEmailText.getText().toString();
             String password = mPasswordText.getText().toString();
 
-            mUserService.SignIn(email, password, new TextValidator(),new UserService.UserSignInCallback() {
+            mUserService.SignUp(lastName, firstName, email, password, new TextValidator(), new UserService.UserSignUpCallback() {
                 @Override
                 public void onSuccess() {
                     goToMainPage();
