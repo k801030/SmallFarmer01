@@ -1,8 +1,6 @@
 package edu.ntu.vison.smallfarmer01.api;
 
 import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -10,20 +8,19 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
-import org.apache.http.HttpStatus;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.Objects;
+
+import edu.ntu.vison.smallfarmer01.model.OrderItem;
 
 /**
  * Created by Vison on 2015/9/11.
@@ -88,7 +85,7 @@ public class ApiService {
 
     }
 
-    public void getOrders(String userId, String accessToken, Boolean called) {
+    public void getOrders(String userId, String accessToken, Boolean called, final GetOrdersCallback callback) {
         String url = getUrlwithField(GET_ORDERS_FIELD);
         final JSONObject json = new JSONObject();
         try {
@@ -103,14 +100,26 @@ public class ApiService {
         final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                Gson gson = new Gson();
+                try {
+                    String json = response.getJSONArray("orders").toString();
+
+                    Type orderClass = new TypeToken<ArrayList<OrderItem>>(){}.getType();
+                    ArrayList<OrderItem> orderItems = gson.fromJson(json, orderClass);
+                    callback.onSuccess(orderItems);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                error.getStackTrace();
             }
         });
+
+        queue.add(req);
     }
 
     public void getBills() {
@@ -139,7 +148,7 @@ public class ApiService {
     }
 
     public interface GetOrdersCallback {
-        void onSuccess();
+        void onSuccess(ArrayList<OrderItem> orderItems);
         void onError();
     }
 

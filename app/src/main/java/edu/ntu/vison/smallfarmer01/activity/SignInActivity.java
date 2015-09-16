@@ -39,8 +39,8 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void tempFillUpAccount() {
-        mEmailText.setText("r03725043@ntu.edu.tw");
-        mPasswordText.setText("00000000");
+        mEmailText.setText("sueming0908@gmail.com");
+        mPasswordText.setText("suesue0908");
     }
 
 

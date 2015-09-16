@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int i) {
             switch (i) {
                 case 0:
-                    return OrdersFragment.newInstance();
+                    return OrdersFragment.newInstance(MainActivity.this);
                 case 1:
-                    return OrdersFragment.newInstance();
+                    return OrdersFragment.newInstance(MainActivity.this);
                 case 2:
                     return AccountFragment.newInstance(MainActivity.this);
                 default:
