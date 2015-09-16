@@ -75,6 +75,14 @@ public class UserService {
 
     }
 
+    public String getUserId() {
+        return mSharedPreferences.getString(SHARED_PREF_KEY_USER_ID, null);
+    }
+
+    public String getAccessToken() {
+        return mSharedPreferences.getString(SHARED_PREF_KEY_ACCESS_TOKEN, null);
+    }
+
     public interface UserSignInCallback {
         void onSuccess();
         void onError();

@@ -33,6 +33,14 @@ public class SignInActivity extends AppCompatActivity {
         mSignInButton = (Button) findViewById(R.id.sign_in_button);
         mSignInButton.setOnClickListener(new OnClickSignInListener());
 
+
+        // TODO: remove below after finishing test.
+        tempFillUpAccount();
+    }
+
+    private void tempFillUpAccount() {
+        mEmailText.setText("r03725043@ntu.edu.tw");
+        mPasswordText.setText("00000000");
     }
 
 

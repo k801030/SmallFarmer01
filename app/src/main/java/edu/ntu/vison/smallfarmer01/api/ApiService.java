@@ -20,6 +20,7 @@ import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -42,7 +43,6 @@ public class ApiService {
     }
 
     public void signIn(final String email, final String password, final SignInCallback callback){
-        Log.d("TEST" , "LOG");
         String url = getUrlwithField(SIGN_IN_FIELD);
 
         // create json post
@@ -88,8 +88,29 @@ public class ApiService {
 
     }
 
-    public void getOrders() {
+    public void getOrders(String userId, String accessToken, Boolean called) {
+        String url = getUrlwithField(GET_ORDERS_FIELD);
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("id", userId);
+            json.put("access_token", accessToken);
+            json.put("called_smallfarmer_c", called);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
     }
 
     public void getBills() {
@@ -101,7 +122,7 @@ public class ApiService {
      * @param field
      * @return full request url
      */
-    public String getUrlwithField(String field) {
+    private String getUrlwithField(String field) {
         return HOST + field;
     }
 
