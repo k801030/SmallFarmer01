@@ -3,9 +3,6 @@ package edu.ntu.vison.smallfarmer01.service;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
-import javax.xml.validation.Validator;
-
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 
 /**
@@ -15,6 +12,7 @@ public class UserService {
     SharedPreferences mSharedPreferences;
     SharedPreferences.Editor mEditor;
     static final String SHARED_PREF_KEY_ACCESS_TOKEN = "ACCESS_TOKEN";
+    static final String SHARED_PREF_KEY_USER_ID = "USER_ID";
     ApiService mApiService;
 
     public UserService(Context context) {
@@ -24,17 +22,28 @@ public class UserService {
         mApiService = new ApiService(context);
     }
 
-    private void saveLoginInfo(String accessToken){
+    private void saveLoginInfo(String userId, String accessToken){
+        mEditor.putString(SHARED_PREF_KEY_USER_ID, userId);
         mEditor.putString(SHARED_PREF_KEY_ACCESS_TOKEN, accessToken);
         mEditor.commit();
     }
 
-    public void signIn(String email, String password, TextValidator textValidator, UserSignInCallback callback) {
+    public void signIn(String email, String password, TextValidator textValidator, final UserSignInCallback callback) {
         if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
             // TODO: get accessToken
-            String accessToken = "accesstoken";
-            saveLoginInfo(accessToken);
-            callback.onSuccess();
+            mApiService.signIn(email, password, new ApiService.SignInCallback() {
+                @Override
+                public void onSuccess(String userId, String accessToken) {
+                    saveLoginInfo(userId, accessToken);
+                    callback.onSuccess();
+                }
+
+                @Override
+                public void onError(int statusCode) {
+                    callback.onError();
+                }
+            });
+
         } else {
             callback.onError();
         }
@@ -43,8 +52,7 @@ public class UserService {
     public void signUp(String firstName, String lastName, String email, String password, TextValidator textValidator, UserSignUpCallback callback) {
         if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
             // TODO: get accessToken
-            String accessToken = "accesstoken";
-            saveLoginInfo(accessToken);
+            saveLoginInfo("userid","accesstoken");
             callback.onSuccess();
         } else {
             callback.onError();

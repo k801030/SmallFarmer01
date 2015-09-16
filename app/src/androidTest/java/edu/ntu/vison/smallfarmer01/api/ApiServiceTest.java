@@ -19,24 +19,55 @@ import edu.ntu.vison.smallfarmer01.activity.MainActivity;
  */
 public class ApiServiceTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
+    ApiService mApiService;
 
     public ApiServiceTest() {
         super(MainActivity.class);
     }
 
-    public void testSignIn() throws Exception {
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        mApiService = new ApiService(getActivity());
+    }
+
+
+    public void testSignInSuccess() throws Exception {
         final CountDownLatch signal = new CountDownLatch(1);
-        ApiService apiService = new ApiService(getActivity());
-        apiService.signIn("email", "password", new ApiService.SignInCallback() {
+
+        mApiService.signIn("r03725043@ntu.edu.tw", "000000000", new ApiService.SignInCallback() {
             @Override
-            public void onSuccess() {
-                Assert.assertTrue(true);
+            public void onSuccess(String userId, String accessToken) {
+                Assert.assertNotNull(userId);
+                Assert.assertNotNull(accessToken);
                 signal.countDown();
             }
 
             @Override
-            public void onError() {
-                Assert.assertTrue(false);
+            public void onError(int statusCode) {
+                Assert.assertNull(statusCode);
+                signal.countDown();
+            }
+        });
+
+        signal.await();
+
+    }
+
+    public void testSignInFailure() throws Exception {
+        final CountDownLatch signal = new CountDownLatch(1);
+
+        mApiService.signIn("r03725043@ntu.edu.tw", "123", new ApiService.SignInCallback() {
+            @Override
+            public void onSuccess(String userId, String accessToken) {
+                Assert.assertNull(userId);
+                Assert.assertNull(accessToken);
+                signal.countDown();
+            }
+
+            @Override
+            public void onError(int statusCode) {
+                Assert.assertEquals(401, statusCode);
                 signal.countDown();
             }
         });

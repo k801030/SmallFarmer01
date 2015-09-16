@@ -13,8 +13,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +32,10 @@ public class ApiService {
     public static String HOST = "http://register.ac-experts.com.tw/";
     public static String mField = "";
 
+    public static String SIGN_IN_FIELD = "account_api/v1/auth/signIn";
+    public static String GET_ORDERS_FIELD = "order_api/v1/index";
+    public static String CONFIRM_ORDER = "order/api_v1/confirm";
+
     public ApiService(Context context) {
         mContext = context;
 
@@ -37,41 +43,41 @@ public class ApiService {
 
     public void signIn(final String email, final String password, final SignInCallback callback){
         Log.d("TEST" , "LOG");
-        String url = getUrlwithField("users/sign_in");
+        String url = getUrlwithField(SIGN_IN_FIELD);
 
         // create json post
-        final JSONObject jsonBody = new JSONObject();
-        JSONObject jsonUser = new JSONObject();
+        final JSONObject json = new JSONObject();
         try {
-            jsonUser.put("email", email);
-            jsonUser.put("password", password);
-            jsonBody.put("user", jsonUser);
+            json.put("email", email);
+            json.put("password", password);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         RequestQueue queue = Volley.newRequestQueue(mContext);
-        StringRequest req = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
-                callback.onSuccess();
+            public void onResponse(JSONObject response) {
+                try {
+                    String id = response.getString("id");
+                    String token = response.getString("token");
+                    callback.onSuccess(id, token);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                callback.onError();
+                if (error.networkResponse != null && error.networkResponse.statusCode == 401) {
+                    // unauthorized: error account or password
+                    callback.onError(401);
+                }
             }
-        }) {
+        }){
             @Override
-            public String getBodyContentType() {
-                String contentType = "application/json";
-                return contentType;
-            }
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                return jsonBody.toString().getBytes();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return super.getHeaders();
             }
         };
         // req.setShouldCache(false);
@@ -103,8 +109,8 @@ public class ApiService {
     /* Callback */
 
     public interface SignInCallback {
-        void onSuccess();
-        void onError();
+        void onSuccess(String userId, String accessToken);
+        void onError(int statusCode);
     }
     public interface SignUpCallback {
         void onSuccess();

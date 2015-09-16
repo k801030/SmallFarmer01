@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.service.TextValidator;
@@ -34,10 +35,24 @@ public class SignUpActivity extends AppCompatActivity {
         mPasswordText = (EditText) findViewById(R.id.password_text);
         mSignUpButton = (Button) findViewById(R.id.sign_up_button);
         mSignUpButton.setOnClickListener(new OnSignUpClickListener());
+
+        TextView haveAccountText = (TextView) findViewById(R.id.have_account_text);
+        haveAccountText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSignInPage();
+            }
+        });
     }
 
     private void goToMainPage() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void goToSignInPage() {
+        Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
         finish();
     }
