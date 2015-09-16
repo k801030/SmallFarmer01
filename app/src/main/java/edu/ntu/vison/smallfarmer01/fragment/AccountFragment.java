@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.MainActivity;
+import edu.ntu.vison.smallfarmer01.activity.SignUpActivity;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**
@@ -40,7 +41,7 @@ public class AccountFragment extends Fragment {
 
 
     private void goToSignUpPage() {
-        Intent intent = new Intent(this.getActivity(), MainActivity.class);
+        Intent intent = new Intent(this.getActivity(), SignUpActivity.class);
         startActivity(intent);
         this.getActivity().finish();
     }

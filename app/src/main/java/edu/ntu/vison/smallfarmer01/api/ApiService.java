@@ -116,6 +116,12 @@ public class ApiService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.getStackTrace();
+                if (error.networkResponse != null && error.networkResponse.statusCode == 401) {
+                    // unauthorized: error account or password
+                    callback.onError(401);
+                }
+
+
             }
         });
 
@@ -149,7 +155,7 @@ public class ApiService {
 
     public interface GetOrdersCallback {
         void onSuccess(ArrayList<OrderItem> orderItems);
-        void onError();
+        void onError(int statusCode);
     }
 
     public interface GetBillsCallback {

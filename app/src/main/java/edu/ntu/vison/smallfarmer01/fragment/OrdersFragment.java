@@ -1,6 +1,9 @@
 package edu.ntu.vison.smallfarmer01.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +16,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.ntu.vison.smallfarmer01.R;
+import edu.ntu.vison.smallfarmer01.activity.MainActivity;
+import edu.ntu.vison.smallfarmer01.activity.SignInActivity;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 import edu.ntu.vison.smallfarmer01.model.OrderItem;
 import edu.ntu.vison.smallfarmer01.service.UserService;
@@ -50,6 +55,14 @@ public class OrdersFragment extends Fragment {
         return view;
     }
 
+    private void goToSignInPage() {
+        Intent intent = new Intent(this.getActivity(), SignInActivity.class);
+        startActivity(intent);
+        this.getActivity().finish();
+    }
+
+    /* Adapter */
+
     private class OrdersAdapter extends BaseAdapter {
         private ApiService mApiService;
         public ArrayList<OrderItem> mOrderItems = new ArrayList<OrderItem>();;
@@ -68,8 +81,20 @@ public class OrdersFragment extends Fragment {
                 }
 
                 @Override
-                public void onError() {
+                public void onError(int statusCode) {
+                    if (statusCode == 401) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(OrdersFragment.this.getActivity());
+                        builder.setMessage("登入逾時，請重新登入。");
+                        builder.setPositiveButton("確定",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        goToSignInPage();
+                                    }
+                                });
 
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    }
                 }
             });
 
