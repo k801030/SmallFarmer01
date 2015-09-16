@@ -49,7 +49,7 @@ public class SignInActivity extends AppCompatActivity {
             String email = mEmailText.getText().toString();
             String password = mPasswordText.getText().toString();
 
-            mUserService.SignIn(email, password, new TextValidator(),new UserService.UserSignInCallback() {
+            mUserService.signIn(email, password, new TextValidator(), new UserService.UserSignInCallback() {
                 @Override
                 public void onSuccess() {
                     goToMainPage();

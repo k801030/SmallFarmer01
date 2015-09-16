@@ -29,8 +29,9 @@ public class UserService {
         mEditor.commit();
     }
 
-    public void SignIn(String email, String password, TextValidator textValidator, UserSignInCallback callback) {
+    public void signIn(String email, String password, TextValidator textValidator, UserSignInCallback callback) {
         if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
+            // TODO: get accessToken
             String accessToken = "accesstoken";
             saveLoginInfo(accessToken);
             callback.onSuccess();
@@ -39,17 +40,21 @@ public class UserService {
         }
     }
 
-    public void SignUp(String firstName, String lastName, String email, String password, TextValidator textValidator, UserSignUpCallback callback) {
+    public void signUp(String firstName, String lastName, String email, String password, TextValidator textValidator, UserSignUpCallback callback) {
         if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
+            // TODO: get accessToken
+            String accessToken = "accesstoken";
+            saveLoginInfo(accessToken);
             callback.onSuccess();
         } else {
             callback.onError();
         }
     }
 
-    public void LogOut(UserLogOutCallback callback) {
+    public void logOut(UserLogOutCallback callback) {
         mEditor.clear();
         mEditor.commit();
+        callback.onSuccess();
     }
 
     public boolean isLogin() {

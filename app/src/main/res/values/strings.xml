@@ -8,4 +8,5 @@
     <string name="password_confirm_text">密碼確認</string>
     <string name="sign_in_button">登入</string>
     <string name="sign_up_button">註冊</string>
+    <string name="log_out_button">登出</string>
 </resources>

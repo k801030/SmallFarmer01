@@ -1,4 +1,4 @@
-package edu.ntu.vison.smallfarmer01.activity;
+package edu.ntu.vison.smallfarmer01.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

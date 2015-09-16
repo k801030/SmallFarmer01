@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import com.astuetz.PagerSlidingTabStrip;
 
 import edu.ntu.vison.smallfarmer01.R;
+import edu.ntu.vison.smallfarmer01.fragment.AccountFragment;
+import edu.ntu.vison.smallfarmer01.fragment.OrdersFragment;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return OrdersFragment.newInstance();
                 case 2:
-                    return OrdersFragment.newInstance();
+                    return AccountFragment.newInstance(MainActivity.this);
                 default:
                     return null;
             }

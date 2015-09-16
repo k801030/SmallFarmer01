@@ -28,6 +28,10 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         mUserService = new UserService(this);
+        mLastName = (EditText) findViewById(R.id.last_name_text);
+        mFirstName = (EditText) findViewById(R.id.first_name_text);
+        mEmailText = (EditText) findViewById(R.id.email_text);
+        mPasswordText = (EditText) findViewById(R.id.password_text);
         mSignUpButton = (Button) findViewById(R.id.sign_up_button);
         mSignUpButton.setOnClickListener(new OnSignUpClickListener());
     }
@@ -48,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
             String email = mEmailText.getText().toString();
             String password = mPasswordText.getText().toString();
 
-            mUserService.SignUp(lastName, firstName, email, password, new TextValidator(), new UserService.UserSignUpCallback() {
+            mUserService.signUp(lastName, firstName, email, password, new TextValidator(), new UserService.UserSignUpCallback() {
                 @Override
                 public void onSuccess() {
                     goToMainPage();
