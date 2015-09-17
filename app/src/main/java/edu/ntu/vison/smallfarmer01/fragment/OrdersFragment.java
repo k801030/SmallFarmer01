@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,11 +35,14 @@ public class OrdersFragment extends Fragment {
     ListView mOrderList;
     String mCallStatus;
     static UserService mUserService;
+    static ApiService mApiService;
+    static Context mContext;
 
 
     public static OrdersFragment newInstance(Context context) {
         mUserService = new UserService(context);
-
+        mApiService = new ApiService(context);
+        mContext = context;
         Bundle args = new Bundle();
 
         OrdersFragment fragment = new OrdersFragment();
@@ -96,16 +100,7 @@ public class OrdersFragment extends Fragment {
                 @Override
                 public void onError(int statusCode) {
                     if (statusCode == 401) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(OrdersFragment.this.getActivity());
-                        builder.setMessage("登入逾時，請重新登入。");
-                        builder.setPositiveButton("確定",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        goToSignInPage();
-                                    }
-                                });
-
-                        AlertDialog alert = builder.create();
+                        AlertDialog alert = new  ErrorLoadAlert().create();
                         alert.show();
                     }
                 }
@@ -130,8 +125,12 @@ public class OrdersFragment extends Fragment {
             return i;
         }
 
+        public void removeItem(int i) {
+            mOrderItems.remove(i);
+        }
+
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(final int i, View view, ViewGroup viewGroup) {
             if (view == null) {
                 view = LayoutInflater.from(OrdersFragment.this.getActivity()).inflate(R.layout.fragment_orders_item, viewGroup, false);
             }
@@ -140,18 +139,74 @@ public class OrdersFragment extends Fragment {
             TextView productNameText = (TextView) view.findViewById(R.id.product_name);
             TextView quantityText = (TextView) view.findViewById(R.id.quantity);
             ImageView productImage = (ImageView) view.findViewById(R.id.product_image);
+            Button confirmButton = (Button) view.findViewById(R.id.confirm_button);
 
-
-            OrderItem item = mOrderItems.get(i);
+            final OrderItem item = mOrderItems.get(i);
             orderIdText.setText(item.getId().toString());
             productNameText.setText(item.getProductName());
             quantityText.setText(item.getQuantity().toString());
             UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
 
+            confirmButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog alert = new ConfirmOrderAlert(i, item.getId().toString()).create();
+                    alert.show();
+                }
+            });
+
             return view;
         }
     }
 
+    private class ErrorLoadAlert extends AlertDialog.Builder {
+        public ErrorLoadAlert() {
+            super(mContext);
+            this.setMessage("登入逾時，請重新登入。");
+            this.setPositiveButton("確定",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            goToSignInPage();
+                        }
+                    });
+        }
+    }
+
+    private class ConfirmOrderAlert extends AlertDialog.Builder {
+        public ConfirmOrderAlert(final int index, final String orderId) {
+            super(mContext);
+
+
+            this.setMessage("出貨編號:" + orderId);
+            this.setCancelable(true);
+            this.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            this.setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialogInterface, int i) {
+                    mApiService.confirmOrder(mUserService.getUserId(), mUserService.getAccessToken(), orderId, new ApiService.ConfirmOrderCallback() {
+                        @Override
+                        public void onSuccess() {
+                            mOrdersAdapter.removeItem(index);
+                            mOrdersAdapter.notifyDataSetChanged();
+                            dialogInterface.dismiss();
+                        }
+
+                        @Override
+                        public void onError(int statusCode) {
+                            AlertDialog alert = new ErrorLoadAlert().create();
+                            alert.show();
+                        }
+                    });
+                }
+            });
+        }
+    }
 
     private class Switcher<T extends TextView> {
         T A, B;
