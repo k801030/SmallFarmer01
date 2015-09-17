@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -121,7 +122,39 @@ public class ApiService {
                     callback.onError(401);
                 }
 
+            }
+        });
 
+        queue.add(req);
+    }
+
+
+    public void confirmOrder(String userId, String accessToken, String orderId, final ConfirmOrderCallback callback) {
+        String url = getUrlwithField(CONFIRM_ORDER);
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("id", userId);
+            json.put("token", accessToken);
+            json.put("order_id", orderId);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                callback.onSuccess();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.getStackTrace();
+                if (error.networkResponse != null && error.networkResponse.statusCode == 401) {
+                    // unauthorized: error account or password
+                    callback.onError(401);
+                }
             }
         });
 
@@ -155,6 +188,11 @@ public class ApiService {
 
     public interface GetOrdersCallback {
         void onSuccess(ArrayList<OrderItem> orderItems);
+        void onError(int statusCode);
+    }
+
+    public interface ConfirmOrderCallback {
+        void onSuccess();
         void onError(int statusCode);
     }
 
