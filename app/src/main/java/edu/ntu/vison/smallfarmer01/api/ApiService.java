@@ -132,7 +132,7 @@ public class ApiService {
         final JSONObject json = new JSONObject();
         try {
             json.put("id", userId);
-            json.put("token", accessToken);
+            json.put("access_token", accessToken);
             json.put("order_id", orderId);
 
         } catch (JSONException e) {
