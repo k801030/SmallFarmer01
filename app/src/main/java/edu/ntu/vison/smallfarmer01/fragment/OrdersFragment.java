@@ -89,7 +89,8 @@ public class OrdersFragment extends Fragment {
         }
 
         public void loadOrdersData(String isCalled) {
-            // TODO: load data via api
+
+            mOrderItems.clear(); // clear first
             mApiService.getOrders(mUserService.getUserId(), mUserService.getAccessToken(), isCalled, new ApiService.GetOrdersCallback() {
                 @Override
                 public void onSuccess(ArrayList<OrderItem> orderItems) {

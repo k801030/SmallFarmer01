@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: check login status
         if (!mUserService.isLogin()) {
-            goToSignUpPage();
+            goToSignInPage();
         }
 
         // init viewPager
