@@ -23,6 +23,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.0'
 
+    // for image loading
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+    compile 'com.koushikdutta.urlimageviewhelper:urlimageviewhelper:1.0.4'
+
     // fb sdk
     compile 'com.facebook.android:facebook-android-sdk:4.4.0'
     // gson
@@ -31,8 +35,7 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.1.1'
     // pager tab
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
-    // for image loading
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+
 
     // volley for http connection
     compile 'com.mcxiaoke.volley:library:1.0.19'
