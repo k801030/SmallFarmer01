@@ -12,6 +12,7 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.fragment.AccountFragment;
+import edu.ntu.vison.smallfarmer01.fragment.BillFragment;
 import edu.ntu.vison.smallfarmer01.fragment.OrdersFragment;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return OrdersFragment.newInstance(MainActivity.this);
                 case 1:
-                    return OrdersFragment.newInstance(MainActivity.this);
+                    return BillFragment.newInstance(MainActivity.this);
                 case 2:
                     return AccountFragment.newInstance(MainActivity.this);
                 default:

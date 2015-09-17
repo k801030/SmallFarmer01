@@ -33,7 +33,7 @@ public class OrdersFragment extends Fragment {
     TextView mNotCalledButton;
     TextView mCalledButton;
     ListView mOrderList;
-    String mCallStatus;
+    Switcher<TextView> mSwitcher;
     static UserService mUserService;
     static ApiService mApiService;
     static Context mContext;
@@ -66,8 +66,8 @@ public class OrdersFragment extends Fragment {
 
 
         // load data from server
-        Switcher<TextView> switcher = new Switcher<>(mNotCalledButton, mCalledButton);
-        switcher.setSelect(mNotCalledButton); // default is A
+        mSwitcher = new Switcher<>(mNotCalledButton, mCalledButton);
+        mSwitcher.setSelect(mNotCalledButton); // default is A
 
         return view;
     }
@@ -147,6 +147,11 @@ public class OrdersFragment extends Fragment {
             quantityText.setText(item.getQuantity().toString());
             UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
 
+            if (!mSwitcher.isLeftSelected()) {
+                confirmButton.setVisibility(View.INVISIBLE);
+            } else {
+                confirmButton.setVisibility(View.VISIBLE);
+            }
             confirmButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

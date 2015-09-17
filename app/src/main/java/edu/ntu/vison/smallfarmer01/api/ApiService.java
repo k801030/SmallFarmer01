@@ -10,10 +10,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,7 +31,7 @@ public class ApiService {
 
     public static String SIGN_IN_FIELD = "account_api/v1/auth/signIn";
     public static String GET_ORDERS_FIELD = "order_api/v1/index";
-    public static String CONFIRM_ORDER = "order/api_v1/confirm";
+    public static String CONFIRM_ORDER = "order_api/v1/confirm";
 
     public ApiService(Context context) {
         mContext = context;
@@ -41,7 +39,7 @@ public class ApiService {
     }
 
     public void signIn(final String email, final String password, final SignInCallback callback){
-        String url = getUrlwithField(SIGN_IN_FIELD);
+        String url = getUrlWithField(SIGN_IN_FIELD);
 
         // create json post
         final JSONObject json = new JSONObject();
@@ -87,7 +85,7 @@ public class ApiService {
     }
 
     public void getOrders(String userId, String accessToken, String called, final GetOrdersCallback callback) {
-        String url = getUrlwithField(GET_ORDERS_FIELD);
+        String url = getUrlWithField(GET_ORDERS_FIELD);
         final JSONObject json = new JSONObject();
         try {
             json.put("id", userId);
@@ -130,7 +128,7 @@ public class ApiService {
 
 
     public void confirmOrder(String userId, String accessToken, String orderId, final ConfirmOrderCallback callback) {
-        String url = getUrlwithField(CONFIRM_ORDER);
+        String url = getUrlWithField(CONFIRM_ORDER);
         final JSONObject json = new JSONObject();
         try {
             json.put("id", userId);
@@ -170,7 +168,7 @@ public class ApiService {
      * @param field
      * @return full request url
      */
-    private String getUrlwithField(String field) {
+    private String getUrlWithField(String field) {
         return HOST + field;
     }
 
