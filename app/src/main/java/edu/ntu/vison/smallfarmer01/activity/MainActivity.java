@@ -48,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    private void goToSignInPage() {
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     /* Adapter */
 
     public class PagerAdapter extends FragmentPagerAdapter {

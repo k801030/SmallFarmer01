@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.MainActivity;
+import edu.ntu.vison.smallfarmer01.activity.SignInActivity;
 import edu.ntu.vison.smallfarmer01.activity.SignUpActivity;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
@@ -46,6 +47,13 @@ public class AccountFragment extends Fragment {
         this.getActivity().finish();
     }
 
+    private void goToSignInPage() {
+        Intent intent = new Intent(this.getActivity(), SignInActivity.class);
+        startActivity(intent);
+        this.getActivity().finish();
+    }
+
+
     /* Listener */
 
     public class OnClickLogOutListener implements View.OnClickListener {
@@ -54,7 +62,7 @@ public class AccountFragment extends Fragment {
             sUserService.logOut(new UserService.UserLogOutCallback() {
                 @Override
                 public void onSuccess() {
-                    goToSignUpPage();
+                    goToSignInPage();
                 }
 
                 @Override
