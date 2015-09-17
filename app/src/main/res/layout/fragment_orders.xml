@@ -3,27 +3,48 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
+        android:orientation="horizontal"
+        android:background="@drawable/switch_button"
+        android:padding="1dp">
+        <TextView
             android:id="@+id/not_called"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/switcher_text_size"
+            android:gravity="center"
+            android:background="@color/main_bg_color"
+            android:textColor="@color/main_text_color"
+            android:padding="@dimen/fragment_orders_button_padding"
             android:text="尚未通知"
             />
-        <Button
+
+        <TextView
             android:id="@+id/called"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/switcher_text_size"
+            android:gravity="center"
+            android:background="@color/default_bg_color"
+            android:padding="@dimen/fragment_orders_button_padding"
             android:text="已通知"/>
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space" />
 
     <ListView
         android:id="@+id/order_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"
+        android:background="@color/default_bg_color"></ListView>
 </LinearLayout>
