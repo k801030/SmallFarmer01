@@ -85,7 +85,7 @@ public class ApiService {
 
     }
 
-    public void getOrders(String userId, String accessToken, Boolean called, final GetOrdersCallback callback) {
+    public void getOrders(String userId, String accessToken, String called, final GetOrdersCallback callback) {
         String url = getUrlwithField(GET_ORDERS_FIELD);
         final JSONObject json = new JSONObject();
         try {

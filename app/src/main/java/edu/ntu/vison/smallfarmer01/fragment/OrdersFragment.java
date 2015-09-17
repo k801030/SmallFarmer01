@@ -16,7 +16,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.ntu.vison.smallfarmer01.R;
-import edu.ntu.vison.smallfarmer01.activity.MainActivity;
 import edu.ntu.vison.smallfarmer01.activity.SignInActivity;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 import edu.ntu.vison.smallfarmer01.model.OrderItem;
@@ -27,7 +26,10 @@ import edu.ntu.vison.smallfarmer01.service.UserService;
  */
 public class OrdersFragment extends Fragment {
     OrdersAdapter mOrdersAdapter;
+    TextView mNotCalledButton;
+    TextView mCalledButton;
     ListView mOrderList;
+    String mCallStatus;
     static UserService mUserService;
 
 
@@ -46,11 +48,19 @@ public class OrdersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_orders, container, false);
 
+        // set adapter
         mOrderList = (ListView) view.findViewById(R.id.order_list);
         mOrdersAdapter = new OrdersAdapter(new ApiService(this.getActivity()));
         mOrderList.setAdapter(mOrdersAdapter);
 
-        mOrdersAdapter.loadOrdersData();
+        // set switcher
+        mNotCalledButton = (TextView) view.findViewById(R.id.not_called);
+        mCalledButton = (TextView) view.findViewById(R.id.called);
+
+
+        // load data from server
+        Switcher<TextView> switcher = new Switcher<>(mNotCalledButton, mCalledButton);
+        switcher.setSelect(mNotCalledButton); // default is A
 
         return view;
     }
@@ -71,9 +81,9 @@ public class OrdersFragment extends Fragment {
             this.mApiService = apiService;
         }
 
-        public void loadOrdersData() {
+        public void loadOrdersData(String isCalled) {
             // TODO: load data via api
-            mApiService.getOrders(mUserService.getUserId(), mUserService.getAccessToken(), false, new ApiService.GetOrdersCallback() {
+            mApiService.getOrders(mUserService.getUserId(), mUserService.getAccessToken(), isCalled, new ApiService.GetOrdersCallback() {
                 @Override
                 public void onSuccess(ArrayList<OrderItem> orderItems) {
                     mOrderItems = orderItems;
@@ -133,6 +143,52 @@ public class OrdersFragment extends Fragment {
             quantityText.setText(item.getQuantity().toString());
 
             return view;
+        }
+    }
+
+
+    private class Switcher<T extends TextView> {
+        T A, B;
+        T selected, unselected;
+        public Switcher(final T A, final T B) {
+            this.A = A;
+            this.B = B;
+            this.A.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setSelect(A);
+                }
+            });
+            this.B.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setSelect(B);
+                }
+            });
+        }
+
+        private void setSelect(T selected) {
+            this.selected = selected;
+            if (A.equals(selected)) {
+                unselected = B;
+                mOrdersAdapter.loadOrdersData("false");
+            } else {
+                unselected = A;
+                mOrdersAdapter.loadOrdersData("true");
+            }
+            setView();
+        }
+
+
+        private void setView() {
+            selected.setBackgroundColor(getResources().getColor(R.color.main_bg_color));
+            selected.setTextColor(getResources().getColor(R.color.main_text_color));
+            unselected.setBackgroundColor(getResources().getColor(R.color.default_bg_color));
+            unselected.setTextColor(getResources().getColor(R.color.main_bg_color));
+        }
+
+        public boolean isLeftSelected() {
+            return A.equals(selected);
         }
     }
 }
