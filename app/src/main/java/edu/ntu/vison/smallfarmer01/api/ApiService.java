@@ -1,6 +1,7 @@
 package edu.ntu.vison.smallfarmer01.api;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -25,13 +26,17 @@ import edu.ntu.vison.smallfarmer01.model.OrderItem;
  * Created by Vison on 2015/9/11.
  */
 public class ApiService {
-    private Context mContext;
-    public static String HOST = "http://register.ac-experts.com.tw/";
-    public static String mField = "";
+    private static final String TAG = "ApiService";
 
-    public static String SIGN_IN_FIELD = "account_api/v1/auth/signIn";
-    public static String GET_ORDERS_FIELD = "order_api/v1/index";
-    public static String CONFIRM_ORDER = "order_api/v1/confirm";
+    private static final String HOST = "http://register.ac-experts.com.tw/";
+    private static final String mField = "";
+
+    private static final String SIGN_IN_FIELD = "account_api/v1/auth/signIn";
+    private static final String GET_ORDERS_FIELD = "order_api/v1/index";
+    private static final String CONFIRM_ORDER = "order_api/v1/confirm";
+    private static final String UPDATED_REG_ID = "user_device_api/v1/update";
+
+    private Context mContext;
 
     public ApiService(Context context) {
         mContext = context;
@@ -164,8 +169,46 @@ public class ApiService {
     }
 
 
-    // GCM
-    public void sendRegistrationToServer() {
+    /**
+     *
+     *
+     * @param userId id got from app server
+     * @param accessToken user token got from app server
+     * @param mobileOS if it's an android device, set 0; else if it's an iPhone set 1
+     * @param oldRegId if updating a registrationId, set old one; else set null
+     * @param newRegId registrationId to send
+     */
+    public void sendRegistrationToServer(String userId, String accessToken, int mobileOS, String oldRegId, String newRegId) {
+        String url = getUrlWithField(UPDATED_REG_ID);
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("id", userId);
+            json.put("access_token", accessToken);
+            json.put("mobile_os", mobileOS);
+            if (oldRegId != newRegId) { // set when not null
+                json.put("old_registration_id", oldRegId);
+            }
+            json.put("new_registration_id", newRegId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, "successful");
+                Log.d(TAG, response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.getStackTrace();
+                Log.d(TAG, "error");
+
+            }
+        });
+
+        queue.add(req);
 
     }
 

@@ -17,7 +17,6 @@ import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.fragment.AccountFragment;
 import edu.ntu.vison.smallfarmer01.fragment.BillFragment;
 import edu.ntu.vison.smallfarmer01.fragment.OrdersFragment;
-import edu.ntu.vison.smallfarmer01.service.MyGcmListenerService;
 import edu.ntu.vison.smallfarmer01.service.RegistrationIntentService;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
@@ -51,21 +50,16 @@ public class MainActivity extends AppCompatActivity {
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(pager);
 
-        // register GCM
+        registerGCM();
+    }
+
+    private void registerGCM() {
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
         }
-
-        MyGcmListenerService gcm = new MyGcmListenerService(this);
-
-        Bundle data = new Bundle();
-        data.putString("title", "標題");
-        data.putString("message", "今天天氣真好");
-        gcm.onMessageReceived("from", data);
     }
-
     private void goToSignUpPage() {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);

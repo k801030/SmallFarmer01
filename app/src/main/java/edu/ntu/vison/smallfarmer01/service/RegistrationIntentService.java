@@ -1,6 +1,7 @@
 package edu.ntu.vison.smallfarmer01.service;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -20,8 +21,23 @@ import edu.ntu.vison.smallfarmer01.api.ApiService;
 public class RegistrationIntentService extends IntentService {
     private static final String TAG = "RegIntentService";
 
+    private static final int ANDROID_DEVICE = 0;
+    static final String SHARED_PREF_KEY_REG_ID = "REG_ID";
+
+    SharedPreferences mSharedPreferences;
+    SharedPreferences.Editor mEditor;
+
     public RegistrationIntentService() {
         super(TAG);
+        // the base Context in the ContextWrapper has not been set yet
+        // DO NOT call context here
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
     }
 
     @Override
@@ -32,18 +48,31 @@ public class RegistrationIntentService extends IntentService {
             // are local.
             // [START get_token]
             InstanceID instanceID = InstanceID.getInstance(this);
-            String token = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
+            String regToken = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 
             // [END get_token]
-            Log.i(TAG, "GCM Registration Token: " + token);
+            Log.i(TAG, "GCM Registration Token: " + regToken);
 
             // TODO: implement sendRegistration api
-            new ApiService(this).sendRegistrationToServer();
+
+            UserService userService = new UserService(this);
+
+            new ApiService(this).sendRegistrationToServer(userService.getUserId(), userService.getAccessToken(), ANDROID_DEVICE, getOldRegToken(), regToken);
+            updateRegToken(regToken);
         } catch (IOException e) {
             e.printStackTrace();
 
         }
 
+    }
+
+    private String getOldRegToken() {
+        return mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID, null);
+    }
+
+    private void updateRegToken(String regToken) {
+        mEditor.putString(SHARED_PREF_KEY_REG_ID, regToken);
+        mEditor.commit();
     }
 }
