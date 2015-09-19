@@ -132,6 +132,12 @@ public class ApiService {
 
     }
 
+
+    // GCM
+    public void sendRegistrationToServer() {
+
+    }
+
     /**
      *
      * @param field

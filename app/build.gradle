@@ -37,4 +37,7 @@ dependencies {
 
     // volley for http connection
     compile 'com.mcxiaoke.volley:library:1.0.19'
+
+    // in order to use GoogleCloudMessaging API
+    compile "com.google.android.gms:play-services:7.5.+"
 }
