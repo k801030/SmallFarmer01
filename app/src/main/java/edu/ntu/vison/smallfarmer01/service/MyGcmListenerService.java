@@ -20,6 +20,14 @@ import edu.ntu.vison.smallfarmer01.activity.MainActivity;
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
+    private static final String NOTI_TITLE = "title";
+    private static final String NOTI_MESSAGE = "message";
+
+    Context mContext;
+
+    public MyGcmListenerService(Context context) {
+        mContext = context;
+    }
 
     /**
      * Called when message is received
@@ -41,21 +49,21 @@ public class MyGcmListenerService extends GcmListenerService {
     }
 
     private void sendNotification(Bundle data) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(mContext, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext)
+                .setSmallIcon(R.drawable.com_facebook_button_icon)
                 .setContentTitle(data.getString("title"))
                 .setContentText(data.getString("message"))
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
-
         NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
