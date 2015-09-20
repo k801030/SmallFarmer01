@@ -43,7 +43,7 @@ public class ApiService {
 
     }
 
-    public void signIn(final String email, final String password, final SignInCallback callback){
+    public void signIn(final String email, final String password, final String regId, final SignInCallback callback){
         String url = getUrlWithField(SIGN_IN_FIELD);
 
         // create json post
@@ -51,6 +51,7 @@ public class ApiService {
         try {
             json.put("email", email);
             json.put("password", password);
+            json.put("registration_id", regId);
         } catch (Exception e) {
             e.printStackTrace();
         }

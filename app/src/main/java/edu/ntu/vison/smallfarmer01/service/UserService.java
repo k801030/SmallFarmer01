@@ -3,6 +3,8 @@ package edu.ntu.vison.smallfarmer01.service;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 
 /**
@@ -13,6 +15,7 @@ public class UserService {
     SharedPreferences.Editor mEditor;
     static final String SHARED_PREF_KEY_ACCESS_TOKEN = "ACCESS_TOKEN";
     static final String SHARED_PREF_KEY_USER_ID = "USER_ID";
+    static final String SHARED_PREF_KEY_REG_ID = "REG_ID";
     ApiService mApiService;
 
     public UserService(Context context) {
@@ -30,8 +33,10 @@ public class UserService {
 
     public void signIn(String email, String password, TextValidator textValidator, final UserSignInCallback callback) {
         if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
-            // TODO: get accessToken
-            mApiService.signIn(email, password, new ApiService.SignInCallback() {
+
+            String regId = mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID, null);
+
+            mApiService.signIn(email, password, regId, new ApiService.SignInCallback() {
                 @Override
                 public void onSuccess(String userId, String accessToken) {
                     saveLoginInfo(userId, accessToken);

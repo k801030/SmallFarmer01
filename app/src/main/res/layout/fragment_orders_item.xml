@@ -68,7 +68,7 @@
                 android:layout_below="@id/below_quantity_line"/>
 
             <TextView
-                android:id="@+id/receiver_address"
+                android:id="@+id/receiver_address_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="收貨地址: "
@@ -103,6 +103,25 @@
                 android:layout_alignTop="@id/quantity_title"
                 android:layout_toRightOf="@id/quantity_title"/>
 
+            <TextView
+                android:id="@+id/receiver_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="李小明"
+                android:textSize="@dimen/basic_text_size"
+                android:textStyle="bold"
+                android:layout_alignTop="@id/receiver_name_title"
+                android:layout_alignLeft="@id/quantity"/>
+
+            <TextView
+                android:id="@+id/receiver_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="台北市大安區羅斯福路四段3號"
+                android:textSize="@dimen/basic_text_size"
+                android:textStyle="bold"
+                android:layout_alignTop="@id/receiver_address_text"
+                android:layout_toRightOf="@id/receiver_address_text"/>
 
 
         </RelativeLayout>
@@ -117,8 +136,8 @@
             android:background="@color/background_material_light"/>
     </LinearLayout>
 
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="@dimen/space" />
+
 </LinearLayout>

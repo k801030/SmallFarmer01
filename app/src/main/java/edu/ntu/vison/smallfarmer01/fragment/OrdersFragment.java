@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import edu.ntu.vison.smallfarmer01.R;
@@ -137,6 +139,8 @@ public class OrdersFragment extends Fragment {
             TextView orderIdText = (TextView) view.findViewById(R.id.order_id);
             TextView productNameText = (TextView) view.findViewById(R.id.product_name);
             TextView quantityText = (TextView) view.findViewById(R.id.quantity);
+            TextView receiverNameText = (TextView) view.findViewById(R.id.receiver_name);
+            TextView receiverAddressText = (TextView) view.findViewById(R.id.receiver_address);
             ImageView productImage = (ImageView) view.findViewById(R.id.product_image);
             Button confirmButton = (Button) view.findViewById(R.id.confirm_button);
 
@@ -146,6 +150,8 @@ public class OrdersFragment extends Fragment {
             productNameText.setText(item.getProductName());
             quantityText.setText(item.getQuantity().toString());
             UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
+            receiverNameText.setText(item.getReceiverName());
+            receiverAddressText.setText(item.getReceiverAddress());
 
             if (!mSwitcher.isLeftSelected()) {
                 confirmButton.setVisibility(View.INVISIBLE);

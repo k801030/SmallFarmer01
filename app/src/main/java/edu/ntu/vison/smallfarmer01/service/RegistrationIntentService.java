@@ -70,7 +70,7 @@ public class RegistrationIntentService extends IntentService {
      * handle regToken
      * when regToken is updated, remove it from app server
      */
-    private String getOldRegToken() {
+    public String getOldRegToken() {
         return mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID, null);
     }
 
