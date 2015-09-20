@@ -13,6 +13,11 @@ import android.view.WindowManager;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.MainActivity;
 import me.leolin.shortcutbadger.ShortcutBadger;
@@ -25,8 +30,6 @@ public class MyGcmListenerService extends GcmListenerService {
     private static final String TAG = "MyGcmListenerService";
     private static final String NOTI_TITLE = "title";
     private static final String NOTI_MESSAGE = "message";
-
-    private static final String PM_TAG = "notification";
 
     public MyGcmListenerService() {
 
@@ -51,6 +54,10 @@ public class MyGcmListenerService extends GcmListenerService {
         sendNotification(data);
         NotificationCountBadge.with(this).addOne();
 
+        // wake lock
+        WakeLocker wakeLocker = new WakeLocker();
+        wakeLocker.acquire(this);
+        wakeLocker.releaseDelayed(WakeLocker.WAKE_TIME);
 
     }
 
@@ -72,5 +79,35 @@ public class MyGcmListenerService extends GcmListenerService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    public class WakeLocker {
+        static final int WAKE_TIME = 2000;
+        private PowerManager.WakeLock wakeLock;
+
+        public void acquire(Context context) {
+            if (wakeLock != null) wakeLock.release();
+
+            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK |
+                    PowerManager.ACQUIRE_CAUSES_WAKEUP |
+                    PowerManager.ON_AFTER_RELEASE, "WakeLock");
+            wakeLock.acquire();
+        }
+
+
+        public void release() {
+            if (wakeLock != null) wakeLock.release(); wakeLock = null;
+        }
+
+        public void releaseDelayed(int milliSec) {
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    release();
+                }
+            }, milliSec);
+
+        }
     }
 }
