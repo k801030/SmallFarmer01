@@ -19,6 +19,7 @@
         <attr name="showUnderlineIndicator" format="boolean" />
         <attr name="showTextIndicator" format="boolean" />
         <attr name="pstsDefaultTextColor" format="color" />
+        <attr name="pstsIndicatorTextColor" format="color" />
 
     </declare-styleable>
 

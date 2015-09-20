@@ -94,7 +94,8 @@ public class MyPagerSlidingTabStrip extends HorizontalScrollView {
 
     private boolean showUnderlineIndicator = true;
     private boolean showTextIndicator = true;
-    private int defaultTextColor = 0x00000000;
+    private int pstsDefaultTextColor = 0x00000000;
+    private int pstsIndicatorTextColor = 0x00000000;
 
     private int tabTextSize = 12;
     private int tabTextColor = 0xFF666666;
@@ -163,7 +164,8 @@ public class MyPagerSlidingTabStrip extends HorizontalScrollView {
 
         showUnderlineIndicator = a.getBoolean(R.styleable.PagerSlidingTabStrip_showUnderlineIndicator, showUnderlineIndicator);
         showTextIndicator = a.getBoolean(R.styleable.PagerSlidingTabStrip_showTextIndicator, showTextIndicator);
-        defaultTextColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsDefaultTextColor, defaultTextColor);
+        pstsDefaultTextColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsDefaultTextColor, pstsDefaultTextColor);
+        pstsIndicatorTextColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsIndicatorTextColor, pstsIndicatorTextColor);
 
 
         a.recycle();
@@ -422,9 +424,9 @@ public class MyPagerSlidingTabStrip extends HorizontalScrollView {
             for (int i=0;i<tabsContainer.getChildCount();i++) {
                 TextView tab = (TextView) tabsContainer.getChildAt(i);
                 if (i == pager.getCurrentItem()) {
-                    tab.setTextColor(indicatorColor);
+                    tab.setTextColor(pstsIndicatorTextColor);
                 } else {
-                    tab.setTextColor(defaultTextColor);
+                    tab.setTextColor(pstsDefaultTextColor);
                 }
 
             }
