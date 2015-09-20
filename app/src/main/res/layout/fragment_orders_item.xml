@@ -74,6 +74,7 @@
                 android:textStyle="bold"
                 android:layout_alignTop="@id/quantity_title"
                 android:layout_toRightOf="@id/quantity_title"/>
+
         </RelativeLayout>
 
         <Button
@@ -90,5 +91,5 @@
         android:id="@+id/horizontal_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#c8c8c8" />
+        android:background="#15000000" />
 </LinearLayout>

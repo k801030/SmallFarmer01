@@ -140,6 +140,7 @@ public class OrdersFragment extends Fragment {
             ImageView productImage = (ImageView) view.findViewById(R.id.product_image);
             Button confirmButton = (Button) view.findViewById(R.id.confirm_button);
 
+
             final OrderItem item = mOrderItems.get(i);
             orderIdText.setText(item.getId().toString());
             productNameText.setText(item.getProductName());
