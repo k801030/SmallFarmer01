@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
@@ -18,6 +17,7 @@ import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.fragment.AccountFragment;
 import edu.ntu.vison.smallfarmer01.fragment.BillFragment;
 import edu.ntu.vison.smallfarmer01.fragment.OrdersFragment;
+import edu.ntu.vison.smallfarmer01.lib.MyPagerSlidingTabStrip;
 import edu.ntu.vison.smallfarmer01.service.RegistrationIntentService;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
 
         // init tabs
-        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        MyPagerSlidingTabStrip tabs = (MyPagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(pager);
 
         registerGCM();

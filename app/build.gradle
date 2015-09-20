@@ -35,7 +35,7 @@ dependencies {
     // rounded images
     compile 'com.makeramen:roundedimageview:2.1.1'
     // pager tab
-    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    // compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 
 
     // volley for http connection

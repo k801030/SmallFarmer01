@@ -10,11 +10,14 @@
         android:layout_height="wrap_content"
         app:theme="@style/AppTheme"
         android:background="@color/color_primary"/>
-    <com.astuetz.PagerSlidingTabStrip
+    <edu.ntu.vison.smallfarmer01.lib.MyPagerSlidingTabStrip
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         app:pstsShouldExpand="true"
+        app:pstsDefaultTextColor="#333"
+        app:pstsIndicatorColor="#ffffffff"
+        app:showUnderlineIndicator="false"
         android:textSize="14sp"
         android:background="@color/color_primary"
         />
