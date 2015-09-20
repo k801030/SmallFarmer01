@@ -71,7 +71,8 @@ public class UserService {
                 mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID, null), new ApiService.LogOutCallback() {
             @Override
             public void onSuccess() {
-                mEditor.clear();
+                mEditor.remove(SHARED_PREF_KEY_USER_ID);
+                mEditor.remove(SHARED_PREF_KEY_ACCESS_TOKEN);
                 mEditor.commit();
                 callback.onSuccess();
             }
