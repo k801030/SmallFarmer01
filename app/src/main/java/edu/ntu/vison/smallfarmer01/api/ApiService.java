@@ -35,6 +35,7 @@ public class ApiService {
     private static final String GET_ORDERS_FIELD = "order_api/v1/index";
     private static final String CONFIRM_ORDER = "order_api/v1/confirm";
     private static final String UPDATED_REG_ID = "user_device_api/v1/update";
+    private static final String LOG_OUT = "user_api/v1/logout";
 
     private Context mContext;
 
@@ -55,7 +56,7 @@ public class ApiService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        Log.d(TAG, json.toString());
         RequestQueue queue = Volley.newRequestQueue(mContext);
         final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
@@ -213,6 +214,40 @@ public class ApiService {
 
     }
 
+    public void logOut(String userId, String accessToken, int mobileOS, String oldRegId, final LogOutCallback callback) {
+        String url = getUrlWithField(UPDATED_REG_ID);
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("id", userId);
+            json.put("access_token", accessToken);
+            json.put("mobile_os", mobileOS);
+            json.put("old_registration_id", oldRegId);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, "successful");
+                Log.d(TAG, response.toString());
+                callback.onSuccess();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.getStackTrace();
+                Log.d(TAG, "error");
+                callback.onError();
+            }
+        });
+
+        queue.add(req);
+
+    }
+
+
     /**
      *
      * @param field
@@ -245,6 +280,11 @@ public class ApiService {
     }
 
     public interface GetBillsCallback {
+        void onSuccess();
+        void onError();
+    }
+
+    public interface LogOutCallback {
         void onSuccess();
         void onError();
     }

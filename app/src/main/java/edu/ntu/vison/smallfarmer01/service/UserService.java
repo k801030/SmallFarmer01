@@ -54,7 +54,8 @@ public class UserService {
         }
     }
 
-    public void signUp(String firstName, String lastName, String email, String password, TextValidator textValidator, UserSignUpCallback callback) {
+    public void signUp(String firstName, String lastName, String email, String password,
+                       TextValidator textValidator, UserSignUpCallback callback) {
         if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
             // TODO: get accessToken
             saveLoginInfo("userid","accesstoken");
@@ -64,10 +65,23 @@ public class UserService {
         }
     }
 
-    public void logOut(UserLogOutCallback callback) {
-        mEditor.clear();
-        mEditor.commit();
-        callback.onSuccess();
+    public void logOut(final UserLogOutCallback callback) {
+        int mobileOS = 0;
+        mApiService.logOut(getUserId(), getAccessToken(), mobileOS,
+                mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID, null), new ApiService.LogOutCallback() {
+            @Override
+            public void onSuccess() {
+                mEditor.clear();
+                mEditor.commit();
+                callback.onSuccess();
+            }
+
+            @Override
+            public void onError() {
+                callback.onError();
+            }
+        });
+
     }
 
     public boolean isLogin() {
