@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -41,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
         if (!mUserService.isLogin()) {
             goToSignInPage();
         }
+
+        // init toolBar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         // init viewPager
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
