@@ -1,7 +1,6 @@
 package edu.ntu.vison.smallfarmer01.service;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -67,6 +66,10 @@ public class RegistrationIntentService extends IntentService {
 
     }
 
+    /**
+     * handle regToken
+     * when regToken is updated, remove it from app server
+     */
     private String getOldRegToken() {
         return mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID, null);
     }

@@ -43,4 +43,7 @@ dependencies {
 
     // in order to use GoogleCloudMessaging API
     compile "com.google.android.gms:play-services:7.5.+"
+
+    // notification count badger
+    compile 'me.leolin:ShortcutBadger:1.1.3@aar'
 }

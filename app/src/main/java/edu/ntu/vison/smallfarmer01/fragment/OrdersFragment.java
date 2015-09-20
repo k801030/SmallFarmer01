@@ -23,6 +23,7 @@ import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.SignInActivity;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 import edu.ntu.vison.smallfarmer01.model.OrderItem;
+import edu.ntu.vison.smallfarmer01.service.NotificationCountBadge;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**
@@ -95,7 +96,7 @@ public class OrdersFragment extends Fragment {
                 @Override
                 public void onSuccess(ArrayList<OrderItem> orderItems) {
                     mOrderItems = orderItems;
-                    notifyDataSetChanged();
+                    myNotifyDataSetChanged();
                 }
 
                 @Override
@@ -106,9 +107,6 @@ public class OrdersFragment extends Fragment {
                     }
                 }
             });
-
-
-            notifyDataSetChanged();
         }
 
         @Override
@@ -199,7 +197,7 @@ public class OrdersFragment extends Fragment {
                         @Override
                         public void onSuccess() {
                             mOrdersAdapter.removeItem(index);
-                            mOrdersAdapter.notifyDataSetChanged();
+                            myNotifyDataSetChanged();
                             dialogInterface.dismiss();
                         }
 
@@ -212,6 +210,13 @@ public class OrdersFragment extends Fragment {
                 }
             });
         }
+    }
+
+
+    private void myNotifyDataSetChanged() {
+        int badgeCount = mOrdersAdapter.getCount();
+        NotificationCountBadge.with(getActivity()).setCount(badgeCount);
+        mOrdersAdapter.notifyDataSetChanged();
     }
 
     private class Switcher<T extends TextView> {

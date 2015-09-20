@@ -7,12 +7,15 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
+import android.view.WindowManager;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.MainActivity;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * Created by Vison on 2015/9/19.
@@ -22,6 +25,8 @@ public class MyGcmListenerService extends GcmListenerService {
     private static final String TAG = "MyGcmListenerService";
     private static final String NOTI_TITLE = "title";
     private static final String NOTI_MESSAGE = "message";
+
+    private static final String PM_TAG = "notification";
 
     public MyGcmListenerService() {
 
@@ -44,6 +49,9 @@ public class MyGcmListenerService extends GcmListenerService {
          */
 
         sendNotification(data);
+        NotificationCountBadge.with(this).addOne();
+
+
     }
 
     private void sendNotification(Bundle data) {
@@ -55,8 +63,8 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.com_facebook_button_icon)
-                .setContentTitle(data.getString("title"))
-                .setContentText(data.getString("message"))
+                .setContentTitle(data.getString(NOTI_TITLE))
+                .setContentText(data.getString(NOTI_MESSAGE))
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
