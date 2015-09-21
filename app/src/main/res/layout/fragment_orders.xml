@@ -50,5 +50,6 @@
         android:layout_height="wrap_content"
         android:divider="@color/default_bg_color"
         android:dividerHeight="@dimen/pager_content_padding"
+        android:listSelector="@color/transparent"
         android:background="@color/white"/>
 </LinearLayout>
