@@ -7,6 +7,8 @@
     <dimen name="fragment_orders_item_product_image">36dp</dimen>
     <dimen name="fragment_orders_item_product_image_radius">18dp</dimen>
 
+    <dimen name="pager_content_padding">10dp</dimen>
+
     <dimen name="basic_text_size">12sp</dimen>
     <dimen name="switcher_text_size">12sp</dimen>
 

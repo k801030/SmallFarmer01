@@ -24,5 +24,8 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/default_bg_color"
+        android:paddingLeft="@dimen/pager_content_padding"
+        android:paddingRight="@dimen/pager_content_padding"/>
 </LinearLayout>

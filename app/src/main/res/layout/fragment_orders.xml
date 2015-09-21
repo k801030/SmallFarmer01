@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <Space
         android:layout_width="match_parent"
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@drawable/switch_button"
+
         android:padding="1dp">
         <TextView
             android:id="@+id/not_called"
@@ -45,5 +47,8 @@
     <ListView
         android:id="@+id/order_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:divider="@color/default_bg_color"
+        android:dividerHeight="@dimen/pager_content_padding"
+        android:background="@color/white"/>
 </LinearLayout>
