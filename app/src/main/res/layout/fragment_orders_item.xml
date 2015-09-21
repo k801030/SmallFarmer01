@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="top"
+        android:gravity="center"
         android:padding="@dimen/fragment_orders_item_padding">
-        <edu.ntu.vison.smallfarmer01.view.SquareImageView
+        <edu.ntu.vison.smallfarmer01.view.MyRoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/product_image"
             android:layout_width="0dp"
-            android:layout_weight="3"
-            android:maxWidth="30dp"
-            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
             android:src="@color/primary_dark_material_dark"
             android:gravity="center"
             android:text="圖片"
@@ -132,8 +134,7 @@
             android:layout_weight="2"
             android:layout_height="wrap_content"
             android:text="@string/notify_shipment"
-            android:textSize="@dimen/basic_text_size"
-            android:background="@color/background_material_light"/>
+            android:textSize="@dimen/basic_text_size" />
     </LinearLayout>
 
     <Space

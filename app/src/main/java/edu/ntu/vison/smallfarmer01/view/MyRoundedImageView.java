@@ -2,22 +2,23 @@ package edu.ntu.vison.smallfarmer01.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+
+import com.makeramen.roundedimageview.RoundedImageView;
 
 /**
  * Created by Vison on 2015/9/20.
  */
-public class SquareImageView  extends ImageView {
+public class MyRoundedImageView extends RoundedImageView {
 
-    public SquareImageView(Context context) {
+    public MyRoundedImageView(Context context) {
         this(context, null);
     }
 
-    public SquareImageView(Context context, AttributeSet attrs) {
+    public MyRoundedImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SquareImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyRoundedImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -26,7 +27,10 @@ public class SquareImageView  extends ImageView {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         int width = getMeasuredWidth();
+
+
         setMeasuredDimension(width, width);
+        setCornerRadius(width/2);
     }
 
 }

@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.w3c.dom.Text;
 
@@ -141,7 +142,7 @@ public class OrdersFragment extends Fragment {
             TextView quantityText = (TextView) view.findViewById(R.id.quantity);
             TextView receiverNameText = (TextView) view.findViewById(R.id.receiver_name);
             TextView receiverAddressText = (TextView) view.findViewById(R.id.receiver_address);
-            ImageView productImage = (ImageView) view.findViewById(R.id.product_image);
+            RoundedImageView productImage = (RoundedImageView) view.findViewById(R.id.product_image);
             Button confirmButton = (Button) view.findViewById(R.id.confirm_button);
 
 
@@ -149,9 +150,10 @@ public class OrdersFragment extends Fragment {
             orderIdText.setText(item.getId().toString());
             productNameText.setText(item.getProductName());
             quantityText.setText(item.getQuantity().toString());
-            UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
             receiverNameText.setText(item.getReceiverName());
             receiverAddressText.setText(item.getReceiverAddress());
+            UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
+            productImage.setCornerRadius(productImage.getWidth() / 2);
 
             if (!mSwitcher.isLeftSelected()) {
                 confirmButton.setVisibility(View.INVISIBLE);
