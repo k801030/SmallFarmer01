@@ -21,6 +21,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.SignInActivity;
@@ -99,6 +100,7 @@ public class OrdersFragment extends Fragment {
                 @Override
                 public void onSuccess(ArrayList<OrderItem> orderItems) {
                     mOrderItems = orderItems;
+                    Collections.reverse(mOrderItems);
                     myNotifyDataSetChanged();
                 }
 

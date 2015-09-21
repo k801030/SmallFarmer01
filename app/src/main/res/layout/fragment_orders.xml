@@ -45,6 +45,5 @@
     <ListView
         android:id="@+id/order_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/default_bg_color"></ListView>
+        android:layout_height="wrap_content" />
 </LinearLayout>
