@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="fragment_orders_item_padding">24dp</dimen>
+    <dimen name="fragment_orders_item_padding">20dp</dimen>
     <dimen name="fragment_orders_item_text_padding">8dp</dimen>
     <dimen name="fragment_orders_button_padding">10dp</dimen>
 
@@ -9,8 +9,12 @@
 
     <dimen name="pager_content_padding">10dp</dimen>
 
-    <dimen name="basic_text_size">12sp</dimen>
+    <dimen name="larger_text_size">16sp</dimen>
+    <dimen name="basic_text_size">14sp</dimen>
+    <dimen name="smaller_text_size">10sp</dimen>
     <dimen name="switcher_text_size">12sp</dimen>
+
+    <dimen name="image_button_padding">3dp</dimen>
 
     <dimen name="space">10dp</dimen>
 

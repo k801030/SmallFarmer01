@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -96,6 +97,7 @@ public class OrdersFragment extends Fragment {
         public void loadOrdersData(String isCalled) {
 
             mOrderItems.clear(); // clear first
+            notifyDataSetChanged();
             mApiService.getOrders(mUserService.getUserId(), mUserService.getAccessToken(), isCalled, new ApiService.GetOrdersCallback() {
                 @Override
                 public void onSuccess(ArrayList<OrderItem> orderItems) {
@@ -145,7 +147,7 @@ public class OrdersFragment extends Fragment {
             TextView receiverNameText = (TextView) view.findViewById(R.id.receiver_name);
             TextView receiverAddressText = (TextView) view.findViewById(R.id.receiver_address);
             RoundedImageView productImage = (RoundedImageView) view.findViewById(R.id.product_image);
-            Button confirmButton = (Button) view.findViewById(R.id.confirm_button);
+            View confirmButton = view.findViewById(R.id.notify_shipment_button);
 
 
             final OrderItem item = mOrderItems.get(i);
