@@ -94,7 +94,7 @@ public class OrdersFragment extends Fragment {
             this.mApiService = apiService;
         }
 
-        public void loadOrdersData(String isCalled) {
+        public void loadOrdersData(final String isCalled) {
 
             mOrderItems.clear(); // clear first
             notifyDataSetChanged();
@@ -103,7 +103,11 @@ public class OrdersFragment extends Fragment {
                 public void onSuccess(ArrayList<OrderItem> orderItems) {
                     mOrderItems = orderItems;
                     Collections.reverse(mOrderItems);
-                    myNotifyDataSetChanged();
+                    if (isCalled == "false") { // list that is not call yet
+                        int badgeCount = mOrdersAdapter.getCount();
+                        NotificationCountBadge.with(getActivity()).setCount(badgeCount);
+                    }
+                    mOrdersAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -209,8 +213,13 @@ public class OrdersFragment extends Fragment {
                     mApiService.confirmOrder(mUserService.getUserId(), mUserService.getAccessToken(), orderId, new ApiService.ConfirmOrderCallback() {
                         @Override
                         public void onSuccess() {
+                            // clear
                             mOrdersAdapter.removeItem(index);
-                            myNotifyDataSetChanged();
+
+                            int badgeCount = mOrdersAdapter.getCount();
+                            NotificationCountBadge.with(getActivity()).setCount(badgeCount);
+
+                            mOrdersAdapter.notifyDataSetChanged();
                             dialogInterface.dismiss();
                         }
 
@@ -225,12 +234,6 @@ public class OrdersFragment extends Fragment {
         }
     }
 
-
-    private void myNotifyDataSetChanged() {
-        int badgeCount = mOrdersAdapter.getCount();
-        NotificationCountBadge.with(getActivity()).setCount(badgeCount);
-        mOrdersAdapter.notifyDataSetChanged();
-    }
 
     private class Switcher<T extends TextView> {
         T A, B;
