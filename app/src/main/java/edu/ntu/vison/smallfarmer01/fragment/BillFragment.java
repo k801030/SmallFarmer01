@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.zip.Inflater;
+
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 import edu.ntu.vison.smallfarmer01.model.Bill;
@@ -39,13 +41,22 @@ public class BillFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bills, container, false);
 
+        ListView bills = (ListView) view.findViewById(R.id.bill_list);
         BillAdapter adapter = new BillAdapter();
         adapter.loadBillData();
+        bills.setAdapter(adapter);
 
         return view;
     }
 
     private class BillAdapter extends BaseAdapter {
+        Bill[] bills;
+
+        public BillAdapter() {
+            bills = new Bill[2];
+            bills[0] = new Bill();
+            bills[1] = new Bill();
+        }
 
         private void loadBillData() {
             mApiService.getBillList(mUserService.getUserId(), mUserService.getAccessToken(), new ApiService.GetBillListCallback() {
@@ -63,22 +74,25 @@ public class BillFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 0;
+            return bills.length;
         }
 
         @Override
         public Object getItem(int i) {
-            return null;
+            return bills[i];
         }
 
         @Override
         public long getItemId(int i) {
-            return 0;
+            return i;
         }
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            return null;
+            if (view == null) {
+                view = LayoutInflater.from(BillFragment.this.getActivity()).inflate(R.layout.fragment_bills_item, viewGroup, false);
+            }
+            return view;
         }
     }
 }

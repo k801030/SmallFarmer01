@@ -13,5 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/space" />
 
-
+    <ListView
+        android:id="@+id/bill_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/default_bg_color"
+        android:dividerHeight="@dimen/pager_content_padding"
+        android:listSelector="@color/transparent"
+        android:background="@color/white" />
 </LinearLayout>

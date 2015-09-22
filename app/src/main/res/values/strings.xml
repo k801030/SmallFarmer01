@@ -11,6 +11,7 @@
     <string name="log_out_button">登出</string>
 
     <string name="product_unit">箱</string>
+    <string name="money_unit">元</string>
     <string name="notify_shipment">通知物流</string>
 
     <!-- gcm -->

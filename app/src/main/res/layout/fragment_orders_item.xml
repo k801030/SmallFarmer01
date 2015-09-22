@@ -1,151 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
     android:padding="@dimen/fragment_orders_item_padding">
 
-
+    <edu.ntu.vison.smallfarmer01.view.MyRoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/product_image"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:src="@color/primary_dark_material_dark"
+        android:gravity="center"
+        android:text="圖片"
+        android:textSize="21sp"
+        android:scaleType="centerCrop"
+        />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="8"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <edu.ntu.vison.smallfarmer01.view.MyRoundedImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/product_image"
-            android:layout_width="0dp"
-            android:layout_weight="2"
+        android:orientation="vertical"
+        android:padding="@dimen/fragment_orders_item_text_padding">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@color/primary_dark_material_dark"
-            android:gravity="center"
-            android:text="圖片"
-            android:textSize="21sp"
-            android:scaleType="centerCrop"
+            android:paddingBottom="@dimen/image_button_padding">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="# "
+                android:textColor="@color/color_primary"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123"
+                android:textSize="@dimen/larger_text_size"
+                android:textColor="@color/color_primary"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="火龍果"
+                android:textSize="@dimen/larger_text_size"
+                android:textColor="@color/default_text_color"
+                />
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textSize="@dimen/larger_text_size"
+                android:textColor="@color/default_text_color"/>
+            <TextView
+                android:id="@+id/unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_unit"
+                android:textSize="@dimen/larger_text_size"
+                android:textColor="@color/default_text_color"/>
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#15000000"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"/>
+
+
+        <TextView
+            android:id="@+id/receiver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="李小明"
+            android:textSize="@dimen/basic_text_size"
+            android:textColor="@color/gray_text_color"
             />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="8"
+        <TextView
+            android:id="@+id/receiver_address"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/fragment_orders_item_text_padding">
+            android:text="台北市大安區羅斯福路四段3號"
+            android:textSize="@dimen/basic_text_size"
+            android:textColor="@color/gray_text_color"/>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/image_button_padding">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="# "
-                    android:textColor="@color/color_primary"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/order_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="123"
-                    android:textSize="@dimen/larger_text_size"
-                    android:textColor="@color/color_primary"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/product_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="火龍果"
-                    android:textSize="@dimen/basic_text_size"
-                    android:textColor="@color/default_text_color"
-                    />
-                <TextView
-                    android:id="@+id/quantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textSize="@dimen/basic_text_size"
-                    android:textColor="@color/default_text_color"/>
-                <TextView
-                    android:id="@+id/unit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/product_unit"
-                    android:textSize="@dimen/basic_text_size"
-                    android:textColor="@color/default_text_color"/>
-            </LinearLayout>
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#15000000"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"/>
-
-
-            <TextView
-                android:id="@+id/receiver_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="李小明"
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/gray_text_color"
-                />
-
-            <TextView
-                android:id="@+id/receiver_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="台北市大安區羅斯福路四段3號"
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/gray_text_color"/>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/notify_shipment_button"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:clickable="true"
-            android:padding="@dimen/image_button_padding"
-            android:background="@drawable/shipment_button">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@drawable/shipment"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/notify_shipment"
-                android:textSize="@dimen/smaller_text_size"
-                android:textColor="@color/shipment_text"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/confirm_button"
-            android:layout_width="0dp"
-            android:layout_weight="0"
-            android:layout_height="wrap_content"
-            android:text="@string/notify_shipment"
-            android:textSize="@dimen/basic_text_size" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/notify_shipment_button"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:padding="@dimen/image_button_padding"
+        android:background="@drawable/shipment_button">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/shipment"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notify_shipment"
+            android:textSize="@dimen/smaller_text_size"
+            android:textColor="@color/shipment_text"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    
 </LinearLayout>
