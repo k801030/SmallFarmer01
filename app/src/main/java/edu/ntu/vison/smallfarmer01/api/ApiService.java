@@ -13,6 +13,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,6 +21,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Map;
 
+import edu.ntu.vison.smallfarmer01.model.Bill;
 import edu.ntu.vison.smallfarmer01.model.OrderItem;
 
 /**
@@ -36,6 +38,8 @@ public class ApiService {
     private static final String CONFIRM_ORDER = "order_api/v1/confirm";
     private static final String UPDATED_REG_ID = "user_device_api/v1/update";
     private static final String LOG_OUT = "user_api/v1/logout";
+    private static final String GET_BILL_LIST = "bill_api/v1/index";
+    private static final String GET_BILL = "bill_api/v1/show";
 
     private Context mContext;
 
@@ -248,6 +252,97 @@ public class ApiService {
     }
 
 
+    public void getBillList(final String userId, final String accessToken, final GetBillListCallback callback) {
+        String url = getUrlWithField(GET_BILL_LIST);
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("id", userId);
+            json.put("access_token", accessToken);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Create request
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String json = response.getString("bills").toString();
+                    Gson gson = new Gson();
+                    Type typeClass = new TypeToken<Bill[]>(){}.getType();
+
+                    Bill[] bills = gson.fromJson(json, typeClass);
+                    for (int i=0;i<bills.length;i++) {
+                        getBillById(userId, accessToken, bills[i].getId(), new GetBillByIdCallback() {
+                            @Override
+                            public void onSuccess() {
+
+                            }
+
+                            @Override
+                            public void onError() {
+
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                // callback.onSuccess();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callback.onError();
+            }
+        });
+
+        // make request
+        queue.add(req);
+    }
+
+    private void getBillById(String userId, String accessToken, String billId, final GetBillByIdCallback callback) {
+        String url = getUrlWithField(GET_BILL);
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("id", userId);
+            json.put("access_token", accessToken);
+            json.put("bill_id", billId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Create request
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String json = response.getString("orders").toString();
+                    Gson gson = new Gson();
+                    Type typeClass = new TypeToken<OrderItem[]>(){}.getType();
+
+                    OrderItem[] orders = gson.fromJson(json, typeClass);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                // callback.onSuccess();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callback.onError();
+            }
+        });
+
+        // make request
+        queue.add(req);
+    }
+
     /**
      *
      * @param field
@@ -279,7 +374,12 @@ public class ApiService {
         void onError(int statusCode);
     }
 
-    public interface GetBillsCallback {
+    public interface GetBillListCallback {
+        void onSuccess();
+        void onError();
+    }
+
+    public interface GetBillByIdCallback {
         void onSuccess();
         void onError();
     }

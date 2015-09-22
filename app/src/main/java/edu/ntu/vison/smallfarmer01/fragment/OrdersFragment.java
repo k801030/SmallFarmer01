@@ -195,7 +195,7 @@ public class OrdersFragment extends Fragment {
             super(mContext);
 
 
-            this.setMessage("出貨編號:" + orderId);
+            this.setMessage("出貨編號：" + orderId+"\n三點前通知，物流將於隔日取貨\n三點後通知，物流將於兩日後取貨");
             this.setCancelable(true);
             this.setPositiveButton("取消", new DialogInterface.OnClickListener() {
                 @Override
