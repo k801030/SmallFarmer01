@@ -52,8 +52,8 @@ public class BillFragment extends Fragment {
         mOrderList = (ListView) view.findViewById(R.id.order_list);
 
         // set bill spinner list
-        BillAdapter billAdapter = new BillAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item);
-        billAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        BillAdapter billAdapter = new BillAdapter(getActivity(), R.layout.fragment_bills_spinner_item_with_arrow, R.id.spinner_text);
+        billAdapter.setDropDownViewResource(R.layout.fragment_bills_spinner_item);
         billAdapter.loadBillData();
         mSpinner.setAdapter(billAdapter);
         mSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
@@ -73,8 +73,8 @@ public class BillFragment extends Fragment {
     private class BillAdapter extends ArrayAdapter<String> {
         Bill[] mBills;
 
-        public BillAdapter(Context context, int resource) {
-            super(context, resource);
+        public BillAdapter(Context context, int resource, int textViewResourceId) {
+            super(context, resource, textViewResourceId);
             mBills = new Bill[0];
         }
 
