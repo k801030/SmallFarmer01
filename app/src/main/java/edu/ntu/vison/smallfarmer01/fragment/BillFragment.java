@@ -102,7 +102,10 @@ public class BillFragment extends Fragment {
 
         @Override
         public String getItem(int i) {
-            return mBills[i].getBeginAt();
+
+            String beginDate = mBills[i].getBeginAt();
+            String endDate = mBills[i].getEndAt();
+            return beginDate + " 至 " +endDate;
         }
 
         @Override
