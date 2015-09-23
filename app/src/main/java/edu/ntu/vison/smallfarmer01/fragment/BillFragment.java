@@ -8,8 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.zip.Inflater;
@@ -17,6 +19,7 @@ import java.util.zip.Inflater;
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 import edu.ntu.vison.smallfarmer01.model.Bill;
+import edu.ntu.vison.smallfarmer01.model.OrderItem;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**
@@ -42,28 +45,32 @@ public class BillFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bills, container, false);
 
-        ListView bills = (ListView) view.findViewById(R.id.bill_list);
-        BillAdapter adapter = new BillAdapter();
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
+
+        BillAdapter adapter = new BillAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         adapter.loadBillData();
-        bills.setAdapter(adapter);
+        spinner.setAdapter(adapter);
 
         return view;
     }
 
-    private class BillAdapter extends BaseAdapter {
-        Bill[] bills;
 
-        public BillAdapter() {
-            bills = new Bill[2];
-            bills[0] = new Bill();
-            bills[1] = new Bill();
+
+    private class BillAdapter extends ArrayAdapter<String> {
+        Bill[] mBills;
+
+        public BillAdapter(Context context, int resource) {
+            super(context, resource);
+            mBills = new Bill[0];
         }
 
         private void loadBillData() {
             mApiService.getBillList(mUserService.getUserId(), mUserService.getAccessToken(), new ApiService.GetBillListCallback() {
                 @Override
-                public void onSuccess() {
-
+                public void onSuccess(Bill[] bills) {
+                    mBills = bills;
+                    notifyDataSetChanged();
                 }
 
                 @Override
@@ -75,12 +82,51 @@ public class BillFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return bills.length;
+            return mBills.length;
+        }
+
+        @Override
+        public String getItem(int i) {
+            return mBills[i].getBeginAt();
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+    }
+
+    private class OrderAdapter extends BaseAdapter {
+
+        OrderItem[] mOrders;
+
+        public OrderAdapter() {
+            mOrders = new OrderItem[0];
+        }
+
+        private void loadBillData(String billId) {
+            mApiService.getBillById(mUserService.getUserId(), mUserService.getAccessToken(), billId, new ApiService.GetBillByIdCallback() {
+                @Override
+                public void onSuccess(OrderItem[] orders) {
+                    mOrders = orders;
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+        }
+
+        @Override
+        public int getCount() {
+            return mOrders.length;
         }
 
         @Override
         public Object getItem(int i) {
-            return bills[i];
+            return mOrders[i];
         }
 
         @Override
@@ -93,7 +139,9 @@ public class BillFragment extends Fragment {
             if (view == null) {
                 view = LayoutInflater.from(BillFragment.this.getActivity()).inflate(R.layout.fragment_bills_item, viewGroup, false);
             }
+
             return view;
         }
     }
+
 }

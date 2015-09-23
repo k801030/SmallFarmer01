@@ -273,21 +273,10 @@ public class ApiService {
                     Type typeClass = new TypeToken<Bill[]>(){}.getType();
 
                     Bill[] bills = gson.fromJson(json, typeClass);
-                    for (int i=0;i<bills.length;i++) {
-                        getBillById(userId, accessToken, bills[i].getId(), new GetBillByIdCallback() {
-                            @Override
-                            public void onSuccess() {
-
-                            }
-
-                            @Override
-                            public void onError() {
-
-                            }
-                        });
-                    }
+                    callback.onSuccess(bills);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    callback.onError();
                 }
 
                 // callback.onSuccess();
@@ -303,7 +292,7 @@ public class ApiService {
         queue.add(req);
     }
 
-    private void getBillById(String userId, String accessToken, String billId, final GetBillByIdCallback callback) {
+    public void getBillById(String userId, String accessToken, String billId, final GetBillByIdCallback callback) {
         String url = getUrlWithField(GET_BILL);
         final JSONObject json = new JSONObject();
         try {
@@ -325,8 +314,10 @@ public class ApiService {
                     Type typeClass = new TypeToken<OrderItem[]>(){}.getType();
 
                     OrderItem[] orders = gson.fromJson(json, typeClass);
+                    callback.onSuccess(orders);
                 } catch (JSONException e) {
                     e.printStackTrace();
+
                 }
 
 
@@ -375,12 +366,12 @@ public class ApiService {
     }
 
     public interface GetBillListCallback {
-        void onSuccess();
+        void onSuccess(Bill[] bills);
         void onError();
     }
 
     public interface GetBillByIdCallback {
-        void onSuccess();
+        void onSuccess(OrderItem[] orders);
         void onError();
     }
 
