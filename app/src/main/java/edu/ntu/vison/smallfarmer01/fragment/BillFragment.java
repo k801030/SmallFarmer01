@@ -22,19 +22,12 @@ import edu.ntu.vison.smallfarmer01.service.UserService;
  * Created by Vison on 2015/9/17.
  */
 public class BillFragment extends Fragment {
-    static UserService mUserService;
-    static ApiService mApiService;
-    static Context mContext;
+    UserService mUserService;
+    ApiService mApiService;
 
-    public static BillFragment newInstance(Context context) {
-        mUserService = new UserService(context);
-        mApiService = new ApiService(context);
-        mContext = context;
-        Bundle args = new Bundle();
-
-        BillFragment fragment = new BillFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public BillFragment() {
+        mUserService = new UserService(getActivity());
+        mApiService = new ApiService(getActivity());
     }
 
     @Override

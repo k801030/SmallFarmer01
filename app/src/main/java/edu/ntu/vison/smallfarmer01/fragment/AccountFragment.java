@@ -19,17 +19,12 @@ import edu.ntu.vison.smallfarmer01.service.UserService;
  * Created by Vison on 2015/9/16.
  */
 public class AccountFragment extends Fragment {
-    static UserService sUserService;
+    UserService mUserService;
 
 
 
-    public static AccountFragment newInstance(Context context) {
-        Bundle args = new Bundle();
-        AccountFragment fragment = new AccountFragment();
-        fragment.setArguments(args);
-
-        sUserService = new UserService(context);
-        return fragment;
+    public AccountFragment() {
+         mUserService = new UserService(getActivity());
     }
 
     @Override
@@ -59,7 +54,7 @@ public class AccountFragment extends Fragment {
     public class OnClickLogOutListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            sUserService.logOut(new UserService.UserLogOutCallback() {
+            mUserService.logOut(new UserService.UserLogOutCallback() {
                 @Override
                 public void onSuccess() {
                     NotificationCountBadge.with(getActivity()).reset();

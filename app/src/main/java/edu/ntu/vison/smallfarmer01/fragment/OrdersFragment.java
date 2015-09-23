@@ -40,22 +40,20 @@ public class OrdersFragment extends Fragment {
     TextView mCalledButton;
     ListView mOrderList;
     Switcher<TextView> mSwitcher;
-    static UserService mUserService;
-    static ApiService mApiService;
-    static Context mContext;
+    UserService mUserService;
+    ApiService mApiService;
 
 
-    public static OrdersFragment newInstance(Context context) {
-        mUserService = new UserService(context);
-        mApiService = new ApiService(context);
-        mContext = context;
-        Bundle args = new Bundle();
-
-        OrdersFragment fragment = new OrdersFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public OrdersFragment () {
+        mUserService = new UserService(getActivity());
+        mApiService = new ApiService(getActivity());
     }
 
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -182,7 +180,7 @@ public class OrdersFragment extends Fragment {
 
     private class ErrorLoadAlert extends AlertDialog.Builder {
         public ErrorLoadAlert() {
-            super(mContext);
+            super(getActivity());
             this.setMessage("登入逾時，請重新登入。");
             this.setPositiveButton("確定",
                     new DialogInterface.OnClickListener() {
@@ -196,7 +194,7 @@ public class OrdersFragment extends Fragment {
 
     private class ConfirmOrderAlert extends AlertDialog.Builder {
         public ConfirmOrderAlert(final int index, final String orderId) {
-            super(mContext);
+            super(getActivity());
 
 
             this.setMessage("出貨編號：" + orderId+"\n三點前通知，物流將於隔日取貨\n三點後通知，物流將於兩日後取貨");
