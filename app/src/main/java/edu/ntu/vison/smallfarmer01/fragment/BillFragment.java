@@ -12,6 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
@@ -63,7 +67,9 @@ public class BillFragment extends Fragment {
     }
 
 
-
+    /**
+     * for Spinner
+     */
     private class BillAdapter extends ArrayAdapter<String> {
         Bill[] mBills;
 
@@ -108,6 +114,9 @@ public class BillFragment extends Fragment {
 
     }
 
+    /**
+     * For ListView
+     */
     private class OrderAdapter extends BaseAdapter {
 
         OrderItem[] mOrders;
@@ -151,6 +160,24 @@ public class BillFragment extends Fragment {
             if (view == null) {
                 view = LayoutInflater.from(BillFragment.this.getActivity()).inflate(R.layout.fragment_bills_item, viewGroup, false);
             }
+
+            TextView orderIdText = (TextView) view.findViewById(R.id.order_id);
+            TextView productNameText = (TextView) view.findViewById(R.id.product_name);
+            TextView quantityText = (TextView) view.findViewById(R.id.quantity);
+            TextView receiverNameText = (TextView) view.findViewById(R.id.receiver_name);
+            RoundedImageView productImage = (RoundedImageView) view.findViewById(R.id.product_image);
+            TextView orderPriceText = (TextView) view.findViewById(R.id.order_price);
+            TextView shipmentPriceText = (TextView) view.findViewById(R.id.shipment_price);
+
+            final OrderItem item = mOrders[i];
+            orderIdText.setText(item.getId().toString());
+            productNameText.setText(item.getProductName());
+            quantityText.setText(item.getQuantity().toString());
+            receiverNameText.setText(item.getReceiverName());
+            UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
+            productImage.setCornerRadius(productImage.getWidth() / 2);
+            orderPriceText.setText(Integer.toString(item.getOrderPrice()));
+            shipmentPriceText.setText(Integer.toString(item.getShipmentPrice()));
 
             return view;
         }

@@ -124,7 +124,7 @@
                     android:textColor="@color/gray_text_color"
                     />
                 <TextView
-                    android:id="@+id/sale_price"
+                    android:id="@+id/order_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5000"

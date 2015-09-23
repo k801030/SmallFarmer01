@@ -18,6 +18,10 @@ public class OrderItem {
     class Order {
         int id;
         int quantity;
+
+        // for bills
+        int price;
+        int shipping_rates;
     }
 
     class Product {
@@ -71,6 +75,15 @@ public class OrderItem {
         String district = shipments[0].receiver_address.district;
         String address = shipments[0].receiver_address.address;
         return county + district + address;
+    }
+
+    // for bill
+    public int getOrderPrice() {
+        return order.price;
+    }
+
+    public int getShipmentPrice() {
+        return order.shipping_rates;
     }
 
 }
