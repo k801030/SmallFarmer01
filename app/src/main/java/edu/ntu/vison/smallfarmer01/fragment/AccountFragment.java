@@ -1,5 +1,6 @@
 package edu.ntu.vison.smallfarmer01.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.SignInActivity;
 import edu.ntu.vison.smallfarmer01.activity.SignUpActivity;
+import edu.ntu.vison.smallfarmer01.api.ApiService;
 import edu.ntu.vison.smallfarmer01.service.NotificationCountBadge;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
@@ -22,9 +24,15 @@ public class AccountFragment extends Fragment {
     UserService mUserService;
 
 
-
     public AccountFragment() {
-         mUserService = new UserService(getActivity());
+
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // getActivity() can return null if it is called before onAttach of the respective fragment.
+        mUserService = new UserService(getActivity());
     }
 
     @Override

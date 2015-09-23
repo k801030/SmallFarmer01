@@ -1,5 +1,6 @@
 package edu.ntu.vison.smallfarmer01.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -45,6 +46,13 @@ public class OrdersFragment extends Fragment {
 
 
     public OrdersFragment () {
+
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // getActivity() can return null if it is called before onAttach of the respective fragment.
         mUserService = new UserService(getActivity());
         mApiService = new ApiService(getActivity());
     }

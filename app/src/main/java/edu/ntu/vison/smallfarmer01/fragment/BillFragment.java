@@ -1,5 +1,6 @@
 package edu.ntu.vison.smallfarmer01.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,6 +27,13 @@ public class BillFragment extends Fragment {
     ApiService mApiService;
 
     public BillFragment() {
+
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // getActivity() can return null if it is called before onAttach of the respective fragment.
         mUserService = new UserService(getActivity());
         mApiService = new ApiService(getActivity());
     }
