@@ -3,18 +3,15 @@ package edu.ntu.vison.smallfarmer01.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
-
-import java.util.zip.Inflater;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
@@ -28,6 +25,8 @@ import edu.ntu.vison.smallfarmer01.service.UserService;
 public class BillFragment extends Fragment {
     UserService mUserService;
     ApiService mApiService;
+    Spinner mSpinner;
+    ListView mOrderList;
 
     public BillFragment() {
 
@@ -45,12 +44,20 @@ public class BillFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bills, container, false);
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
+        mSpinner = (Spinner) view.findViewById(R.id.spinner);
+        mOrderList = (ListView) view.findViewById(R.id.order_list);
 
-        BillAdapter adapter = new BillAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        adapter.loadBillData();
-        spinner.setAdapter(adapter);
+        // set bill spinner list
+        BillAdapter billAdapter = new BillAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item);
+        billAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        billAdapter.loadBillData();
+        mSpinner.setAdapter(billAdapter);
+        mSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
+
+        // set orders showed
+        OrderAdapter orderAdapter = new OrderAdapter();
+        mOrderList.setAdapter(orderAdapter);
+
 
         return view;
     }
@@ -65,7 +72,7 @@ public class BillFragment extends Fragment {
             mBills = new Bill[0];
         }
 
-        private void loadBillData() {
+        public void loadBillData() {
             mApiService.getBillList(mUserService.getUserId(), mUserService.getAccessToken(), new ApiService.GetBillListCallback() {
                 @Override
                 public void onSuccess(Bill[] bills) {
@@ -95,6 +102,10 @@ public class BillFragment extends Fragment {
             return i;
         }
 
+        public String getBillId(int i) {
+            return mBills[i].getId();
+        }
+
     }
 
     private class OrderAdapter extends BaseAdapter {
@@ -105,11 +116,12 @@ public class BillFragment extends Fragment {
             mOrders = new OrderItem[0];
         }
 
-        private void loadBillData(String billId) {
+        public void loadBillData(String billId) {
             mApiService.getBillById(mUserService.getUserId(), mUserService.getAccessToken(), billId, new ApiService.GetBillByIdCallback() {
                 @Override
                 public void onSuccess(OrderItem[] orders) {
                     mOrders = orders;
+                    notifyDataSetChanged();
                 }
 
                 @Override
@@ -144,4 +156,19 @@ public class BillFragment extends Fragment {
         }
     }
 
+
+    /* Listener */
+    public class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            String billId = ((BillAdapter)adapterView.getAdapter()).getBillId(i);
+            ((OrderAdapter)mOrderList.getAdapter()).loadBillData(billId);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    }
 }
