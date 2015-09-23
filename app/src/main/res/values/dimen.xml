@@ -15,6 +15,7 @@
     <dimen name="smaller_text_size">10sp</dimen>
 
     <dimen name="image_button_padding">3dp</dimen>
+    <dimen name="spinner_padding">5dp</dimen>
 
     <dimen name="space">10dp</dimen>
 

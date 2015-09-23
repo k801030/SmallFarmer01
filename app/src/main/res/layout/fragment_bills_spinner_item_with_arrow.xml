@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/main_text_color"
-        android:padding="@dimen/fragment_orders_button_padding"
+        android:padding="@dimen/spinner_padding"
         android:textSize="@dimen/basic_text_size"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
@@ -18,8 +18,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/spinner_padding"
         android:textSize="32dp"
-        android:padding="@dimen/fragment_orders_button_padding"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:textColor="@color/main_text_color"
