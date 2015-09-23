@@ -52,4 +52,14 @@
         android:dividerHeight="@dimen/pager_content_padding"
         android:listSelector="@color/transparent"
         android:background="@color/white"/>
+
+    <TextView
+        android:id="@+id/order_empty"
+        android:text="@string/order_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/gray_text_color"
+        android:textSize="@dimen/larger_text_size"
+        android:gravity="center" />
 </LinearLayout>

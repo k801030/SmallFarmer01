@@ -50,6 +50,8 @@ public class BillFragment extends Fragment {
 
         mSpinner = (Spinner) view.findViewById(R.id.spinner);
         mOrderList = (ListView) view.findViewById(R.id.order_list);
+        View emptyView = view.findViewById(R.id.bill_empty);
+        mSpinner.setEmptyView(emptyView);
 
         // set bill spinner list
         BillAdapter billAdapter = new BillAdapter(getActivity(), R.layout.fragment_bills_spinner_item_with_arrow, R.id.spinner_text);

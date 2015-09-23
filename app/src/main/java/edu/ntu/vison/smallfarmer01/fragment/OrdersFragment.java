@@ -24,6 +24,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.SignInActivity;
@@ -71,6 +72,8 @@ public class OrdersFragment extends Fragment {
         mOrderList = (ListView) view.findViewById(R.id.order_list);
         mOrdersAdapter = new OrdersAdapter(new ApiService(this.getActivity()));
         mOrderList.setAdapter(mOrdersAdapter);
+        View emptyView =  view.findViewById(R.id.order_empty);
+        mOrderList.setEmptyView(emptyView);
 
         // set switcher
         mNotCalledButton = (TextView) view.findViewById(R.id.not_called);
