@@ -24,20 +24,43 @@
             android:minHeight="0dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
+            android:textAllCaps="false"
             android:background="@color/fb_background"
             android:drawableLeft="@drawable/com_facebook_inverse_icon"
             android:textSize="@dimen/basic_text_size"
             android:textColor="@color/white"
             android:text="@string/fb_login_button"/>
 
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#15000000"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="0.5dp"
+                android:background="@color/sign_in_or_line"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/sign_in_or_line"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="或"/>
+            <View
+                android:layout_width="0dp"gi
+                android:layout_weight="1"
+                android:layout_height="0.5dp"
+                android:background="@color/sign_in_or_line"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"/>
+        </LinearLayout>
 
         <EditText
             android:id="@+id/email_text"

@@ -18,4 +18,5 @@
     <color name="shipment_text">#96d1a2</color>
 
     <color name="fb_background">#5f7bb6</color>
+    <color name="sign_in_or_line">#65000000</color>
 </resources>
