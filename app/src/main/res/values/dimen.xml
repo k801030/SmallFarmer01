@@ -21,6 +21,7 @@
 
     <dimen name="activity_sign_in_margin">28dp</dimen>
     <dimen name="activity_sign_in_button_padding">8dp</dimen>
+    <dimen name="activity_sign_in_button_margin">30dp</dimen>
 
 
 </resources>

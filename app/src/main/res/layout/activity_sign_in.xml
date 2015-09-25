@@ -4,7 +4,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@color/default_bg_color">
 
     <View
         android:layout_width="0dp"
@@ -22,8 +23,8 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:minHeight="0dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="@dimen/activity_sign_in_margin"
+            android:layout_marginBottom="@dimen/activity_sign_in_margin"
             android:textAllCaps="false"
             android:background="@color/fb_background"
             android:drawableLeft="@drawable/com_facebook_inverse_icon"
@@ -52,7 +53,7 @@
                 android:paddingRight="8dp"
                 android:text="或"/>
             <View
-                android:layout_width="0dp"gi
+                android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="0.5dp"
                 android:background="@color/sign_in_or_line"
@@ -66,12 +67,24 @@
             android:id="@+id/email_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_sign_in_margin"
+            android:background="@color/white"
+            android:padding="12dp"
+            android:minHeight="0dp"
             android:hint="@string/email_text" />
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/transparent"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"/>
         <EditText
             android:id="@+id/password_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="12dp"
+            android:minHeight="0dp"
             android:hint="@string/password_text"
             android:password="true" />
 
@@ -79,11 +92,11 @@
             android:id="@+id/sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_sign_in_margin"
             android:padding="12dp"
             android:minHeight="0dp"
             android:paddingTop="@dimen/activity_sign_in_button_padding"
             android:paddingBottom="@dimen/activity_sign_in_button_padding"
-            android:layout_margin="0dp"
             android:textSize="@dimen/basic_text_size"
             android:background="@color/color_primary"
             android:textStyle="bold"
