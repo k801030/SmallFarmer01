@@ -2,7 +2,6 @@ package edu.ntu.vison.smallfarmer01.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,26 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.SignInActivity;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 import edu.ntu.vison.smallfarmer01.model.OrderItem;
-import edu.ntu.vison.smallfarmer01.service.NotificationCountBadge;
+import edu.ntu.vison.smallfarmer01.service.push_notification.NotificationCountBadge;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**

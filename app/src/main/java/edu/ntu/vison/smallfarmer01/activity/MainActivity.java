@@ -18,7 +18,7 @@ import edu.ntu.vison.smallfarmer01.fragment.AccountFragment;
 import edu.ntu.vison.smallfarmer01.fragment.BillFragment;
 import edu.ntu.vison.smallfarmer01.fragment.OrdersFragment;
 import edu.ntu.vison.smallfarmer01.lib.MyPagerSlidingTabStrip;
-import edu.ntu.vison.smallfarmer01.service.RegistrationIntentService;
+import edu.ntu.vison.smallfarmer01.service.push_notification.RegistrationIntentService;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**

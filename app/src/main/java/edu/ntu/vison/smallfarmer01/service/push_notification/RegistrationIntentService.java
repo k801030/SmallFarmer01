@@ -1,4 +1,4 @@
-package edu.ntu.vison.smallfarmer01.service;
+package edu.ntu.vison.smallfarmer01.service.push_notification;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
+import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**
  * Created by Vison on 2015/9/19.

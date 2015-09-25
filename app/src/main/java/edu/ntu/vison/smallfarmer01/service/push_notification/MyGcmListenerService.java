@@ -1,4 +1,4 @@
-package edu.ntu.vison.smallfarmer01.service;
+package edu.ntu.vison.smallfarmer01.service.push_notification;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,18 +9,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
-import android.view.WindowManager;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.MainActivity;
-import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * Created by Vison on 2015/9/19.

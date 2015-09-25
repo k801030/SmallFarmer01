@@ -1,4 +1,4 @@
-package edu.ntu.vison.smallfarmer01.service;
+package edu.ntu.vison.smallfarmer01.service.push_notification;
 
 import android.content.Intent;
 

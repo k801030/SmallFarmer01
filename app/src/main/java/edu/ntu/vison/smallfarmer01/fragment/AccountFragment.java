@@ -1,7 +1,6 @@
 package edu.ntu.vison.smallfarmer01.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,8 +12,7 @@ import android.widget.Button;
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.SignInActivity;
 import edu.ntu.vison.smallfarmer01.activity.SignUpActivity;
-import edu.ntu.vison.smallfarmer01.api.ApiService;
-import edu.ntu.vison.smallfarmer01.service.NotificationCountBadge;
+import edu.ntu.vison.smallfarmer01.service.push_notification.NotificationCountBadge;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**

@@ -10600,7 +10600,7 @@ W/ActivityManager( 3531): NORMAL SET : dst_category = 0, src_allowCategory = 0,2
 W/ActivityManager( 3531): NORMAL SET : srcAppInfo.processName = com.samsung.android.app.galaxyfinder, destAppInfo.processName = com.samsung.android.app.galaxyfinder
 I/SA      (10944): [SUR] onReceive Intent=[ action_PACKAGE_REMOVED package extra.REMOVED_FOR_ALL_USERS.:false extra.UID.:10246 extra.DATA_REMOVED.:false extra.REPLACING.:true extra.user_handle.:0 ]
 D/ActivityManager( 3531): startService callerProcessName:edu.ntu.vison.smallfarmer01, calleePkgName: edu.ntu.vison.smallfarmer01
-D/ActivityManager( 3531): retrieveServiceLocked(): component = edu.ntu.vison.smallfarmer01/edu.ntu.vison.smallfarmer01.service.RegistrationIntentService; callingUser = 0; userId(target) = 0
+D/ActivityManager( 3531): retrieveServiceLocked(): component = edu.ntu.vison.smallfarmer01/edu.ntu.vison.smallfarmer01.service.push_notification.RegistrationIntentService; callingUser = 0; userId(target) = 0
 D/ActivityManager( 3531): startService callerProcessName:com.samsung.android.app.galaxyfinder, calleePkgName: com.samsung.android.app.galaxyfinder
 D/ActivityManager( 3531): retrieveServiceLocked(): component = com.samsung.android.app.galaxyfinder/com.samsung.android.app.galaxyfinder.tag.TagReadyService; callingUser = 0; userId(target) = 0
 I/ActivityManager( 3531): Killing 7696:am.sunrise.android.calendar/u0a194 (adj 15): empty #31
