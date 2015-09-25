@@ -263,13 +263,13 @@ public class ApiService {
     }
 
     public void logOut(String userId, String accessToken, int mobileOS, String oldRegId, final LogOutCallback callback) {
-        String url = getUrlWithField(UPDATED_REG_ID);
+        String url = getUrlWithField(LOG_OUT);
         final JSONObject json = new JSONObject();
         try {
             json.put("id", userId);
             json.put("access_token", accessToken);
             json.put("mobile_os", mobileOS);
-            json.put("old_registration_id", oldRegId);
+            json.put("registration_id", oldRegId);
 
         } catch (JSONException e) {
             e.printStackTrace();
