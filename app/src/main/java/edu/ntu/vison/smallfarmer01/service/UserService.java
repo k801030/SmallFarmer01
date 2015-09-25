@@ -47,12 +47,16 @@ public class UserService {
             public void onSuccess(LoginResult loginResult) {
                 // send user identity data to server
                 String fbToken = loginResult.getAccessToken().getToken();
-                String regId = mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID,  null);
+                // do not need facebook token anymore
+                LoginManager.getInstance().logOut();
+
+                String regId = mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID, null);
                 mApiService.signInWithFacebookToken(fbToken, regId, new ApiService.SignInCallback() {
                     @Override
                     public void onSuccess(String userId, String accessToken) {
                         saveLoginInfo(userId, accessToken);
                         callback.onSuccess();
+
                     }
 
                     @Override
