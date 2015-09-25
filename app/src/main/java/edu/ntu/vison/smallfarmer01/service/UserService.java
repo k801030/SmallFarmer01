@@ -36,6 +36,20 @@ public class UserService {
 
         // TODO: send user identity data to server
         String fbToken = "";
+        String regId = mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID,  null);
+        mApiService.signInWithFacebookToken(fbToken, regId, new ApiService.SignInCallback() {
+            @Override
+            public void onSuccess(String userId, String accessToken) {
+                saveLoginInfo(userId, accessToken);
+                callback.onSuccess();
+            }
+
+            @Override
+            public void onError(int statusCode) {
+                // TODO: need to sign up on website
+                callback.onError();
+            }
+        });
     }
 
     public void signIn(String email, String password, TextValidator textValidator, final UserSignInCallback callback) {
