@@ -1,9 +1,18 @@
 package edu.ntu.vison.smallfarmer01.service;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+
+import java.util.Arrays;
 
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 
@@ -31,25 +40,42 @@ public class UserService {
         mEditor.commit();
     }
 
-    public void signInWithFacebook(final UserSignInCallback callback) {
-        // TODO: get facebook token
-
-        // TODO: send user identity data to server
-        String fbToken = "";
-        String regId = mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID,  null);
-        mApiService.signInWithFacebookToken(fbToken, regId, new ApiService.SignInCallback() {
+    public void signInWithFacebook(Activity actvity, CallbackManager callbackManager, final UserSignInCallback callback) {
+        // get facebook token
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(String userId, String accessToken) {
-                saveLoginInfo(userId, accessToken);
-                callback.onSuccess();
+            public void onSuccess(LoginResult loginResult) {
+                // send user identity data to server
+                String fbToken = loginResult.getAccessToken().getToken();
+                String regId = mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID,  null);
+                mApiService.signInWithFacebookToken(fbToken, regId, new ApiService.SignInCallback() {
+                    @Override
+                    public void onSuccess(String userId, String accessToken) {
+                        saveLoginInfo(userId, accessToken);
+                        callback.onSuccess();
+                    }
+
+                    @Override
+                    public void onError(int statusCode) {
+                        // TODO: need to sign up on website
+                        callback.onError();
+                    }
+                });
             }
 
             @Override
-            public void onError(int statusCode) {
-                // TODO: need to sign up on website
-                callback.onError();
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+
             }
         });
+
+        LoginManager.getInstance().logInWithReadPermissions(actvity, Arrays.asList("public_profile"));
+
     }
 
     public void signIn(String email, String password, TextValidator textValidator, final UserSignInCallback callback) {

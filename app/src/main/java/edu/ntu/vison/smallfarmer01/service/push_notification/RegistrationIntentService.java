@@ -55,10 +55,10 @@ public class RegistrationIntentService extends IntentService {
             Log.i(TAG, "GCM Registration Token: " + regToken);
 
             // TODO: implement sendRegistration api
-
             UserService userService = new UserService(this);
-
-            new ApiService(this).sendRegistrationToServer(userService.getUserId(), userService.getAccessToken(), ANDROID_DEVICE, getOldRegToken(), regToken);
+            if (userService.isLogin()) {
+                new ApiService(this).sendRegistrationToServer(userService.getUserId(), userService.getAccessToken(), ANDROID_DEVICE, getOldRegToken(), regToken);
+            }
             updateRegToken(regToken);
         } catch (IOException e) {
             e.printStackTrace();

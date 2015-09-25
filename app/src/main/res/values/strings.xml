@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">小農一號</string>
+    <string name="facebook_app_id">247642338743051</string>
 
     <string name="last_name_text">姓</string>
     <string name="first_name_text">名字</string>
@@ -9,6 +10,7 @@
     <string name="sign_in_button">登入</string>
     <string name="sign_up_button">註冊</string>
     <string name="log_out_button">登出</string>
+    <string name="fb_login_button">使用Facebook登入</string>
 
     <string name="product_unit">箱</string>
     <string name="money_unit">元</string>

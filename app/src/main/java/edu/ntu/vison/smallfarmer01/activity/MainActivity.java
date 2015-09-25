@@ -66,11 +66,6 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
     }
-    private void goToSignUpPage() {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     private void goToSignInPage() {
         Intent intent = new Intent(this, SignInActivity.class);
