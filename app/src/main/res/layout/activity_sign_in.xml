@@ -16,18 +16,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.facebook.login.widget.LoginButton
+        <Button
             android:id="@+id/fb_login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:padding="12dp"
+            android:minHeight="0dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
+            android:background="@color/fb_background"
+            android:drawableLeft="@drawable/com_facebook_inverse_icon"
             android:textSize="@dimen/basic_text_size"
-            facebook:com_facebook_login_text="@string/fb_login_button"/>
+            android:textColor="@color/white"
+            android:text="@string/fb_login_button"/>
 
         <View
             android:layout_width="match_parent"
@@ -55,6 +56,8 @@
             android:id="@+id/sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:minHeight="0dp"
             android:paddingTop="@dimen/activity_sign_in_button_padding"
             android:paddingBottom="@dimen/activity_sign_in_button_padding"
             android:layout_margin="0dp"

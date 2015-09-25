@@ -16,4 +16,6 @@
     <color name="transparent">#00000000</color>
 
     <color name="shipment_text">#96d1a2</color>
+
+    <color name="fb_background">#5f7bb6</color>
 </resources>
