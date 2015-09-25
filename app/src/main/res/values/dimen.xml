@@ -18,6 +18,7 @@
     <dimen name="spinner_padding">5dp</dimen>
 
     <dimen name="space">10dp</dimen>
+    <dimen name="activity_sign_in_margin">28dp</dimen>
 
 
 </resources>
