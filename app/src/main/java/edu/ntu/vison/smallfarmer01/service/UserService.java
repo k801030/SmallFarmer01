@@ -31,6 +31,13 @@ public class UserService {
         mEditor.commit();
     }
 
+    public void signInWithFacebook(final UserSignInCallback callback) {
+        // TODO: get facebook token
+
+        // TODO: send user identity data to server
+        String fbToken = "";
+    }
+
     public void signIn(String email, String password, TextValidator textValidator, final UserSignInCallback callback) {
         if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
 

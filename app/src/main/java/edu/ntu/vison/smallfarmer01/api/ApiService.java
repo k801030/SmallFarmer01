@@ -1,6 +1,7 @@
 package edu.ntu.vison.smallfarmer01.api;
 
 import android.content.Context;
+import android.support.annotation.StringDef;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -17,6 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Map;
@@ -33,6 +36,10 @@ public class ApiService {
     private static final String HOST = "http://register.ac-experts.com.tw/";
     private static final String mField = "";
 
+    @StringDef({SIGN_IN_FIELD, GET_ORDERS_FIELD, CONFIRM_ORDER, UPDATED_REG_ID, LOG_OUT, GET_BILL_LIST, GET_BILL, FB_SIGN_IN_FIELD})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface UrlField{};
+
     private static final String SIGN_IN_FIELD = "account_api/v1/auth/signIn";
     private static final String GET_ORDERS_FIELD = "order_api/v1/index";
     private static final String CONFIRM_ORDER = "order_api/v1/confirm";
@@ -40,12 +47,49 @@ public class ApiService {
     private static final String LOG_OUT = "user_api/v1/logout";
     private static final String GET_BILL_LIST = "bill_api/v1/index";
     private static final String GET_BILL = "bill_api/v1/show";
+    private static final String FB_SIGN_IN_FIELD = "account_api/v1/auth/facebookSignIn";
 
     private Context mContext;
 
     public ApiService(Context context) {
         mContext = context;
 
+    }
+
+    public void signInWithFacebookToken(String fbToken, String regId, final SignInCallback callback) {
+        String url = getUrlWithField(FB_SIGN_IN_FIELD);
+
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("fb_token", fbToken);
+            json.put("registration_id", regId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String id = response.getString("id");
+                    String token = response.getString("token");
+                    callback.onSuccess(id, token);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.networkResponse != null && error.networkResponse.statusCode == 401) {
+                    // unauthorized: error account or password
+                    callback.onError(401);
+                }
+            }
+        });
+
+        queue.add(req);
     }
 
     public void signIn(final String email, final String password, final String regId, final SignInCallback callback){
@@ -339,7 +383,7 @@ public class ApiService {
      * @param field
      * @return full request url
      */
-    private String getUrlWithField(String field) {
+    private String getUrlWithField(@UrlField String field) {
         return HOST + field;
     }
 
