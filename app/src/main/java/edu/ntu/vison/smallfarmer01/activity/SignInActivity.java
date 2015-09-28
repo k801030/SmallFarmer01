@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -91,9 +92,9 @@ public class SignInActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onError() {
+                public void onError(String error) {
                     // TODO: need to sign up on website
-
+                    Toast.makeText(SignInActivity.this, error, Toast.LENGTH_LONG).show();
                 }
             });
          }
@@ -112,8 +113,8 @@ public class SignInActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onError() {
-
+                public void onError(String error) {
+                    Toast.makeText(SignInActivity.this, error, Toast.LENGTH_LONG).show();
                 }
             });
         }

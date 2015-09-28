@@ -33,5 +33,13 @@ public class TextValidator {
         }
     }
 
+    public boolean checkNotBlank(String string) {
+        if (string != "") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

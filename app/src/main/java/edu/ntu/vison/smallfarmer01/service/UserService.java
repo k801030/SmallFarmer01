@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.IntDef;
+import android.support.annotation.StringDef;
 import android.util.Log;
 
 import com.facebook.CallbackManager;
@@ -12,6 +14,8 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
 import edu.ntu.vison.smallfarmer01.api.ApiService;
@@ -26,6 +30,17 @@ public class UserService {
     static final String SHARED_PREF_KEY_USER_ID = "USER_ID";
     static final String SHARED_PREF_KEY_REG_ID = "REG_ID";
     ApiService mApiService;
+
+    static final String UNKNOWN = "未知的錯誤";
+    static final String BLANK_PASSWORD = "尚未輸入密碼";
+    static final String BLANK_EMAIL = "尚未輸入電子郵件";
+    static final String EMAIL_FORMAT_ERROR = "信箱格式錯誤";
+    static final String PASSWORD_AT_LEAST_8 = "密碼請輸入至少8字元";
+    static final String NOT_YET_REGISTER = "尚未註冊";
+    static final String WRONG = "帳號密碼錯誤";
+    @StringDef({UNKNOWN, BLANK_EMAIL, BLANK_PASSWORD, EMAIL_FORMAT_ERROR, PASSWORD_AT_LEAST_8, NOT_YET_REGISTER, WRONG})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface AccountError{};
 
     public UserService(Context context) {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -62,7 +77,7 @@ public class UserService {
                     @Override
                     public void onError(int statusCode) {
                         // TODO: need to sign up on website
-                        callback.onError();
+                        callback.onError(NOT_YET_REGISTER);
                     }
                 });
             }
@@ -96,25 +111,27 @@ public class UserService {
 
                 @Override
                 public void onError(int statusCode) {
-                    callback.onError();
+                    callback.onError(WRONG);
                 }
             });
 
         } else {
-            callback.onError();
+            // do not pass the validator
+            String error = UNKNOWN;
+            if (!textValidator.checkNotBlank(email)) {
+                error = BLANK_EMAIL;
+            } else if (!textValidator.checkNotBlank(password)) {
+                error = BLANK_PASSWORD;
+            } else if (!textValidator.checkEmail(email)) {
+                error = EMAIL_FORMAT_ERROR;
+            } else if (!textValidator.checkPassword(password)) {
+                error = PASSWORD_AT_LEAST_8;
+            }
+
+            callback.onError(error);
         }
     }
 
-    public void signUp(String firstName, String lastName, String email, String password,
-                       TextValidator textValidator, UserSignUpCallback callback) {
-        if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
-            // TODO: get accessToken
-            saveLoginInfo("userid","accesstoken");
-            callback.onSuccess();
-        } else {
-            callback.onError();
-        }
-    }
 
     public void logOut(final UserLogOutCallback callback) {
         int mobileOS = 0;
@@ -156,12 +173,7 @@ public class UserService {
 
     public interface UserSignInCallback {
         void onSuccess();
-        void onError();
-    }
-
-    public interface UserSignUpCallback {
-        void onSuccess();
-        void onError();
+        void onError(@AccountError String error);
     }
 
     public interface UserLogOutCallback {
