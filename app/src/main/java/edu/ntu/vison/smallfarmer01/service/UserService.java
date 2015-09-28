@@ -36,8 +36,8 @@ public class UserService {
     static final String BLANK_EMAIL = "尚未輸入電子郵件";
     static final String EMAIL_FORMAT_ERROR = "信箱格式錯誤";
     static final String PASSWORD_AT_LEAST_8 = "密碼請輸入至少8字元";
-    static final String NOT_YET_REGISTER = "尚未註冊";
-    static final String WRONG = "帳號密碼錯誤";
+    public static final String NOT_YET_REGISTER = "尚未註冊";
+    public static final String WRONG = "帳號密碼錯誤";
     @StringDef({UNKNOWN, BLANK_EMAIL, BLANK_PASSWORD, EMAIL_FORMAT_ERROR, PASSWORD_AT_LEAST_8, NOT_YET_REGISTER, WRONG})
     @Retention(RetentionPolicy.SOURCE)
     public @interface AccountError{};

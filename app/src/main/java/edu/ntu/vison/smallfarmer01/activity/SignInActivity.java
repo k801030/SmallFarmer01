@@ -1,20 +1,19 @@
 package edu.ntu.vison.smallfarmer01.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.service.TextValidator;
@@ -85,16 +84,22 @@ public class SignInActivity extends AppCompatActivity {
     public class OnClickFbSignInListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            Log.d("TAG", "ONCLICK");
             mUserService.signInWithFacebook(SignInActivity.this, mCallbackManager, new UserService.UserSignInCallback() {
                 @Override
                 public void onSuccess() {
+                    Log.d("TAG", "SUCCESS");
                     goToMainPage();
                 }
 
                 @Override
                 public void onError(String error) {
                     // TODO: need to sign up on website
-                    Toast.makeText(SignInActivity.this, error, Toast.LENGTH_LONG).show();
+                    Log.d("TAG", "ERROR");
+                    if (error == UserService.NOT_YET_REGISTER) {
+                        AlertDialog alert = new RegisterErrorAlert().create();
+                        alert.show();
+                    }
                 }
             });
          }
@@ -118,5 +123,34 @@ public class SignInActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+
+    private class RegisterErrorAlert extends AlertDialog.Builder {
+        public RegisterErrorAlert() {
+            super(SignInActivity.this);
+            this.setMessage("您好，手機app目前不提供註冊功能。第一次使用，請至網頁版進行註冊，謝謝！");
+            this.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            this.setNegativeButton("立即前往",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            openRegisterWeb();
+                        }
+                    });
+        }
+
+
+    }
+
+    private void openRegisterWeb() {
+        final String REGISTER_PAGE = "https://www.smallfarmer01.com/users/sign_up";
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(REGISTER_PAGE));
+        startActivity(browserIntent);
     }
 }
