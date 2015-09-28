@@ -110,6 +110,7 @@
                 android:padding="12dp"
                 android:minHeight="0dp"
                 android:layout_marginTop="@dimen/activity_sign_in_margin"
+                android:layout_marginBottom="@dimen/activity_sign_in_margin"
                 android:textAllCaps="false"
                 android:background="@color/fb_background"
                 android:drawableLeft="@drawable/com_facebook_inverse_icon"
@@ -117,12 +118,19 @@
                 android:textColor="@color/white"
                 android:text="@string/fb_login_button"/>
 
+            <TextView
+                android:id="@+id/link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_text_color"
+                android:text="第一次使用，請至網頁版註冊"
+                />
         </LinearLayout>
 
         <View
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent" />
-    </LinearLayout>
+    </LinearLayout>g
 
 </LinearLayout>

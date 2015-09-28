@@ -7,10 +7,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -23,12 +26,16 @@ import edu.ntu.vison.smallfarmer01.service.UserService;
  * Created by Vison on 2015/9/14.
  */
 public class SignInActivity extends AppCompatActivity {
+    final String REGISTER_PAGE = "https://www.smallfarmer01.com/users/sign_up";
+
     UserService mUserService;
     EditText mEmailText;
     EditText mPasswordText;
     Button mSignInButton;
     Button mFBLoginButton;
+    TextView mLink;
     CallbackManager mCallbackManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +58,18 @@ public class SignInActivity extends AppCompatActivity {
         mEmailText = (EditText) findViewById(R.id.email_text);
         mPasswordText = (EditText) findViewById(R.id.password_text);
 
+
         // fb button
         mFBLoginButton = (Button) findViewById(R.id.fb_login_button);
         mFBLoginButton.setOnClickListener(new OnClickFbSignInListener());
         mCallbackManager = CallbackManager.Factory.create();
 
-        // TODO: remove below after finishing test.
-        tempFillUpAccount();
-    }
+        mLink = (TextView) findViewById(R.id.link);
+        mLink.setClickable(true);
+        mLink.setMovementMethod(LinkMovementMethod.getInstance());
+        String text = "第一次使用，請先至<a href='" + REGISTER_PAGE + "'>網頁版</a>註冊。";
+        mLink.setText(Html.fromHtml(text));
 
-    private void tempFillUpAccount() {
-        mEmailText.setText("sueming0908@gmail.com");
-        mPasswordText.setText("suesue0908");
     }
 
 
@@ -84,18 +91,15 @@ public class SignInActivity extends AppCompatActivity {
     public class OnClickFbSignInListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Log.d("TAG", "ONCLICK");
             mUserService.signInWithFacebook(SignInActivity.this, mCallbackManager, new UserService.UserSignInCallback() {
                 @Override
                 public void onSuccess() {
-                    Log.d("TAG", "SUCCESS");
                     goToMainPage();
                 }
 
                 @Override
                 public void onError(String error) {
                     // TODO: need to sign up on website
-                    Log.d("TAG", "ERROR");
                     if (error == UserService.NOT_YET_REGISTER) {
                         AlertDialog alert = new RegisterErrorAlert().create();
                         alert.show();
@@ -149,7 +153,6 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void openRegisterWeb() {
-        final String REGISTER_PAGE = "https://www.smallfarmer01.com/users/sign_up";
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(REGISTER_PAGE));
         startActivity(browserIntent);
     }
