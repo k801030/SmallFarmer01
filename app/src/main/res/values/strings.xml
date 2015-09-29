@@ -18,6 +18,9 @@
     <string name="order_empty">沒有訂單資料</string>
     <string name="bill_empty">沒有帳單資料</string>
 
+    <string name="cash">應得金額</string>
+    <string name="serial_number">出貨編號：</string>
+
     <!-- gcm -->
     <string name="gcm_defaultSenderId">702294285521</string>
 </resources>
