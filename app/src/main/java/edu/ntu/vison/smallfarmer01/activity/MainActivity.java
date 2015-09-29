@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
 
         // init viewPager
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
