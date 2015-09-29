@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/switch_button"
         android:padding="1dp">
         <TextView
             android:id="@+id/not_called"
