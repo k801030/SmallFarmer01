@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_primary">#dd551b</color>
-    <color name="color_primary_dark">#a6542b</color>
+    <color name="color_primary_dark">#692f14</color>
     <color name="light_text">#dd8936</color>
     <color name="dark_text">#83441a</color>
 
@@ -18,7 +18,7 @@
 
     <color name="main_bg_color">#f7b385</color>
     <color name="main_text_color">#83441a</color>
-    <color name="default_bg_color">#dee4dc</color>
+    <color name="default_bg_color">#e4dfca</color>
 
     <color name="switcher_bg_color">#ff9e5e</color>
     <color name="switcher_default_bg_color">@color/white</color>
