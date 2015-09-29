@@ -25,14 +25,14 @@
     <color name="switcher_text_color">#c76313</color>
     <color name="switcher_default_text_color">@color/light_gray</color>
 
-    <color name="default_text_color">#444</color>
+    <color name="default_text_color">#333</color>
     <color name="gray_text_color">#666</color>
     <color name="order_item_serial_color">@color/light_text</color>
 
     <color name="shipment_text">@color/light_text</color>
     <color name="fb_background">#5f7bb6</color>
     <color name="sign_in_or_line">#65000000</color>
-
+    <color name="horizontal_line">#30000000</color>
 
 
 

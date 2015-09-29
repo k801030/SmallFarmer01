@@ -169,10 +169,9 @@ public class BillFragment extends Fragment {
             TextView orderIdText = (TextView) view.findViewById(R.id.order_id);
             TextView productNameText = (TextView) view.findViewById(R.id.product_name);
             TextView quantityText = (TextView) view.findViewById(R.id.quantity);
-            TextView receiverNameText = (TextView) view.findViewById(R.id.receiver_name);
+            TextView receiverNameText = (TextView) view.findViewById(R.id.receiver_info);
             RoundedImageView productImage = (RoundedImageView) view.findViewById(R.id.product_image);
             TextView orderPriceText = (TextView) view.findViewById(R.id.order_price);
-            TextView shipmentPriceText = (TextView) view.findViewById(R.id.shipment_price);
 
             final OrderItem item = mOrders[i];
             orderIdText.setText(item.getId().toString());
@@ -182,7 +181,6 @@ public class BillFragment extends Fragment {
             UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
             productImage.setCornerRadius(productImage.getWidth() / 2);
             orderPriceText.setText(Integer.toString(item.getOrderPrice()));
-            shipmentPriceText.setText(Integer.toString(item.getShipmentPrice()));
 
             return view;
         }

@@ -150,8 +150,7 @@ public class OrdersFragment extends Fragment {
             TextView orderIdText = (TextView) view.findViewById(R.id.order_id);
             TextView productNameText = (TextView) view.findViewById(R.id.product_name);
             TextView quantityText = (TextView) view.findViewById(R.id.quantity);
-            TextView receiverNameText = (TextView) view.findViewById(R.id.receiver_name);
-            TextView receiverAddressText = (TextView) view.findViewById(R.id.receiver_address);
+            TextView receiverInfoText = (TextView) view.findViewById(R.id.receiver_info);
             RoundedImageView productImage = (RoundedImageView) view.findViewById(R.id.product_image);
             View confirmButton = view.findViewById(R.id.notify_shipment_button);
 
@@ -160,8 +159,12 @@ public class OrdersFragment extends Fragment {
             orderIdText.setText(item.getId().toString());
             productNameText.setText(item.getProductName());
             quantityText.setText(item.getQuantity().toString());
-            receiverNameText.setText(item.getReceiverName());
-            receiverAddressText.setText(item.getReceiverAddress());
+
+            // appending receiver information
+            receiverInfoText.setText(item.getReceiverName());
+            receiverInfoText.append("．");
+            receiverInfoText.append(item.getReceiverAddress());
+
             UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
             productImage.setCornerRadius(productImage.getWidth() / 2);
 

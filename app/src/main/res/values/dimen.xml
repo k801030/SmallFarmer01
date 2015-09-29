@@ -11,6 +11,7 @@
     <dimen name="item_word_content_padding">10dp</dimen>
 
     <dimen name="larger_text_size">18sp</dimen>
+    <dimen name="ex_larger_text_size">20sp</dimen>
     <dimen name="basic_text_size">16sp</dimen>
     <dimen name="smaller_text_size">10sp</dimen>
 
