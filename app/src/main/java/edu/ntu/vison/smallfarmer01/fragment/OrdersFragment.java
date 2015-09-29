@@ -271,10 +271,10 @@ public class OrdersFragment extends Fragment {
 
 
         private void setView() {
-            selected.setBackgroundColor(getResources().getColor(R.color.main_bg_color));
-            selected.setTextColor(getResources().getColor(R.color.main_text_color));
-            unselected.setBackgroundColor(getResources().getColor(R.color.white));
-            unselected.setTextColor(getResources().getColor(R.color.main_bg_color));
+            selected.setBackgroundColor(getResources().getColor(R.color.switcher_bg_color));
+            selected.setTextColor(getResources().getColor(R.color.switcher_text_color));
+            unselected.setBackgroundColor(getResources().getColor(R.color.switcher_default_bg_color));
+            unselected.setTextColor(getResources().getColor(R.color.switcher_default_text_color));
         }
 
         public boolean isLeftSelected() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_primary">#e77a50</color>
-    <color name="color_primary_dark">#bb5f30</color>
+    <color name="color_primary_dark">#a6542b</color>
     <color name="light_text">#dd8936</color>
     <color name="dark_text">#83441a</color>
 
@@ -16,9 +16,14 @@
     <color name="tab_text_color">@color/dark_text</color>
     <color name="tab_indicator_color">@color/dark_text</color>
 
-    <color name="main_bg_color">#dd8936</color>
+    <color name="main_bg_color">#f7b38a</color>
+    <color name="main_text_color">#83441a</color>
     <color name="default_bg_color">#dee4dc</color>
-    <color name="main_text_color">#c76313</color>
+
+    <color name="switcher_bg_color">#ff9e5e</color>
+    <color name="switcher_default_bg_color">@color/white</color>
+    <color name="switcher_text_color">#c76313</color>
+    <color name="switcher_default_text_color">@color/light_gray</color>
 
     <color name="default_text_color">#333</color>
     <color name="gray_text_color">#777</color>

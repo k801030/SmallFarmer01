@@ -9,7 +9,7 @@
         android:id="@+id/spinner_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/main_text_color"
+        android:textColor="@color/switcher_text_color"
         android:padding="@dimen/spinner_padding"
         android:textSize="@dimen/basic_text_size"
         android:layout_centerVertical="true"
@@ -18,10 +18,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spinner_padding"
+        android:paddingRight="@dimen/spinner_arrow_right_padding"
         android:textSize="32dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:textColor="@color/main_text_color"
+        android:textColor="@color/switcher_text_color"
         android:text="▾"/>
 </RelativeLayout>
