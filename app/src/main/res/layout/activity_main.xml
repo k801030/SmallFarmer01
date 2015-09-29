@@ -15,9 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         app:pstsShouldExpand="true"
-        app:pstsDefaultTextColor="@color/tab_default_color"
+        app:pstsDefaultTextColor="@color/tab_text_color"
         app:pstsIndicatorTextColor="@color/white"
-        app:pstsIndicatorColor="@color/tab_default_color"
+        app:pstsIndicatorColor="@color/tab_indicator_color"
         android:textSize="14sp"
         android:background="@color/color_primary"
         />
