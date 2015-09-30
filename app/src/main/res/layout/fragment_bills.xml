@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/pager_content_padding"
     android:paddingRight="@dimen/pager_content_padding">
     <Space
+        android:id="@+id/space1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/space" />
     <Spinner
@@ -12,26 +13,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:spinnerMode="dropdown"
-        android:background="@drawable/spinner" />
+        android:background="@drawable/spinner"
+        android:layout_below="@id/space1"/>
+
     <Space
+        android:id="@+id/space2"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/space" />
-    <Button
-        android:id="@+id/show_detail_button"
-        android:layout_width="0dp"
-        android:layout_weight="2"
+        android:layout_height="@dimen/space"
+        android:layout_below="@id/spinner"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_sign_in_margin"
-        android:layout_marginBottom="@dimen/activity_sign_in_margin"
-        android:padding="12dp"
-        android:minHeight="0dp"
-        android:paddingTop="@dimen/activity_sign_in_button_padding"
-        android:paddingBottom="@dimen/activity_sign_in_button_padding"
-        android:textSize="@dimen/basic_text_size"
-        android:background="@color/color_primary"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:text="@string/show_bill_detail_button"/>
+        android:orientation="horizontal"
+        android:layout_below="@id/space2">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/show_detail_button"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_sign_in_margin"
+            android:layout_marginBottom="@dimen/activity_sign_in_margin"
+            android:padding="12dp"
+            android:minHeight="0dp"
+            android:paddingTop="@dimen/activity_sign_in_button_padding"
+            android:paddingBottom="@dimen/activity_sign_in_button_padding"
+            android:textSize="@dimen/basic_text_size"
+            android:background="@color/normal_button"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="@string/show_bill_detail_button"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </LinearLayout>
     <TextView
         android:id="@+id/bill_empty"
         android:text="@string/bill_empty"
@@ -39,5 +62,6 @@
         android:layout_height="match_parent"
         android:textColor="@color/gray_text_color"
         android:textSize="@dimen/larger_text_size"
+        android:background="@color/default_bg_color"
         android:gravity="center" />
-</LinearLayout>
+</RelativeLayout>

@@ -25,6 +25,7 @@
     <color name="switcher_text_color">#c76313</color>
     <color name="switcher_default_text_color">@color/light_gray</color>
 
+    <color name="normal_button">#ff9e5e</color>
     <color name="default_text_color">#333</color>
     <color name="gray_text_color">#666</color>
     <color name="order_item_serial_color">@color/light_text</color>

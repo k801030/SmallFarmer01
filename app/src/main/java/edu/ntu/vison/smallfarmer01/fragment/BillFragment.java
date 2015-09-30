@@ -62,6 +62,7 @@ public class BillFragment extends Fragment {
         View emptyView = view.findViewById(R.id.bill_empty);
         mSpinner.setEmptyView(emptyView);
 
+
         // set bill spinner list
         BillAdapter billAdapter = new BillAdapter(getActivity(), R.layout.fragment_bills_spinner_item_with_arrow, R.id.spinner_text);
         billAdapter.setDropDownViewResource(R.layout.fragment_bills_spinner_item);
