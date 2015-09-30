@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_color">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -20,5 +21,5 @@
         android:dividerHeight="@dimen/pager_content_padding"
         android:listSelector="@color/transparent"
         android:background="@color/white"
-        android:padding="@dimen/fragment_orders_item_padding"/>
+        android:layout_margin="@dimen/fragment_orders_item_padding"/>
 </LinearLayout>

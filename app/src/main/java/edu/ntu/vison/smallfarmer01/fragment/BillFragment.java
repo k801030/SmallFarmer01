@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +18,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.makeramen.roundedimageview.RoundedImageView;
+
+import java.io.Serializable;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.BillDetailActivity;
@@ -54,7 +59,6 @@ public class BillFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_bills, container, false);
 
         mSpinner = (Spinner) view.findViewById(R.id.spinner);
-        mOrderList = (ListView) view.findViewById(R.id.order_list);
         View emptyView = view.findViewById(R.id.bill_empty);
         mSpinner.setEmptyView(emptyView);
 
@@ -65,9 +69,7 @@ public class BillFragment extends Fragment {
         mSpinner.setAdapter(billAdapter);
         mSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
 
-        // set orders showed
-        OrderAdapter orderAdapter = new OrderAdapter();
-        mOrderList.setAdapter(orderAdapter);
+
 
         // set show detail
         mShowDetailButton = (Button) view.findViewById(R.id.show_detail_button);
@@ -127,62 +129,7 @@ public class BillFragment extends Fragment {
 
     }
 
-    /**
-     * For ListView
-     */
-    private class OrderAdapter extends BaseAdapter {
 
-        OrderItem[] orders;
-
-        public OrderAdapter() {
-            orders = new OrderItem[0];
-        }
-
-        public void setOrders(OrderItem[] orders) {
-            this.orders = orders;
-        }
-
-
-        @Override
-        public int getCount() {
-            return orders.length;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return orders[i];
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return i;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            if (view == null) {
-                view = LayoutInflater.from(BillFragment.this.getActivity()).inflate(R.layout.fragment_bills_item, viewGroup, false);
-            }
-
-            TextView orderIdText = (TextView) view.findViewById(R.id.order_id);
-            TextView productNameText = (TextView) view.findViewById(R.id.product_name);
-            TextView quantityText = (TextView) view.findViewById(R.id.quantity);
-            TextView receiverNameText = (TextView) view.findViewById(R.id.receiver_info);
-            RoundedImageView productImage = (RoundedImageView) view.findViewById(R.id.product_image);
-            TextView orderPriceText = (TextView) view.findViewById(R.id.order_price);
-
-            final OrderItem item = orders[i];
-            orderIdText.setText(item.getId().toString());
-            productNameText.setText(item.getProductName());
-            quantityText.setText(item.getQuantity().toString());
-            receiverNameText.setText(item.getReceiverName());
-            UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
-            productImage.setCornerRadius(productImage.getWidth() / 2);
-            orderPriceText.setText(Integer.toString(item.getOrderPrice()));
-
-            return view;
-        }
-    }
 
 
 
@@ -193,7 +140,8 @@ public class BillFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(BillFragment.this.getActivity(), BillDetailActivity.class);
-            intent.putExtra("orders", mOrders);
+            Gson gson = new Gson();
+            intent.putExtra("orders", gson.toJson(mOrders));
             startActivity(intent);
         }
     }
