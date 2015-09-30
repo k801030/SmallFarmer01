@@ -1,6 +1,7 @@
 package edu.ntu.vison.smallfarmer01.activity;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
