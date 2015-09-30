@@ -35,8 +35,8 @@
             android:layout_height="match_parent"
             android:textSize="@dimen/basic_text_size"
             android:gravity="center"
-            android:background="@color/white"
-            android:textColor="@color/main_bg_color"
+            android:background="@color/switcher_default_bg_color"
+            android:textColor="@color/switcher_default_text_color"
             android:padding="@dimen/fragment_orders_button_padding"
             android:text="已通知"/>
     </LinearLayout>

@@ -22,12 +22,159 @@
         android:layout_height="@dimen/space"
         android:layout_below="@id/spinner"/>
 
+    <TableLayout
+        android:id="@+id/table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:layout_below="@id/space2">
+
+        <TableRow>
+            <TextView
+                android:text="總銷售金額（不含運）"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:padding="3dip" />
+            <TextView
+                android:id="@+id/total_sales"
+                android:text="1234"
+                android:gravity="right"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:padding="3dip" />
+            <TextView
+                android:text="元"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="總金流支出"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:padding="3dip" />
+            <TextView
+                android:id="@+id/cash_flow"
+                android:text="356"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:gravity="right"
+                android:padding="3dip" />
+            <TextView
+                android:text="元"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="總回饋金支出"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:padding="3dip" />
+            <TextView
+                android:id="@+id/coupon_fee"
+                android:text="1234"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:gravity="right"
+                android:padding="3dip" />
+            <TextView
+                android:text="元"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"/>
+        </TableRow>
+
+
+        <TableRow>
+            <TextView
+                android:text="總行政費支出"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:padding="3dip" />
+            <TextView
+                android:id="@+id/admin_fee"
+                android:text="1234"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:gravity="right"
+                android:padding="3dip" />
+            <TextView
+                android:text="元"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="撥款手續費"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:padding="3dip" />
+            <TextView
+                android:id="@+id/translate_fee"
+                android:text="1234"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:gravity="right"
+                android:padding="3dip" />
+            <TextView
+                android:text="元"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="營業稅"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:padding="3dip" />
+            <TextView
+                android:id="@+id/sales_tax"
+                android:text="14"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"
+                android:gravity="right"
+                android:padding="3dip" />
+            <TextView
+                android:text="元"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/default_text_color"/>
+        </TableRow>
+
+        <View
+            android:layout_height="1.5dp"
+            android:background="@color/horizontal_line" />
+
+
+
+        <TableRow>
+            <TextView
+                android:text="應收金額"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/light_text"
+                android:padding="3dip" />
+            <TextView
+                android:id="@+id/received_cash"
+                android:text="1234"
+                android:textSize="@dimen/larger_text_size"
+                android:textColor="@color/light_text"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:padding="3dip" />
+            <TextView
+                android:text="元"
+                android:textSize="@dimen/basic_text_size"
+                android:textColor="@color/light_text"/>
+        </TableRow>
+    </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/space2">
+        android:layout_below="@id/table">
 
         <View
             android:layout_width="0dp"
@@ -59,7 +206,7 @@
         android:id="@+id/bill_empty"
         android:text="@string/bill_empty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:textColor="@color/gray_text_color"
         android:textSize="@dimen/larger_text_size"
         android:background="@color/default_bg_color"
