@@ -18,7 +18,7 @@
 
     <color name="main_bg_color">#f7b385</color>
     <color name="main_text_color">#83441a</color>
-    <color name="default_bg_color">#e4dfca</color>
+    <color name="default_bg_color">#f0ebd5</color>
 
     <color name="switcher_bg_color">#ff9e5e</color>
     <color name="switcher_default_bg_color">@color/white</color>
