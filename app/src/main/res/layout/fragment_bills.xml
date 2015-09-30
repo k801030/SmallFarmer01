@@ -27,7 +27,8 @@
         android:layout_height="wrap_content"
         android:stretchColumns="1"
         android:layout_below="@id/space2"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:padding="@dimen/fragment_orders_item_product_image">
 
         <TableRow>
             <TextView
@@ -144,8 +145,13 @@
         </TableRow>
 
         <View
-            android:layout_height="1.5dp"
-            android:background="@color/horizontal_line" />
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/horizontal_line"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"/>
 
 
 

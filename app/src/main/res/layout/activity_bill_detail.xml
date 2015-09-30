@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/default_bg_color">
+    android:background="@color/default_bg_color"
+    android:paddingBottom="@dimen/pager_content_padding">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -20,6 +21,5 @@
         android:divider="@color/default_bg_color"
         android:dividerHeight="@dimen/pager_content_padding"
         android:listSelector="@color/transparent"
-        android:background="@color/white"
-        android:layout_margin="@dimen/fragment_orders_item_padding"/>
+        android:background="@color/white" />
 </LinearLayout>

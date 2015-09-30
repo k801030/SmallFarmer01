@@ -63,7 +63,9 @@ public class AccountFragment extends Fragment {
             public void onSuccess(UserData user) {
                 Log.d(TAG, user.getUserName());
                 Log.d(TAG, user.getUserImgUrl());
-                UrlImageViewHelper.setUrlDrawable(mUserImg, user.getUserImgUrl());
+                if (user.getUserImgUrl() != "") {
+                    UrlImageViewHelper.setUrlDrawable(mUserImg, user.getUserImgUrl());
+                }
                 mUserName.setText(user.getUserName());
             }
 
