@@ -48,6 +48,7 @@ public class SignInActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
 
         mEmailText = (EditText) findViewById(R.id.email_text);
         mPasswordText = (EditText) findViewById(R.id.password_text);
