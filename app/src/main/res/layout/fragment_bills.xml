@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/pager_content_padding"
-    android:paddingRight="@dimen/pager_content_padding">
+    android:layout_height="match_parent">
     <Space
         android:id="@+id/space1"
         android:layout_width="match_parent"
@@ -22,12 +20,14 @@
         android:layout_height="@dimen/space"
         android:layout_below="@id/spinner"/>
 
+
     <TableLayout
         android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stretchColumns="1"
-        android:layout_below="@id/space2">
+        android:layout_below="@id/space2"
+        android:background="@color/white">
 
         <TableRow>
             <TextView

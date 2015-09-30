@@ -13,6 +13,8 @@
         android:layout_weight="2"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_margin="-100dp"
         android:gravity="center">
         <edu.ntu.vison.smallfarmer01.view.MyRoundedImageView
             android:id="@+id/user_profile_img"
