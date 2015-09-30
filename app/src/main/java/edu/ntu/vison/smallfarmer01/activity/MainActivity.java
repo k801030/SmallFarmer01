@@ -2,6 +2,7 @@ package edu.ntu.vison.smallfarmer01.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     UserService mUserService;
+    ViewPager mPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +52,12 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
 
         // init viewPager
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
 
         // init tabs
         MyPagerSlidingTabStrip tabs = (MyPagerSlidingTabStrip) findViewById(R.id.tabs);
-        tabs.setViewPager(pager);
+        tabs.setViewPager(mPager);
 
         registerGCM();
     }
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
     public class PagerAdapter extends FragmentPagerAdapter {
 
         private final String[] TITLES = {"管理出貨", "管理帳單", "帳號設定"};
+        private int currentItem = 0;
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
@@ -108,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int i) {
+            currentItem = i;
             switch (i) {
                 case 0:
                     return new OrdersFragment();
@@ -120,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        public int getCurrentItem() {
+            return currentItem;
+        }
+
         @Override
         public CharSequence getPageTitle(int i) {
             return TITLES[i];
@@ -130,4 +138,14 @@ public class MainActivity extends AppCompatActivity {
             return TITLES.length;
         }
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.d("onSaveInstanceState", savedInstanceState.toString());
+        savedInstanceState.putInt("page", mPager.getCurrentItem());
+
+    }
+
+
 }

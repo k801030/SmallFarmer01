@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -26,6 +28,9 @@ import edu.ntu.vison.smallfarmer01.model.OrderItem;
  * Created by Vison on 2015/9/30.
  */
 public class BillDetailActivity extends AppCompatActivity {
+
+    static final String TAG = "BILL_DETAIL_ACTIVITY";
+    static final int HOME_OPTION = 16908332;
     ListView mOrderList;
     OrderAdapter mOrderAdapter;
 
@@ -53,6 +58,20 @@ public class BillDetailActivity extends AppCompatActivity {
         mOrderAdapter.setOrders(orderItems);
         mOrderAdapter.notifyDataSetChanged();
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case HOME_OPTION:
+                Log.d(TAG, "press home button");
+               // Home as up button is to navigate to Home-Activity not previous activity
+                super.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     /**
      * For ListView

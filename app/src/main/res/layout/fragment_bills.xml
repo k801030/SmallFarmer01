@@ -18,8 +18,19 @@
         android:layout_height="@dimen/space" />
     <Button
         android:id="@+id/show_detail_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="2"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_sign_in_margin"
+        android:layout_marginBottom="@dimen/activity_sign_in_margin"
+        android:padding="12dp"
+        android:minHeight="0dp"
+        android:paddingTop="@dimen/activity_sign_in_button_padding"
+        android:paddingBottom="@dimen/activity_sign_in_button_padding"
+        android:textSize="@dimen/basic_text_size"
+        android:background="@color/color_primary"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:text="@string/show_bill_detail_button"/>
     <TextView
         android:id="@+id/bill_empty"
