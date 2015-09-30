@@ -37,7 +37,7 @@
                 android:padding="3dip" />
             <TextView
                 android:id="@+id/total_sales"
-                android:text="1234"
+                android:text=""
                 android:gravity="right"
                 android:textSize="@dimen/basic_text_size"
                 android:textColor="@color/default_text_color"
@@ -55,7 +55,7 @@
                 android:padding="3dip" />
             <TextView
                 android:id="@+id/cash_flow"
-                android:text="356"
+                android:text=""
                 android:textSize="@dimen/basic_text_size"
                 android:textColor="@color/default_text_color"
                 android:gravity="right"
@@ -74,7 +74,7 @@
                 android:padding="3dip" />
             <TextView
                 android:id="@+id/coupon_fee"
-                android:text="1234"
+                android:text=""
                 android:textSize="@dimen/basic_text_size"
                 android:textColor="@color/default_text_color"
                 android:gravity="right"
@@ -94,7 +94,7 @@
                 android:padding="3dip" />
             <TextView
                 android:id="@+id/admin_fee"
-                android:text="1234"
+                android:text=""
                 android:textSize="@dimen/basic_text_size"
                 android:textColor="@color/default_text_color"
                 android:gravity="right"
@@ -113,7 +113,7 @@
                 android:padding="3dip" />
             <TextView
                 android:id="@+id/translate_fee"
-                android:text="1234"
+                android:text=""
                 android:textSize="@dimen/basic_text_size"
                 android:textColor="@color/default_text_color"
                 android:gravity="right"
@@ -132,7 +132,7 @@
                 android:padding="3dip" />
             <TextView
                 android:id="@+id/sales_tax"
-                android:text="14"
+                android:text=""
                 android:textSize="@dimen/basic_text_size"
                 android:textColor="@color/default_text_color"
                 android:gravity="right"
@@ -157,7 +157,7 @@
                 android:padding="3dip" />
             <TextView
                 android:id="@+id/received_cash"
-                android:text="1234"
+                android:text=""
                 android:textSize="@dimen/larger_text_size"
                 android:textColor="@color/light_text"
                 android:gravity="right"

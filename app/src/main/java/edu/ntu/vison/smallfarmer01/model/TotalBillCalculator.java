@@ -1,5 +1,6 @@
 package edu.ntu.vison.smallfarmer01.model;
 
+import android.content.Intent;
 import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
@@ -100,7 +101,7 @@ public class TotalBillCalculator {
     /**
      * @return 總銷售金額
      */
-    public int getTotalSales() {
+    public Integer getTotalSales() {
         return totalSales;
     }
 
@@ -108,7 +109,7 @@ public class TotalBillCalculator {
      * 總金流支出
      * @return
      */
-    public int getCashFlow() {
+    public Integer getCashFlow() {
         return cashFlow;
     }
 
@@ -116,35 +117,35 @@ public class TotalBillCalculator {
      *
      * @return 總回饋金支出
      */
-    public int getCouponFee() {
+    public Integer getCouponFee() {
         return couponFee;
     }
 
     /**
      * @return 總行政費用支出
      */
-    public int getAdminFee() {
+    public Integer getAdminFee() {
         return adminFee;
     }
 
     /**
      * @return 撥款手續費
      */
-    public static int getTranslateFee() {
+    public static Integer getTranslateFee() {
         return TRANSLATE_FEE;
     }
 
     /**
      * @return 營業稅
      */
-    public int getSalesTax() {
+    public Integer getSalesTax() {
         return salesTax;
     }
 
     /**
      * @return 應收金額
      */
-    public int getReceivedCash() {
+    public Integer getReceivedCash() {
         return receivedCash;
     }
 

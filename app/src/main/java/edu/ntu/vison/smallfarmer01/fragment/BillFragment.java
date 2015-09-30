@@ -22,6 +22,8 @@ import com.google.gson.Gson;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import org.w3c.dom.Text;
+
 import java.io.Serializable;
 
 import edu.ntu.vison.smallfarmer01.R;
@@ -29,6 +31,7 @@ import edu.ntu.vison.smallfarmer01.activity.BillDetailActivity;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 import edu.ntu.vison.smallfarmer01.model.Bill;
 import edu.ntu.vison.smallfarmer01.model.OrderItem;
+import edu.ntu.vison.smallfarmer01.model.TotalBillCalculator;
 import edu.ntu.vison.smallfarmer01.service.UserService;
 
 /**
@@ -41,6 +44,13 @@ public class BillFragment extends Fragment {
     ListView mOrderList;
     OrderItem[] mOrders;
     Button mShowDetailButton;
+
+    private TextView mTotalSales;
+    private TextView mCashFlow;
+    private TextView mCouponFee;
+    private TextView mAdminFee;
+    private TextView mSalesTax;
+    private TextView mReceivedCash;
 
     public BillFragment() {
 
@@ -71,6 +81,14 @@ public class BillFragment extends Fragment {
         mSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
 
 
+        // set total bill
+        mTotalSales = (TextView) view.findViewById(R.id.total_sales);
+        mCashFlow = (TextView) view.findViewById(R.id.cash_flow);
+        mCouponFee = (TextView) view.findViewById(R.id.coupon_fee);
+        mAdminFee = (TextView) view.findViewById(R.id.admin_fee);
+        mSalesTax = (TextView) view.findViewById(R.id.sales_tax);
+        mReceivedCash = (TextView) view.findViewById(R.id.received_cash);
+
 
         // set show detail
         mShowDetailButton = (Button) view.findViewById(R.id.show_detail_button);
@@ -79,6 +97,15 @@ public class BillFragment extends Fragment {
         return view;
     }
 
+    private void setTotalBill() {
+        TotalBillCalculator billCal = new TotalBillCalculator(mOrders);
+        mTotalSales.setText(billCal.getTotalSales().toString());
+        mCashFlow.setText(billCal.getCashFlow().toString());
+        mCouponFee.setText(billCal.getCouponFee().toString());
+        mAdminFee.setText(billCal.getAdminFee().toString());
+        mSalesTax.setText(billCal.getSalesTax().toString());
+        mReceivedCash.setText(billCal.getReceivedCash().toString());
+    }
 
     /**
      * for Spinner
@@ -156,6 +183,7 @@ public class BillFragment extends Fragment {
                 @Override
                 public void onSuccess(OrderItem[] orders) {
                     mOrders = orders;
+                    setTotalBill();
                 }
 
                 @Override
