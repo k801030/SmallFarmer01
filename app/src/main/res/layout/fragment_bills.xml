@@ -212,7 +212,7 @@
         android:id="@+id/bill_empty"
         android:text="@string/bill_empty"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:textColor="@color/gray_text_color"
         android:textSize="@dimen/larger_text_size"
         android:background="@color/default_bg_color"
