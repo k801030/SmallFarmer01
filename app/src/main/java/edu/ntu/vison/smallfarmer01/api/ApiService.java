@@ -26,6 +26,7 @@ import java.util.Map;
 
 import edu.ntu.vison.smallfarmer01.model.Bill;
 import edu.ntu.vison.smallfarmer01.model.OrderItem;
+import edu.ntu.vison.smallfarmer01.model.UserData;
 
 /**
  * Created by Vison on 2015/9/11.
@@ -135,8 +136,41 @@ public class ApiService {
         queue.add(req);
     }
 
-    public void SignUp() {
+    public void getUserProfile(String userId, String accessToken, final GetUserProfileCallback callback) {
+        String url = getUrlWithField(GET_ORDERS_FIELD);
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("id", userId);
+            json.put("access_token", accessToken);
+            json.put("user_id", userId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Gson gson = new Gson();
+                String json = response.toString();
+                Type userClass = new TypeToken<UserData>(){}.getType();
+                UserData user = gson.fromJson(json, userClass);
+                callback.onSuccess(user);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.getStackTrace();
+                if (error.networkResponse != null && error.networkResponse.statusCode == 401) {
+                    // unauthorized: error account or password
+                    callback.onError(401);
+                }
+
+            }
+        });
+
+        queue.add(req);
     }
 
     public void getOrders(String userId, String accessToken, String called, final GetOrdersCallback callback) {
@@ -181,7 +215,6 @@ public class ApiService {
         queue.add(req);
     }
 
-
     public void confirmOrder(String userId, String accessToken, String orderId, final ConfirmOrderCallback callback) {
         String url = getUrlWithField(CONFIRM_ORDER);
         final JSONObject json = new JSONObject();
@@ -214,9 +247,6 @@ public class ApiService {
         queue.add(req);
     }
 
-    public void getBills() {
-
-    }
 
 
     /**
@@ -422,5 +452,10 @@ public class ApiService {
     public interface LogOutCallback {
         void onSuccess();
         void onError();
+    }
+
+    public interface GetUserProfileCallback {
+        void onSuccess(UserData user);
+        void onError(int statusCode);
     }
 }
