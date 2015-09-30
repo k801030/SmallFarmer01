@@ -1,11 +1,5 @@
 package edu.ntu.vison.smallfarmer01.model;
 
-import android.content.Intent;
-import android.support.annotation.IntDef;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 /**
  * Created by Vison on 2015/9/30.
  */
@@ -33,7 +27,7 @@ public class TotalBillCalculator {
 
     private void init() {
         setTotalSales();
-        setCashFlow();
+        setCashFlowFee();
         setCouponFee();
         setAdminFee();
         setSalesTax();
@@ -48,16 +42,17 @@ public class TotalBillCalculator {
         totalSales = 0;
         for (int i=0;i<mOrders.length;i++) {
             order = mOrders[i];
-            totalSales += order.getOrderPrice() + order.getShipmentPrice();
+            totalSales += order.getOrderPrice();
         }
     }
 
-    private void setCashFlow() {
+    private void setCashFlowFee() {
         OrderItem order;
         cashFlow = 0;
         for (int i=0;i<mOrders.length;i++) {
             order = mOrders[i];
-            cashFlow += Math.round(order.getOrderPrice() + order.getShipmentPrice());
+            double p = (order.getOrderPrice() + order.getShipmentPrice()) * CASH_FLOW_RATE;
+            cashFlow += Math.round(p);
         }
     }
 
@@ -66,7 +61,8 @@ public class TotalBillCalculator {
         couponFee = 0;
         for (int i=0;i<mOrders.length;i++) {
             order = mOrders[i];
-            couponFee += Math.round(order.getOrderPrice() + order.getShipmentPrice());
+            double p = (order.getOrderPrice() + order.getShipmentPrice()) * COUPON_RATE;
+            couponFee += Math.round(p);
         }
     }
 
@@ -75,7 +71,8 @@ public class TotalBillCalculator {
         adminFee = 0;
         for (int i=0;i<mOrders.length;i++) {
             order = mOrders[i];
-            adminFee += Math.round(order.getOrderPrice() + order.getShipmentPrice());
+            double p = (order.getOrderPrice() + order.getShipmentPrice()) * ADMINISTRATION_RATE;
+            adminFee += Math.round(p);
         }
     }
 
@@ -84,7 +81,8 @@ public class TotalBillCalculator {
         salesTax = 0;
         for (int i=0;i<mOrders.length;i++) {
             order = mOrders[i];
-            salesTax += Math.ceil(order.getOrderPrice() + order.getShipmentPrice());
+            double p = (order.getOrderPrice() + order.getShipmentPrice()) * SALES_TAX_RATE;
+            salesTax += Math.ceil(p);
         }
     }
 
@@ -92,7 +90,7 @@ public class TotalBillCalculator {
      * MUST be set after other cash
      */
     private void setReceivedCash() {
-        receivedCash = getTotalSales() - getCashFlow() - getCouponFee() - getAdminFee() - getTranslateFee() - getSalesTax();
+        receivedCash = getTotalSales() - getCashFlowFee() - getCouponFee() - getAdminFee() - getTranslateFee() - getSalesTax();
     }
 
 
@@ -109,7 +107,7 @@ public class TotalBillCalculator {
      * 總金流支出
      * @return
      */
-    public Integer getCashFlow() {
+    public Integer getCashFlowFee() {
         return cashFlow;
     }
 

@@ -4,27 +4,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.w3c.dom.Text;
-
-import java.io.Serializable;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.BillDetailActivity;
@@ -50,6 +43,7 @@ public class BillFragment extends Fragment {
     private TextView mCouponFee;
     private TextView mAdminFee;
     private TextView mSalesTax;
+    private TextView mTranslateFee;
     private TextView mReceivedCash;
 
     public BillFragment() {
@@ -87,6 +81,7 @@ public class BillFragment extends Fragment {
         mCouponFee = (TextView) view.findViewById(R.id.coupon_fee);
         mAdminFee = (TextView) view.findViewById(R.id.admin_fee);
         mSalesTax = (TextView) view.findViewById(R.id.sales_tax);
+        mTranslateFee = (TextView) view.findViewById(R.id.translate_fee);
         mReceivedCash = (TextView) view.findViewById(R.id.received_cash);
 
 
@@ -100,10 +95,11 @@ public class BillFragment extends Fragment {
     private void setTotalBill() {
         TotalBillCalculator billCal = new TotalBillCalculator(mOrders);
         mTotalSales.setText(billCal.getTotalSales().toString());
-        mCashFlow.setText(billCal.getCashFlow().toString());
+        mCashFlow.setText(billCal.getCashFlowFee().toString());
         mCouponFee.setText(billCal.getCouponFee().toString());
         mAdminFee.setText(billCal.getAdminFee().toString());
         mSalesTax.setText(billCal.getSalesTax().toString());
+        mTranslateFee.setText(billCal.getTranslateFee().toString());
         mReceivedCash.setText(billCal.getReceivedCash().toString());
     }
 
