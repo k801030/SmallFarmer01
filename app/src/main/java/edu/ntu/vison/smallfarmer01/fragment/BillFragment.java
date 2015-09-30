@@ -187,6 +187,8 @@ public class BillFragment extends Fragment {
     }
 
 
+
+
     /* Listener */
     public class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
