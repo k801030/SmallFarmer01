@@ -35,9 +35,8 @@ public class ApiService {
     private static final String TAG = "ApiService";
 
     private static final String HOST = "http://register.ac-experts.com.tw/";
-    private static final String mField = "";
 
-    @StringDef({SIGN_IN_FIELD, GET_ORDERS_FIELD, CONFIRM_ORDER, UPDATED_REG_ID, LOG_OUT, GET_BILL_LIST, GET_BILL, FB_SIGN_IN_FIELD})
+    @StringDef({SIGN_IN_FIELD, GET_ORDERS_FIELD, CONFIRM_ORDER, UPDATED_REG_ID, LOG_OUT, GET_BILL_LIST, GET_BILL, FB_SIGN_IN_FIELD, GET_USER_PROFILE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface UrlField{};
 
@@ -49,6 +48,7 @@ public class ApiService {
     private static final String GET_BILL_LIST = "bill_api/v1/index";
     private static final String GET_BILL = "bill_api/v1/show";
     private static final String FB_SIGN_IN_FIELD = "account_api/v1/auth/facebookSignIn";
+    private static final String GET_USER_PROFILE = "user_api/v1/show";
 
     private Context mContext;
 
@@ -137,7 +137,7 @@ public class ApiService {
     }
 
     public void getUserProfile(String userId, String accessToken, final GetUserProfileCallback callback) {
-        String url = getUrlWithField(GET_ORDERS_FIELD);
+        String url = getUrlWithField(GET_USER_PROFILE);
         final JSONObject json = new JSONObject();
         try {
             json.put("id", userId);
