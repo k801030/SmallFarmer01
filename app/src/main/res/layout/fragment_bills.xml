@@ -16,22 +16,16 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="@dimen/space" />
-
-    <ListView
-        android:id="@+id/order_list"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/show_detail_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:divider="@color/default_bg_color"
-        android:dividerHeight="@dimen/pager_content_padding"
-        android:listSelector="@color/transparent"
-        android:background="@color/white" />
-
+        android:text="@string/show_bill_detail_button"/>
     <TextView
         android:id="@+id/bill_empty"
         android:text="@string/bill_empty"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:textColor="@color/gray_text_color"
         android:textSize="@dimen/larger_text_size"
         android:gravity="center" />

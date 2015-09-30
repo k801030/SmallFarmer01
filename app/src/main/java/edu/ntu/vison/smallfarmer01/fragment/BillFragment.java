@@ -2,6 +2,7 @@ package edu.ntu.vison.smallfarmer01.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import edu.ntu.vison.smallfarmer01.R;
+import edu.ntu.vison.smallfarmer01.activity.BillDetailActivity;
 import edu.ntu.vison.smallfarmer01.api.ApiService;
 import edu.ntu.vison.smallfarmer01.model.Bill;
 import edu.ntu.vison.smallfarmer01.model.OrderItem;
@@ -31,6 +34,8 @@ public class BillFragment extends Fragment {
     ApiService mApiService;
     Spinner mSpinner;
     ListView mOrderList;
+    OrderItem[] mOrders;
+    Button mShowDetailButton;
 
     public BillFragment() {
 
@@ -64,6 +69,9 @@ public class BillFragment extends Fragment {
         OrderAdapter orderAdapter = new OrderAdapter();
         mOrderList.setAdapter(orderAdapter);
 
+        // set show detail
+        mShowDetailButton = (Button) view.findViewById(R.id.show_detail_button);
+        mShowDetailButton.setOnClickListener(new OnClickShowDetailListener());
 
         return view;
     }
@@ -124,35 +132,25 @@ public class BillFragment extends Fragment {
      */
     private class OrderAdapter extends BaseAdapter {
 
-        OrderItem[] mOrders;
+        OrderItem[] orders;
 
         public OrderAdapter() {
-            mOrders = new OrderItem[0];
+            orders = new OrderItem[0];
         }
 
-        public void loadBillData(String billId) {
-            mApiService.getBillById(mUserService.getUserId(), mUserService.getAccessToken(), billId, new ApiService.GetBillByIdCallback() {
-                @Override
-                public void onSuccess(OrderItem[] orders) {
-                    mOrders = orders;
-                    notifyDataSetChanged();
-                }
-
-                @Override
-                public void onError() {
-
-                }
-            });
+        public void setOrders(OrderItem[] orders) {
+            this.orders = orders;
         }
+
 
         @Override
         public int getCount() {
-            return mOrders.length;
+            return orders.length;
         }
 
         @Override
         public Object getItem(int i) {
-            return mOrders[i];
+            return orders[i];
         }
 
         @Override
@@ -173,7 +171,7 @@ public class BillFragment extends Fragment {
             RoundedImageView productImage = (RoundedImageView) view.findViewById(R.id.product_image);
             TextView orderPriceText = (TextView) view.findViewById(R.id.order_price);
 
-            final OrderItem item = mOrders[i];
+            final OrderItem item = orders[i];
             orderIdText.setText(item.getId().toString());
             productNameText.setText(item.getProductName());
             quantityText.setText(item.getQuantity().toString());
@@ -190,12 +188,32 @@ public class BillFragment extends Fragment {
 
 
     /* Listener */
+
+    public class OnClickShowDetailListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(BillFragment.this.getActivity(), BillDetailActivity.class);
+            intent.putExtra("orders", mOrders);
+            startActivity(intent);
+        }
+    }
+
     public class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             String billId = ((BillAdapter)adapterView.getAdapter()).getBillId(i);
-            ((OrderAdapter)mOrderList.getAdapter()).loadBillData(billId);
+            mApiService.getBillById(mUserService.getUserId(), mUserService.getAccessToken(), billId, new ApiService.GetBillByIdCallback() {
+                @Override
+                public void onSuccess(OrderItem[] orders) {
+                    mOrders = orders;
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
         }
 
         @Override
