@@ -4,10 +4,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GcmListenerService;
@@ -24,13 +26,18 @@ import edu.ntu.vison.smallfarmer01.activity.MainActivity;
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
+
     private static final String NOTI_TITLE = "title";
     private static final String NOTI_MESSAGE = "message";
 
-    private int notiCount;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private static final String PREF_NOTIFICATION_ID = "notification_id";
 
     public MyGcmListenerService() {
-        notiCount = 0;
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
     }
 
     /**
@@ -80,7 +87,10 @@ public class MyGcmListenerService extends GcmListenerService {
     }
 
     private int getNotificationId() {
-        return notiCount++;
+        int notificationId = mSharedPreferences.getInt(PREF_NOTIFICATION_ID, 0);
+        notificationId++; // sequence
+        mEditor.putInt(PREF_NOTIFICATION_ID, notificationId);
+        return notificationId;
     }
 
     public class WakeLocker {
