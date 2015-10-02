@@ -67,7 +67,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.com_facebook_button_icon)
+                .setSmallIcon(R.mipmap.noti_icon)
                 .setContentTitle(data.getString(NOTI_TITLE))
                 .setContentText(data.getString(NOTI_MESSAGE))
                 .setAutoCancel(true)
