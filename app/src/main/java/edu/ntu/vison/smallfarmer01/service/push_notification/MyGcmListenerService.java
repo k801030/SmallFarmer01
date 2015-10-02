@@ -27,8 +27,10 @@ public class MyGcmListenerService extends GcmListenerService {
     private static final String NOTI_TITLE = "title";
     private static final String NOTI_MESSAGE = "message";
 
-    public MyGcmListenerService() {
+    private int notiCount;
 
+    public MyGcmListenerService() {
+        notiCount = 0;
     }
 
     /**
@@ -74,7 +76,11 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(getNotificationId() /* ID of notification */, notificationBuilder.build());
+    }
+
+    private int getNotificationId() {
+        return notiCount++;
     }
 
     public class WakeLocker {
