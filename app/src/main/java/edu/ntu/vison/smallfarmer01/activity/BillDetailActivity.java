@@ -1,7 +1,6 @@
 package edu.ntu.vison.smallfarmer01.activity;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.model.OrderItem;
@@ -114,7 +112,7 @@ public class BillDetailActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
-                view = LayoutInflater.from(BillDetailActivity.this).inflate(R.layout.fragment_bills_item, viewGroup, false);
+                view = LayoutInflater.from(BillDetailActivity.this).inflate(R.layout.activity_bills_item, viewGroup, false);
             }
 
             TextView orderIdText = (TextView) view.findViewById(R.id.order_id);
@@ -122,7 +120,7 @@ public class BillDetailActivity extends AppCompatActivity {
             TextView quantityText = (TextView) view.findViewById(R.id.quantity);
             TextView receiverNameText = (TextView) view.findViewById(R.id.receiver_info);
             RoundedImageView productImage = (RoundedImageView) view.findViewById(R.id.product_image);
-            TextView orderPriceText = (TextView) view.findViewById(R.id.order_price);
+            TextView receivedMoneyText = (TextView) view.findViewById(R.id.received_money);
 
             final OrderItem item = orders[i];
             orderIdText.setText(item.getId().toString());
@@ -131,7 +129,9 @@ public class BillDetailActivity extends AppCompatActivity {
             receiverNameText.setText(item.getReceiverName());
             UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
             productImage.setCornerRadius(productImage.getWidth() / 2);
-            orderPriceText.setText(Integer.toString(item.getOrderPrice()));
+            // It's RECEIVED MONEY: 0.9*price - shipmentPrice
+            double receivedMoney = item.getOrderPrice() * 0.9 - item.getShipmentPrice();
+            receivedMoneyText.setText(Double.toString(receivedMoney));
 
             return view;
         }
