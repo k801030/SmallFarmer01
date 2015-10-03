@@ -1,5 +1,6 @@
 package edu.ntu.vison.smallfarmer01.service.push_notification;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -88,6 +89,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 .setContentText(data.getString(NOTI_MESSAGE))
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
+                .setPriority(Notification.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent);
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
