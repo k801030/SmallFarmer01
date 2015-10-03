@@ -104,7 +104,6 @@ public class OrdersFragment extends Fragment {
                 @Override
                 public void onSuccess(ArrayList<OrderItem> orderItems) {
                     mOrderItems = orderItems;
-                    Collections.reverse(mOrderItems);
                     if (isCalled == "false") { // list that is not call yet
                         int badgeCount = mOrdersAdapter.getCount();
                         NotificationCountBadge.with(getActivity()).setCount(badgeCount);
