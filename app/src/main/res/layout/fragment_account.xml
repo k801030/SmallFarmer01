@@ -25,7 +25,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="18dp"
-                android:src="@drawable/default_profile_img"
                 android:scaleType="centerCrop"
                 />
 
@@ -35,8 +34,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/basic_text_size"
                 android:textStyle="bold"
-                android:textColor="@color/default_text_color"
-                android:text="123"/>
+                android:textColor="@color/default_text_color" />
         </LinearLayout>
         <View
             android:layout_width="0dp"

@@ -129,8 +129,8 @@ public class BillDetailActivity extends AppCompatActivity {
             receiverNameText.setText(item.getReceiverName());
             UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
             productImage.setCornerRadius(productImage.getWidth() / 2);
-            // It's RECEIVED MONEY: 0.9*price - shipmentPrice
-            long receivedMoney = Math.round(item.getOrderPrice() * 0.9 - item.getShipmentPrice());
+            // It's RECEIVED MONEY: 0.9*price
+            long receivedMoney = Math.round(item.getOrderPrice() * 0.9);
             receivedMoneyText.setText(Long.toString(receivedMoney));
 
             return view;
