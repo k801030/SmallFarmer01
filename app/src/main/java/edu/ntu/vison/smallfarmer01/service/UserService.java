@@ -1,7 +1,9 @@
 package edu.ntu.vison.smallfarmer01.service;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.IntDef;
@@ -30,6 +32,7 @@ public class UserService {
     static final String SHARED_PREF_KEY_USER_ID = "USER_ID";
     static final String SHARED_PREF_KEY_REG_ID = "REG_ID";
     ApiService mApiService;
+    Context mContext;
 
     static final String UNKNOWN = "未知的錯誤";
     static final String BLANK_PASSWORD = "尚未輸入密碼";
@@ -47,6 +50,7 @@ public class UserService {
         mEditor = mSharedPreferences.edit();
 
         mApiService = new ApiService(context);
+        mContext = context;
     }
 
     private void saveLoginInfo(String userId, String accessToken){
@@ -55,7 +59,7 @@ public class UserService {
         mEditor.commit();
     }
 
-    public void signInWithFacebook(Activity actvity, CallbackManager callbackManager, final UserSignInCallback callback) {
+    public void signInWithFacebook(Activity activity, CallbackManager callbackManager, final UserSignInCallback callback) {
         // get facebook token
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -84,16 +88,18 @@ public class UserService {
 
             @Override
             public void onCancel() {
-
+                AlertDialog test = new TestErrorAlert("FbLogin onCancel", "").create();
+                test.show();
             }
 
             @Override
             public void onError(FacebookException e) {
-
+                AlertDialog test = new TestErrorAlert("FbLogin onError", e.toString()).create();
+                test.show();
             }
         });
 
-        LoginManager.getInstance().logInWithReadPermissions(actvity, Arrays.asList("public_profile"));
+        LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("public_profile"));
 
     }
 
@@ -179,5 +185,19 @@ public class UserService {
     public interface UserLogOutCallback {
         void onSuccess();
         void onError();
+    }
+
+    private class TestErrorAlert extends AlertDialog.Builder {
+        public TestErrorAlert(String tag, String errorMessage) {
+            super(mContext);
+            this.setTitle("測試回報: " + tag);
+            this.setMessage(errorMessage);
+            this.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+        }
     }
 }

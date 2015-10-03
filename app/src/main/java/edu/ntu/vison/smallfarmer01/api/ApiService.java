@@ -1,6 +1,8 @@
 package edu.ntu.vison.smallfarmer01.api;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.StringDef;
 import android.util.Log;
 
@@ -83,6 +85,8 @@ public class ApiService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                AlertDialog test = new TestErrorAlert("ApiService onError", error.toString()).create();
+                test.show();
                 if (error.networkResponse != null && error.networkResponse.statusCode == 401) {
                     // unauthorized: error account or password
                     callback.onError(401);
@@ -457,5 +461,19 @@ public class ApiService {
     public interface GetUserProfileCallback {
         void onSuccess(UserData user);
         void onError(int statusCode);
+    }
+
+    private class TestErrorAlert extends AlertDialog.Builder {
+        public TestErrorAlert(String tag, String errorMessage) {
+            super(mContext);
+            this.setTitle("測試回報: " + tag);
+            this.setMessage(errorMessage);
+            this.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+        }
     }
 }
