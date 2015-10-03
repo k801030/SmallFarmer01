@@ -104,30 +104,24 @@
 
     </LinearLayout>
 
-    <LinearLayout
+
+    <Button
         android:id="@+id/notify_shipment_button"
         android:layout_width="0dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:clickable="true"
-        android:padding="@dimen/image_button_padding"
-        android:background="@drawable/shipment_button">
+        android:text="@string/notify_shipment"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/activity_sign_in_margin"
+        android:layout_marginBottom="@dimen/activity_sign_in_margin"
+        android:padding="12dp"
+        android:minHeight="0dp"
+        android:paddingTop="@dimen/activity_sign_in_button_padding"
+        android:paddingBottom="@dimen/activity_sign_in_button_padding"
+        android:background="@color/normal_button"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/shipment"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/notify_shipment"
-            android:textSize="@dimen/smaller_text_size"
-            android:textColor="@color/shipment_text"
-            android:layout_gravity="center"/>
-    </LinearLayout>
 
     
 </LinearLayout>

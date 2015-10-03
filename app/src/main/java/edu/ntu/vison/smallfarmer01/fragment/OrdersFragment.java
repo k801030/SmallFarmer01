@@ -161,7 +161,7 @@ public class OrdersFragment extends Fragment {
 
             // appending receiver information
             receiverInfoText.setText(item.getReceiverName());
-            receiverInfoText.append("．");
+            receiverInfoText.append("｜");
             receiverInfoText.append(item.getReceiverAddress());
 
             UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
@@ -203,7 +203,7 @@ public class OrdersFragment extends Fragment {
             super(getActivity());
 
 
-            this.setMessage("出貨編號：" + orderId+"\n下午3:30前通知，物流將於隔日取貨\n下午3:30後通知，物流將於兩日後取貨");
+            this.setMessage("出貨編號：" + orderId+"\n\n下午3:30前通知，物流將於隔日取貨\n下午3:30後通知，物流將於兩日後取貨");
             this.setCancelable(true);
             this.setPositiveButton("取消", new DialogInterface.OnClickListener() {
                 @Override
