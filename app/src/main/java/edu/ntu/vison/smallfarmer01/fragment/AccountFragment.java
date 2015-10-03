@@ -1,6 +1,8 @@
 package edu.ntu.vison.smallfarmer01.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -86,23 +88,47 @@ public class AccountFragment extends Fragment {
     }
 
 
+
+    private class ConfirmLogoutAlert extends AlertDialog.Builder {
+        public ConfirmLogoutAlert() {
+            super(getActivity());
+
+            this.setTitle("登出");
+            this.setMessage("確認要登出？");
+            this.setCancelable(true);
+            this.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            this.setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialogInterface, int i) {
+                    mUserService.logOut(new UserService.UserLogOutCallback() {
+                        @Override
+                        public void onSuccess() {
+                            NotificationCountBadge.with(getActivity()).reset();
+                            goToSignInPage();
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
+                }
+            });
+        }
+    }
+
     /* Listener */
 
     public class OnClickLogOutListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            mUserService.logOut(new UserService.UserLogOutCallback() {
-                @Override
-                public void onSuccess() {
-                    NotificationCountBadge.with(getActivity()).reset();
-                    goToSignInPage();
-                }
-
-                @Override
-                public void onError() {
-
-                }
-            });
+            AlertDialog alert = new ConfirmLogoutAlert().create();
+            alert.show();
         }
     }
 

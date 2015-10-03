@@ -202,7 +202,7 @@ public class OrdersFragment extends Fragment {
         public ConfirmOrderAlert(final int index, final String orderId) {
             super(getActivity());
 
-
+            this.setTitle("通知物流");
             this.setMessage("出貨編號：" + orderId+"\n\n下午3:30前通知，物流將於隔日取貨\n下午3:30後通知，物流將於兩日後取貨");
             this.setCancelable(true);
             this.setPositiveButton("取消", new DialogInterface.OnClickListener() {
