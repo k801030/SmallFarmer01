@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
@@ -27,17 +28,23 @@ public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
 
-    private static final String NOTI_TITLE = "title";
-    private static final String NOTI_MESSAGE = "message";
+    public static final String NOTI_TITLE = "title";
+    public static final String NOTI_MESSAGE = "message";
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private static final String PREF_NOTIFICATION_ID = "notification_id";
 
     public MyGcmListenerService() {
+        Log.d(TAG, "constructor");
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.d(TAG, "oncreate");
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mSharedPreferences.edit();
-
     }
 
     /**
@@ -73,7 +80,9 @@ public class MyGcmListenerService extends GcmListenerService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        int color = getResources().getColor(R.color.color_primary);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setColor(color)
                 .setSmallIcon(R.mipmap.noti_icon)
                 .setContentTitle(data.getString(NOTI_TITLE))
                 .setContentText(data.getString(NOTI_MESSAGE))
@@ -90,6 +99,9 @@ public class MyGcmListenerService extends GcmListenerService {
         int notificationId = mSharedPreferences.getInt(PREF_NOTIFICATION_ID, 0);
         notificationId++; // sequence
         mEditor.putInt(PREF_NOTIFICATION_ID, notificationId);
+        mEditor.commit();
+
+        Log.d(TAG, Integer.toString(notificationId));
         return notificationId;
     }
 

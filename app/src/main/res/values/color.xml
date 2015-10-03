@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#dd551b</color>
+    <color name="color_primary">#dd551b</color> <!-- the same color of logo -->
     <color name="color_primary_dark">#692f14</color>
     <color name="light_text">#dd8936</color>
     <color name="dark_text">#83441a</color>

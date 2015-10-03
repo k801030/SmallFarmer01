@@ -130,8 +130,8 @@ public class BillDetailActivity extends AppCompatActivity {
             UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
             productImage.setCornerRadius(productImage.getWidth() / 2);
             // It's RECEIVED MONEY: 0.9*price - shipmentPrice
-            double receivedMoney = item.getOrderPrice() * 0.9 - item.getShipmentPrice();
-            receivedMoneyText.setText(Double.toString(receivedMoney));
+            long receivedMoney = Math.round(item.getOrderPrice() * 0.9 - item.getShipmentPrice());
+            receivedMoneyText.setText(Long.toString(receivedMoney));
 
             return view;
         }
