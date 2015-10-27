@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -176,6 +177,10 @@ public class OrdersFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     AlertDialog alert = new ConfirmOrderAlert(i, item.getId().toString()).create();
+                    Button negButton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
+                    negButton.setTextColor(getResources().getColor(R.color.default_text_color));
+                    Button posButton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+                    posButton.setTextColor(getResources().getColor(R.color.color_primary));
                     alert.show();
                 }
             });
@@ -205,13 +210,13 @@ public class OrdersFragment extends Fragment {
             this.setTitle("通知物流");
             this.setMessage("出貨編號：" + orderId+"\n\n下午3:30前通知，物流將於隔日取貨\n下午3:30後通知，物流將於兩日後取貨");
             this.setCancelable(true);
-            this.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            this.setPositiveButton("確定出貨", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss();
                 }
             });
-            this.setNegativeButton("確定", new DialogInterface.OnClickListener() {
+            this.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(final DialogInterface dialogInterface, int i) {
                     mApiService.confirmOrder(mUserService.getUserId(), mUserService.getAccessToken(), orderId, new ApiService.ConfirmOrderCallback() {
@@ -230,6 +235,8 @@ public class OrdersFragment extends Fragment {
                         @Override
                         public void onError(int statusCode) {
                             AlertDialog alert = new ErrorLoadAlert().create();
+                            Button posButton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+                            posButton.setTextColor(getResources().getColor(R.color.color_primary));
                             alert.show();
                         }
                     });

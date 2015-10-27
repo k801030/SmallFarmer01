@@ -96,13 +96,13 @@ public class AccountFragment extends Fragment {
             this.setTitle("登出");
             this.setMessage("確認要登出？");
             this.setCancelable(true);
-            this.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            this.setPositiveButton("確定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss();
                 }
             });
-            this.setNegativeButton("確定", new DialogInterface.OnClickListener() {
+            this.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(final DialogInterface dialogInterface, int i) {
                     mUserService.logOut(new UserService.UserLogOutCallback() {
@@ -128,6 +128,10 @@ public class AccountFragment extends Fragment {
         @Override
         public void onClick(View view) {
             AlertDialog alert = new ConfirmLogoutAlert().create();
+            Button negButton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
+            negButton.setTextColor(getResources().getColor(R.color.default_text_color));
+            Button posButton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+            posButton.setTextColor(getResources().getColor(R.color.color_primary));
             alert.show();
         }
     }
