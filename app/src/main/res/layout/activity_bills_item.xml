@@ -66,6 +66,19 @@
                 android:text="火龍果"
                 android:textColor="@color/default_text_color"
                 />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/image_button_padding">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="出貨數量："
+                android:textColor="@color/gray_text_color"
+                />
             <TextView
                 android:id="@+id/quantity"
                 android:layout_width="wrap_content"
@@ -82,7 +95,6 @@
                 android:textColor="@color/default_text_color"
                 />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -129,8 +141,6 @@
                     android:textSize="@dimen/larger_text_size"
                     android:textColor="@color/default_text_color"
                     />
-
-
         </LinearLayout>
 
 
