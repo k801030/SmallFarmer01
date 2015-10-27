@@ -13,7 +13,7 @@
     <dimen name="larger_text_size">18sp</dimen>
     <dimen name="ex_larger_text_size">20sp</dimen>
     <dimen name="basic_text_size">16sp</dimen>
-    <dimen name="smaller_text_size">10sp</dimen>
+    <dimen name="smaller_text_size">12sp</dimen>
 
     <dimen name="image_button_padding">3dp</dimen>
     <dimen name="spinner_padding">5dp</dimen>

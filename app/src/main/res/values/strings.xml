@@ -14,7 +14,7 @@
 
     <string name="product_unit">箱</string>
     <string name="money_unit">元</string>
-    <string name="notify_shipment">通知\n物流</string>
+    <string name="notify_shipment">通知物流</string>
     <string name="order_empty">沒有訂單資料</string>
     <string name="bill_empty">沒有帳單資料</string>
 
