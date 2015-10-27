@@ -1,5 +1,8 @@
 package edu.ntu.vison.smallfarmer01.model;
 
+import java.util.HashMap;
+import java.util.Set;
+
 /**
  * Created by Vison on 2015/9/30.
  */
@@ -17,15 +20,29 @@ public class TotalBillCalculator {
     private int salesTax;
     private int receivedCash; // 應收金額
 
+    private HashMap<String, Integer> sales; // product name mapping to sales quantity
 
     private OrderItem[] mOrders;
     public TotalBillCalculator(OrderItem[] orders) {
+        sales = new HashMap<>();
         mOrders = orders;
-        init();
+        initBills();
+        initSales();
     }
 
+    private void initSales() {
+        for (int i=0; i<mOrders.length; i++) {
+            OrderItem o = mOrders[i];
+            Integer currentQuantity = sales.get(o.getProductName());
+            if (currentQuantity == null) {
+                sales.put(o.getProductName(), o.getQuantity());
+            } else {
+                sales.put(o.getProductName(), o.getQuantity() + currentQuantity);
+            }
+        }
+    }
 
-    private void init() {
+    private void initBills() {
         setTotalSales();
         setCashFlowFee();
         setCouponFee();
@@ -95,6 +112,18 @@ public class TotalBillCalculator {
 
 
     // Getter
+
+
+    /**
+     * @return key set
+     */
+    public Set getSalesSet() {
+        return sales.keySet();
+    }
+
+    public Integer getItemQuantity(String productName) {
+        return sales.get(productName);
+    }
 
     /**
      * @return 總銷售金額

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-
-import org.w3c.dom.Text;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.BillDetailActivity;
@@ -45,6 +46,7 @@ public class BillFragment extends Fragment {
     private TextView mSalesTax;
     private TextView mTranslateFee;
     private TextView mReceivedCash;
+    private TableLayout mSalesTable;
 
     public BillFragment() {
 
@@ -63,9 +65,6 @@ public class BillFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_bills, container, false);
 
         mSpinner = (Spinner) view.findViewById(R.id.spinner);
-        View emptyView = view.findViewById(R.id.bill_empty);
-        mSpinner.setEmptyView(emptyView);
-
 
         // set bill spinner list
         BillAdapter billAdapter = new BillAdapter(getActivity(), R.layout.fragment_bills_spinner_item_with_arrow, R.id.spinner_text);
@@ -73,13 +72,15 @@ public class BillFragment extends Fragment {
         billAdapter.loadBillData();
         mSpinner.setAdapter(billAdapter);
         mSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
+        View emptyView = view.findViewById(R.id.bill_empty);
+        mSpinner.setEmptyView(emptyView);
 
+        // create sales table
+        mSalesTable = (TableLayout) view.findViewById(R.id.sales_table);
 
         // set total bill
         mTotalSales = (TextView) view.findViewById(R.id.total_sales);
         mCashFlow = (TextView) view.findViewById(R.id.cash_flow);
-        mCouponFee = (TextView) view.findViewById(R.id.coupon_fee);
-        mAdminFee = (TextView) view.findViewById(R.id.admin_fee);
         mSalesTax = (TextView) view.findViewById(R.id.sales_tax);
         mTranslateFee = (TextView) view.findViewById(R.id.translate_fee);
         mReceivedCash = (TextView) view.findViewById(R.id.received_cash);
@@ -94,13 +95,46 @@ public class BillFragment extends Fragment {
 
     private void setTotalBill() {
         TotalBillCalculator billCal = new TotalBillCalculator(mOrders);
+        // bills
         mTotalSales.setText(billCal.getTotalSales().toString());
         mCashFlow.setText(billCal.getCashFlowFee().toString());
-        mCouponFee.setText(billCal.getCouponFee().toString());
-        mAdminFee.setText(billCal.getAdminFee().toString());
         mSalesTax.setText(billCal.getSalesTax().toString());
         mTranslateFee.setText(billCal.getTranslateFee().toString());
         mReceivedCash.setText(billCal.getReceivedCash().toString());
+
+        // sales
+        TextView itemText;
+        TextView quantityText;
+        TextView unitText;
+        mSalesTable.removeAllViews();
+        for (Object key: billCal.getSalesSet()) {
+            String productName = (String) key;
+            TableRow row = new TableRow(this.getActivity());
+
+            itemText = new TextView(this.getActivity());
+            quantityText = new TextView(this.getActivity());
+
+            unitText = new TextView(this.getActivity());
+            // TODO: set product name, set quantity
+            itemText.setText(productName);
+            quantityText.setText(billCal.getItemQuantity(productName).toString());
+            quantityText.setGravity(Gravity.RIGHT);
+            quantityText.setPadding(3, 3, 3, 3);
+            unitText.setText(getResources().getString(R.string.product_unit));
+
+            itemText.setTextSize(getResources().getDimension(R.dimen.basic_text_size));
+            itemText.setTextColor(getResources().getColor(R.color.default_text_color));
+            quantityText.setTextSize(getResources().getDimension(R.dimen.basic_text_size));
+            quantityText.setTextColor(getResources().getColor(R.color.default_text_color));
+            unitText.setTextSize(getResources().getDimension(R.dimen.basic_text_size));
+            unitText.setTextColor(getResources().getColor(R.color.default_text_color));
+
+            row.addView(itemText);
+            row.addView(quantityText);
+            row.addView(unitText);
+            mSalesTable.addView(row);
+
+        }
     }
 
     /**
