@@ -99,12 +99,6 @@ public class AccountFragment extends Fragment {
             this.setPositiveButton("確定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            this.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialogInterface, int i) {
                     mUserService.logOut(new UserService.UserLogOutCallback() {
                         @Override
                         public void onSuccess() {
@@ -119,6 +113,12 @@ public class AccountFragment extends Fragment {
                     });
                 }
             });
+            this.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
         }
     }
 
@@ -128,11 +128,11 @@ public class AccountFragment extends Fragment {
         @Override
         public void onClick(View view) {
             AlertDialog alert = new ConfirmLogoutAlert().create();
+            alert.show();
             Button negButton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
             negButton.setTextColor(getResources().getColor(R.color.default_text_color));
             Button posButton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
             posButton.setTextColor(getResources().getColor(R.color.color_primary));
-            alert.show();
         }
     }
 
