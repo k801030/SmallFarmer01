@@ -41,9 +41,6 @@ public class BillFragment extends Fragment {
 
     private TextView mTotalSales;
     private TextView mCashFlow;
-    private TextView mCouponFee;
-    private TextView mAdminFee;
-    private TextView mSalesTax;
     private TextView mTranslateFee;
     private TextView mReceivedCash;
     private TableLayout mSalesTable;
@@ -81,7 +78,6 @@ public class BillFragment extends Fragment {
         // set total bill
         mTotalSales = (TextView) view.findViewById(R.id.total_sales);
         mCashFlow = (TextView) view.findViewById(R.id.cash_flow);
-        mSalesTax = (TextView) view.findViewById(R.id.sales_tax);
         mTranslateFee = (TextView) view.findViewById(R.id.translate_fee);
         mReceivedCash = (TextView) view.findViewById(R.id.received_cash);
 
@@ -98,7 +94,6 @@ public class BillFragment extends Fragment {
         // bills
         mTotalSales.setText(billCal.getTotalSales().toString());
         mCashFlow.setText(billCal.getCashFlowFee().toString());
-        mSalesTax.setText(billCal.getSalesTax().toString());
         mTranslateFee.setText(billCal.getTranslateFee().toString());
         mReceivedCash.setText(billCal.getReceivedCash().toString());
 

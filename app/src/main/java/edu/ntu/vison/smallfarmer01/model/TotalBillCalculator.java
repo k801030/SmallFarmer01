@@ -7,17 +7,20 @@ import java.util.Set;
  * Created by Vison on 2015/9/30.
  */
 public class TotalBillCalculator {
-    private final static double CASH_FLOW_RATE = 0.03;
-    private final static double COUPON_RATE = 0.03;
-    private final static double ADMINISTRATION_RATE = 0.04;
-    private final static double SALES_TAX_RATE = 0.0075;
+    private final static double CASH_FLOW_RATE = 0.05;
+
+    @Deprecated private final static double COUPON_RATE = 0.03;
+    @Deprecated private final static double ADMINISTRATION_RATE = 0.04;
+    @Deprecated private final static double SALES_TAX_RATE = 0.0075;
     private final static int TRANSLATE_FEE = 15; // 手續費
 
     private int totalSales; //
     private int cashFlow; // 總金流支出
-    private int couponFee; // 總行政費支出
-    private int adminFee;
-    private int salesTax;
+
+    @Deprecated private int couponFee; // 總行政費支出
+    @Deprecated private int adminFee;
+    @Deprecated private int salesTax;
+
     private int receivedCash; // 應收金額
 
     private HashMap<String, Integer> sales; // product name mapping to sales quantity

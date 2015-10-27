@@ -101,24 +101,7 @@
                 android:textSize="@dimen/basic_text_size"
                 android:textColor="@color/default_text_color"/>
         </TableRow>
-        <TableRow>
-            <TextView
-                android:text="營業稅"
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/default_text_color"
-                android:padding="3dip" />
-            <TextView
-                android:id="@+id/sales_tax"
-                android:text=""
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/default_text_color"
-                android:gravity="right"
-                android:padding="3dip" />
-            <TextView
-                android:text="元"
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/default_text_color"/>
-        </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
