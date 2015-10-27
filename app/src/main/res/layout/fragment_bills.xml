@@ -67,44 +67,6 @@
                 android:textColor="@color/default_text_color"/>
         </TableRow>
 
-        <TableRow>
-            <TextView
-                android:text="總回饋金支出"
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/default_text_color"
-                android:padding="3dip" />
-            <TextView
-                android:id="@+id/coupon_fee"
-                android:text=""
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/default_text_color"
-                android:gravity="right"
-                android:padding="3dip" />
-            <TextView
-                android:text="元"
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/default_text_color"/>
-        </TableRow>
-
-
-        <TableRow>
-            <TextView
-                android:text="總行政費支出"
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/default_text_color"
-                android:padding="3dip" />
-            <TextView
-                android:id="@+id/admin_fee"
-                android:text=""
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/default_text_color"
-                android:gravity="right"
-                android:padding="3dip" />
-            <TextView
-                android:text="元"
-                android:textSize="@dimen/basic_text_size"
-                android:textColor="@color/default_text_color"/>
-        </TableRow>
 
         <TableRow>
             <TextView
