@@ -51,7 +51,6 @@
                 android:layout_below="@id/space3"
                 android:background="@color/white"
                 android:padding="@dimen/fragment_orders_item_product_image">
-
                 <TableRow>
                     <TextView
                         android:text="總銷售金額（不含運）"
@@ -117,7 +116,7 @@
                     android:layout_marginRight="8dp"/>
                 <TableRow>
                     <TextView
-                        android:text="應收金額"
+                        android:text="應得金額"
                         android:textSize="@dimen/basic_text_size"
                         android:textColor="@color/light_text"
                         android:padding="3dip" />

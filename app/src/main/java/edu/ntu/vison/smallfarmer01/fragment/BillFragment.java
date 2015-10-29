@@ -3,6 +3,7 @@ package edu.ntu.vison.smallfarmer01.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
@@ -104,9 +105,21 @@ public class BillFragment extends Fragment {
         TextView quantityText;
         TextView unitText;
         mSalesTable.removeAllViews();
+        TableRow row = new TableRow(this.getActivity());
+        row.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        row.setGravity(Gravity.CENTER);
+        row.setPadding(0,0,0,5);
+        TextView headText = new TextView(this.getActivity());
+        headText.setText("本期賣出");
+        
+
+        headText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.larger_text_size));
+        row.addView(headText);
+        mSalesTable.addView(row);
+
         for (Object key: billCal.getSalesSet()) {
             String productName = (String) key;
-            TableRow row = new TableRow(this.getActivity());
+            row = new TableRow(this.getActivity());
 
             itemText = new TextView(this.getActivity());
             quantityText = new TextView(this.getActivity());
