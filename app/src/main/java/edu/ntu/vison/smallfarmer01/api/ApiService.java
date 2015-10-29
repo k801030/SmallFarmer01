@@ -85,7 +85,7 @@ public class ApiService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                AlertDialog test = new TestErrorAlert("ApiService onError", error.toString()).create();
+                AlertDialog test = new TestErrorAlert("抱歉，好像出了問題", "請重新嘗試，或者聯絡服務單位。").create();
                 test.show();
                 if (error.networkResponse != null && error.networkResponse.statusCode == 401) {
                     // unauthorized: error account or password
@@ -466,7 +466,7 @@ public class ApiService {
     private class TestErrorAlert extends AlertDialog.Builder {
         public TestErrorAlert(String tag, String errorMessage) {
             super(mContext);
-            this.setTitle("測試回報: " + tag);
+            this.setTitle(tag);
             this.setMessage(errorMessage);
             this.setPositiveButton("確定", new DialogInterface.OnClickListener() {
                 @Override
