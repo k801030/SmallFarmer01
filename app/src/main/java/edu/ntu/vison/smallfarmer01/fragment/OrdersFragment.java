@@ -91,19 +91,60 @@ public class OrdersFragment extends Fragment {
 
     private class OrdersAdapter extends BaseAdapter {
         private ApiService mApiService;
-        public ArrayList<OrderItem> mOrderItems = new ArrayList<OrderItem>();;
+        public ArrayList<OrderItem> mOrderItems_false = new ArrayList<OrderItem>(); // notify is false
+        public ArrayList<OrderItem> mOrderItems_true = new ArrayList<OrderItem>(); // notify is true
+        public ArrayList<OrderItem> mOrderItems = new ArrayList<OrderItem>(); // notify is true
 
         public OrdersAdapter(ApiService apiService) {
             this.mApiService = apiService;
+            init();
+        }
+
+        public void init() {
+            getFirstDataSet("false");
+            getFirstDataSet("true");
+        }
+
+        private void getFirstDataSet(final String isCalled) {
+            mApiService.getOrders(mUserService.getUserId(), mUserService.getAccessToken(), isCalled, new ApiService.GetOrdersCallback() {
+                @Override
+                public void onSuccess(ArrayList<OrderItem> orderItems) {
+                    if (isCalled == "false") {
+                        mOrderItems_false = orderItems;
+                    } else {
+                        mOrderItems_true = orderItems;
+                    }
+                }
+
+                @Override
+                public void onError(int statusCode) {
+                    if (statusCode == 401) {
+                        AlertDialog alert = new  ErrorLoadAlert().create();
+                        alert.show();
+                    }
+                }
+            });
         }
 
         public void loadOrdersData(final String isCalled) {
 
-            mOrderItems.clear(); // clear first
+            // make updating quick
+            if (isCalled == "false") {
+                mOrderItems = mOrderItems_false;
+            } else {
+                mOrderItems = mOrderItems_true;
+            }
+            mOrdersAdapter.notifyDataSetChanged();
+
             notifyDataSetChanged();
             mApiService.getOrders(mUserService.getUserId(), mUserService.getAccessToken(), isCalled, new ApiService.GetOrdersCallback() {
                 @Override
                 public void onSuccess(ArrayList<OrderItem> orderItems) {
+                    if (isCalled == "false") {
+                        mOrderItems_false = orderItems;
+                    } else {
+                        mOrderItems_true = orderItems;
+                    }
                     mOrderItems = orderItems;
                     if (isCalled == "false") { // list that is not call yet
                         int badgeCount = mOrdersAdapter.getCount();
