@@ -64,8 +64,7 @@ public class TotalBillCalculator {
         cashFlow = 0;
         for (int i=0;i<mOrders.length;i++) {
             order = mOrders[i];
-            double p = (order.getOrderPrice() + order.getShipmentPrice()) * CASH_FLOW_RATE;
-            cashFlow += Math.round(p);
+            cashFlow += order.getCashFlowFee();
         }
     }
 
@@ -75,7 +74,12 @@ public class TotalBillCalculator {
      * MUST be set after other cash
      */
     private void setReceivedCash() {
-        receivedCash = getTotalSales() - getCashFlowFee() -  - getTranslateFee();
+        OrderItem order;
+        receivedCash = 0;
+        for (int i=0;i<mOrders.length;i++) {
+            order = mOrders[i];
+            receivedCash += order.getReceivedMoney();
+        }
     }
 
 
@@ -104,7 +108,7 @@ public class TotalBillCalculator {
      * 總金流支出
      * @return
      */
-    public Integer getCashFlowFee() {
+    public Integer getTotalCashFlowFee() {
         return cashFlow;
     }
 

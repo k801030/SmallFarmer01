@@ -15,6 +15,8 @@ public class OrderItem {
     Product product;
     Shipments[] shipments;
 
+    private final static float CASH_FLOW_RATE = new Float(0.05);
+
     class Order {
         int id;
         int quantity;
@@ -82,8 +84,18 @@ public class OrderItem {
         return order.price;
     }
 
-    public int getShipmentPrice() {
+    public int getShipmentFee() {
         return order.shipping_rates;
+    }
+
+    public int getCashFlowFee() {
+        float sum = getOrderPrice() + getShipmentFee();
+        float fee = sum * CASH_FLOW_RATE;
+        return Math.round(fee);
+    }
+
+    public int getReceivedMoney() {
+        return getOrderPrice() - getCashFlowFee();
     }
 
 }

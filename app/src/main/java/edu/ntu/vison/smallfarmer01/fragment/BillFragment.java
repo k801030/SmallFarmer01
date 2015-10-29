@@ -93,8 +93,9 @@ public class BillFragment extends Fragment {
     private void setTotalBill() {
         TotalBillCalculator billCal = new TotalBillCalculator(mOrders);
         // bills
+
         mTotalSales.setText(billCal.getTotalSales().toString());
-        mCashFlow.setText(billCal.getCashFlowFee().toString());
+        mCashFlow.setText(billCal.getTotalCashFlowFee().toString());
         mTranslateFee.setText(billCal.getTranslateFee().toString());
         mReceivedCash.setText(billCal.getReceivedCash().toString());
 
