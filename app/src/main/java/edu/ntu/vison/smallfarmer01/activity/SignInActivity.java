@@ -95,16 +95,11 @@ public class SignInActivity extends AppCompatActivity {
             mUserService.signInWithFacebook(SignInActivity.this, mCallbackManager, new UserService.UserSignInCallback() {
                 @Override
                 public void onSuccess() {
-                    AlertDialog test = new TestErrorAlert("userService onSuccess", "").create();
-                    test.show();
                     goToMainPage();
                 }
 
                 @Override
                 public void onError(String error) {
-
-                    AlertDialog test = new TestErrorAlert("userService onError", error).create();
-                    test.show();
 
                     if (error == UserService.NOT_YET_REGISTER) {
                         AlertDialog alert = new RegisterErrorAlert().create();
@@ -163,19 +158,4 @@ public class SignInActivity extends AppCompatActivity {
         startActivity(browserIntent);
     }
 
-    private class TestErrorAlert extends AlertDialog.Builder {
-        public TestErrorAlert(String tag, String errorMessage) {
-            super(SignInActivity.this);
-            this.setTitle("測試回報: " + tag);
-            this.setMessage(errorMessage);
-            this.setPositiveButton("確定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-        }
-
-
-    }
 }
