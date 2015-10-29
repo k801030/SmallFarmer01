@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +68,8 @@ public class AccountFragment extends Fragment {
                 Log.d(TAG, user.getUserImgUrl());
                 if (user.getUserImgUrl() != "") {
                     UrlImageViewHelper.setUrlDrawable(mUserImg, user.getUserImgUrl());
+                } else {
+                    mUserImg.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.default_profile_img));
                 }
                 mUserName.setText(user.getUserName());
             }
