@@ -80,6 +80,7 @@ public class TotalBillCalculator {
             order = mOrders[i];
             receivedCash += order.getReceivedMoney();
         }
+        receivedCash -= getTranslateFee();
     }
 
 
