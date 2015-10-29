@@ -88,14 +88,12 @@ public class UserService {
 
             @Override
             public void onCancel() {
-                AlertDialog test = new TestErrorAlert("FbLogin onCancel", "").create();
-                test.show();
+
             }
 
             @Override
             public void onError(FacebookException e) {
-                AlertDialog test = new TestErrorAlert("FbLogin onError", e.toString()).create();
-                test.show();
+
             }
         });
 
@@ -187,17 +185,5 @@ public class UserService {
         void onError();
     }
 
-    private class TestErrorAlert extends AlertDialog.Builder {
-        public TestErrorAlert(String tag, String errorMessage) {
-            super(mContext);
-            this.setTitle("測試回報: " + tag);
-            this.setMessage(errorMessage);
-            this.setPositiveButton("確定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-        }
-    }
+
 }
