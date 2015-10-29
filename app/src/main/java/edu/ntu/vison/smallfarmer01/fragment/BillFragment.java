@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,11 +118,12 @@ public class BillFragment extends Fragment {
             quantityText.setPadding(3, 3, 3, 3);
             unitText.setText(getResources().getString(R.string.product_unit));
 
-            itemText.setTextSize(getResources().getDimension(R.dimen.basic_text_size));
+            // note: setTextSize takes unit as pixel
+            itemText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.basic_text_size));
             itemText.setTextColor(getResources().getColor(R.color.default_text_color));
-            quantityText.setTextSize(getResources().getDimension(R.dimen.basic_text_size));
+            quantityText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.basic_text_size));
             quantityText.setTextColor(getResources().getColor(R.color.default_text_color));
-            unitText.setTextSize(getResources().getDimension(R.dimen.basic_text_size));
+            unitText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.basic_text_size));
             unitText.setTextColor(getResources().getColor(R.color.default_text_color));
 
             row.addView(itemText);
