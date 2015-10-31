@@ -89,9 +89,9 @@ public class OrderItem {
     }
 
     public int getCashFlowFee() {
-        float sum = getOrderPrice() + getShipmentFee();
-        float fee = sum * CASH_FLOW_RATE;
-        return Math.round(fee);
+        double sum = getOrderPrice() + getShipmentFee();
+        double fee = sum * CASH_FLOW_RATE;
+        return (int) Math.ceil(fee);
     }
 
     public int getReceivedMoney() {
