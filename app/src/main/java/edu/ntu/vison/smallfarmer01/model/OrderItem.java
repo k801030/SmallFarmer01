@@ -34,7 +34,8 @@ public class OrderItem {
     String product_cover;
 
     class Shipments {
-        Receiver_address receiver_address;
+        Receiver_address receiver_address = new Receiver_address();
+        Shipment shipment = new Shipment();
     }
 
     class Receiver_address {
@@ -45,6 +46,10 @@ public class OrderItem {
         String county;
         String district;
         String address;
+    }
+
+    class Shipment {
+        int quantity;
     }
 
 
@@ -96,6 +101,11 @@ public class OrderItem {
 
     public int getReceivedMoney() {
         return getOrderPrice() - getCashFlowFee();
+    }
+
+    // for shipping
+    public int getShipmentQuantity() {
+        return shipments[0].shipment.quantity;
     }
 
 }
