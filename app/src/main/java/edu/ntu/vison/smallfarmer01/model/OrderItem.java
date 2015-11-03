@@ -25,6 +25,7 @@ public class OrderItem {
         // for bills
         int price;
         int shipping_rates;
+        int size;
     }
 
     class Product {
@@ -119,6 +120,11 @@ public class OrderItem {
         return shipments[0].shipment.quantity;
     }
 
+    public String getOrderSize() {
+        String[] size = new String[]{"60公分以下", "61公分~90公分", "91公分~120公分"};
+
+        return size[order.size];
+    }
 
     private int getPaymentMethod() {
         return invoice.payment_method;

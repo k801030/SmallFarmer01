@@ -6,6 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +43,6 @@ public class OrdersFragment extends Fragment {
     Switcher<TextView> mSwitcher;
     UserService mUserService;
     ApiService mApiService;
-
 
     public OrdersFragment () {
 
@@ -192,6 +196,7 @@ public class OrdersFragment extends Fragment {
             TextView productNameText = (TextView) view.findViewById(R.id.product_name);
             TextView quantityText = (TextView) view.findViewById(R.id.quantity);
             TextView receiverInfoText = (TextView) view.findViewById(R.id.receiver_info);
+            TextView shipmentDetailText = (TextView) view.findViewById(R.id.shipment_detail);
             RoundedImageView productImage = (RoundedImageView) view.findViewById(R.id.product_image);
             View confirmButton = view.findViewById(R.id.notify_shipment_button);
 
@@ -205,6 +210,37 @@ public class OrdersFragment extends Fragment {
             receiverInfoText.setText(item.getReceiverName());
             receiverInfoText.append("｜");
             receiverInfoText.append(item.getReceiverAddress());
+
+            // appending shipment detail
+            int a = item.getQuantity() / 2;
+            int b = item.getQuantity() % 2;
+            int j = 1;
+            shipmentDetailText.setText("");
+            while(j<=a) {
+                String id = item.getId()+"_"+j;
+                String type = "2箱" + item.getOrderSize() + "綁一起";
+                String text = id +" " + type;
+                Spannable span = new SpannableString(text);
+                final ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.light_text));
+                final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
+                span.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.light_text)), 0, id.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(bss, 0, id.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                shipmentDetailText.append(span + "\n");
+
+                j++;
+            }
+            if (b == 1) {
+                String id = item.getId()+"_"+j;
+                String type = "1箱" + item.getOrderSize();
+                String text = id +" " + type;
+                Spannable span = new SpannableString(text);
+                final ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.light_text));
+                final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
+                span.setSpan(fcs, 0, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                // span.setSpan(bss, 0, id.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+                shipmentDetailText.append(span + "\n");
+            }
+
 
             UrlImageViewHelper.setUrlDrawable(productImage, item.getProductUrl());
             productImage.setCornerRadius(productImage.getWidth() / 2);

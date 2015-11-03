@@ -35,15 +35,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/serial_number"
-                android:textColor="@color/order_item_serial_color" />
+                android:textColor="@color/gray_text_color" />
             <TextView
                 android:id="@+id/order_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="123"
                 android:textSize="@dimen/larger_text_size"
-                android:textColor="@color/order_item_serial_color"
-                android:textStyle="bold" />
+                android:textColor="@color/gray_text_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,13 +76,14 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:textSize="@dimen/larger_text_size"
+                android:textColor="@color/light_text"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/product_unit"
-                android:textColor="@color/default_text_color" />
+                android:textColor="@color/light_text"/>
         </LinearLayout>
 
 
@@ -109,7 +109,28 @@
             android:text="李小明．台北市大安區"
             android:textColor="@color/default_text_color"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/horizontal_line"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"/>
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="配送明細"
+            android:textColor="@color/gray_text_color"/>
+        <TextView
+            android:id="@+id/shipment_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="李小明．台北市大安區"
+            android:textColor="@color/default_text_color"
+            />
 
 
     </LinearLayout>
