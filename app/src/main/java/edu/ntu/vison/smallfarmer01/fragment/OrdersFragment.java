@@ -219,26 +219,26 @@ public class OrdersFragment extends Fragment {
             while(j<=a) {
                 String id = item.getId()+"_"+j;
                 String type = "2箱" + item.getOrderSize() + "綁一起";
-                String text = id +" " + type;
+                String text = id +" " + type + "\n";
                 Spannable span = new SpannableString(text);
                 final ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.light_text));
                 final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
-                span.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.light_text)), 0, id.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                span.setSpan(bss, 0, id.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                shipmentDetailText.append(span + "\n");
+                span.setSpan(fcs, 0, id.length(), 0);
+                span.setSpan(bss, 0, id.length(), 0);
+                shipmentDetailText.append(span);
 
                 j++;
             }
             if (b == 1) {
                 String id = item.getId()+"_"+j;
                 String type = "1箱" + item.getOrderSize();
-                String text = id +" " + type;
+                String text = id +" " + type + "\n";
                 Spannable span = new SpannableString(text);
                 final ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.light_text));
                 final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
-                span.setSpan(fcs, 0, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                // span.setSpan(bss, 0, id.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-                shipmentDetailText.append(span + "\n");
+                span.setSpan(fcs, 0, id.length(), 0);
+                span.setSpan(bss, 0, id.length(), 0);
+                shipmentDetailText.append(span);
             }
 
 
@@ -367,5 +367,19 @@ public class OrdersFragment extends Fragment {
         public boolean isLeftSelected() {
             return A.equals(selected);
         }
+    }
+
+    private void doColorSpanForFirstString(String firstString,
+                                           String lastString, TextView txtSpan) {
+
+        String changeString = (firstString != null ? firstString : "");
+
+        String totalString = changeString + lastString;
+        Spannable spanText = new SpannableString(totalString);
+        spanText.setSpan(new ForegroundColorSpan(getResources()
+                .getColor(R.color.light_text)), 0, changeString.length(), 0);
+
+        txtSpan.setText(spanText);
+
     }
 }

@@ -101,7 +101,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="收件資訊"
-            android:textColor="@color/gray_text_color"/>
+            android:textColor="@color/gray_text_color"
+            android:paddingBottom="@dimen/image_button_padding"/>
         <TextView
             android:id="@+id/receiver_info"
             android:layout_width="wrap_content"
@@ -123,7 +124,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="配送明細"
-            android:textColor="@color/gray_text_color"/>
+            android:textColor="@color/gray_text_color"
+            android:paddingBottom="@dimen/image_button_padding"/>
         <TextView
             android:id="@+id/shipment_detail"
             android:layout_width="wrap_content"
