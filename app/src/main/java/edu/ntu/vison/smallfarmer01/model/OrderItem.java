@@ -14,6 +14,7 @@ public class OrderItem {
     Order order;
     Product product;
     Shipments[] shipments;
+    Invoice invoice;
 
     private final static float CASH_FLOW_RATE = new Float(0.05);
 
@@ -29,6 +30,11 @@ public class OrderItem {
     class Product {
         String name;
 
+    }
+
+
+    class Invoice {
+        int payment_method;
     }
 
     String product_cover;
@@ -94,9 +100,14 @@ public class OrderItem {
     }
 
     public int getCashFlowFee() {
-        double sum = getOrderPrice() + getShipmentFee();
-        double fee = sum * CASH_FLOW_RATE;
-        return (int) Math.ceil(fee);
+        if (getPaymentMethod() == 1 || getPaymentMethod() == 2) {
+            double sum = getOrderPrice() + getShipmentFee();
+            double fee = sum * CASH_FLOW_RATE;
+            return (int) Math.ceil(fee);
+        } else {
+            return 0;
+        }
+
     }
 
     public int getReceivedMoney() {
@@ -107,5 +118,11 @@ public class OrderItem {
     public int getShipmentQuantity() {
         return shipments[0].shipment.quantity;
     }
+
+
+    private int getPaymentMethod() {
+        return invoice.payment_method;
+    }
+
 
 }
