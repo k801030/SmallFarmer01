@@ -149,7 +149,7 @@ public class OrdersFragment extends Fragment {
                     } else {
                         mOrderItems_true = orderItems;
                     }
-                    mOrderItems = orderItems;
+                    // mOrderItems = orderItems;
                     if (isCalled == "false") { // list that is not call yet
                         int badgeCount = mOrdersAdapter.getCount();
                         NotificationCountBadge.with(getActivity()).setCount(badgeCount);

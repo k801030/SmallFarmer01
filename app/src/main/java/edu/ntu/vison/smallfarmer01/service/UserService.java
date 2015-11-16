@@ -26,6 +26,8 @@ import edu.ntu.vison.smallfarmer01.api.ApiService;
  * Created by Vison on 2015/9/14.
  */
 public class UserService {
+    private static final String TAG = "UserService";
+
     SharedPreferences mSharedPreferences;
     SharedPreferences.Editor mEditor;
     static final String SHARED_PREF_KEY_ACCESS_TOKEN = "ACCESS_TOKEN";
@@ -105,7 +107,7 @@ public class UserService {
         if (textValidator.checkEmail(email) && textValidator.checkPassword(password)) {
 
             String regId = mSharedPreferences.getString(SHARED_PREF_KEY_REG_ID, null);
-
+            Log.i(TAG, "GCM Registration Token: " + regId);
             mApiService.signIn(email, password, regId, new ApiService.SignInCallback() {
                 @Override
                 public void onSuccess(String userId, String accessToken) {
