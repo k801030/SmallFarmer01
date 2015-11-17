@@ -132,4 +132,7 @@ public class OrderItem {
     }
 
 
+    public boolean getReturnProblem() {
+        return order.problem_c;
+    }
 }

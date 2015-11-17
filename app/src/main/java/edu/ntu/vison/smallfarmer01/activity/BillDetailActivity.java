@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -121,6 +122,8 @@ public class BillDetailActivity extends AppCompatActivity {
             TextView receiverNameText = (TextView) view.findViewById(R.id.receiver_info);
             RoundedImageView productImage = (RoundedImageView) view.findViewById(R.id.product_image);
             TextView receivedMoneyText = (TextView) view.findViewById(R.id.received_money);
+            ImageView returnSign = (ImageView) view.findViewById(R.id.return_sign);
+
 
             final OrderItem item = orders[i];
             orderIdText.setText(item.getId().toString());
@@ -131,6 +134,13 @@ public class BillDetailActivity extends AppCompatActivity {
             productImage.setCornerRadius(productImage.getWidth() / 2);
 
             receivedMoneyText.setText(Long.toString(item.getReceivedMoney()));
+
+            // set return
+            if (item.getReturnProblem()) {
+                returnSign.setVisibility(View.VISIBLE);
+            } else {
+                returnSign.setVisibility(View.INVISIBLE);
+            }
 
             return view;
         }
