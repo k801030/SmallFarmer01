@@ -26,6 +26,7 @@ public class OrderItem {
         int price;
         int shipping_rates;
         int size;
+        boolean problem_c;
     }
 
     class Product {
