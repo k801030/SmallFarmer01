@@ -24,6 +24,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 import edu.ntu.vison.smallfarmer01.R;
 import edu.ntu.vison.smallfarmer01.activity.SignInActivity;
@@ -182,8 +183,9 @@ public class OrdersFragment extends Fragment {
             return i;
         }
 
-        public void removeItem(int i) {
-            mOrderItems.remove(i);
+        public void removeItem(OrderItem order) {
+            mOrderItems_true.add(order);
+            mOrderItems_false.remove(order);
         }
 
         @Override
@@ -294,7 +296,10 @@ public class OrdersFragment extends Fragment {
                         @Override
                         public void onSuccess() {
                             // clear
-                            mOrdersAdapter.removeItem(index);
+                            OrderItem i = (OrderItem)mOrdersAdapter.getItem(index);
+                            mOrdersAdapter.removeItem(i);
+                            mOrdersAdapter.notifyDataSetChanged();
+
 
                             int badgeCount = mOrdersAdapter.getCount();
                             NotificationCountBadge.with(getActivity()).setCount(badgeCount);

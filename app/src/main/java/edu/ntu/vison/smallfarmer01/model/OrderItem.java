@@ -94,22 +94,31 @@ public class OrderItem {
 
     // for bill
     public int getOrderPrice() {
-        return order.price;
+        if (getReturnProblem())
+            return 0;
+        else
+            return order.price;
     }
 
     public int getShipmentFee() {
-        return order.shipping_rates;
+        if (getReturnProblem())
+            return 0;
+        else
+            return order.shipping_rates;
     }
 
     public int getCashFlowFee() {
-        if (getPaymentMethod() == 1 || getPaymentMethod() == 2) {
-            double sum = getOrderPrice() + getShipmentFee();
-            double fee = sum * CASH_FLOW_RATE;
-            return (int) Math.ceil(fee);
-        } else {
+        if (getReturnProblem())
             return 0;
+        else {
+            if (getPaymentMethod() == 1 || getPaymentMethod() == 2) {
+                double sum = getOrderPrice() + getShipmentFee();
+                double fee = sum * CASH_FLOW_RATE;
+                return (int) Math.ceil(fee);
+            } else {
+                return 0;
+            }
         }
-
     }
 
     public int getReceivedMoney() {
