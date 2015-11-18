@@ -24,6 +24,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 import edu.ntu.vison.smallfarmer01.R;
@@ -117,6 +118,7 @@ public class OrdersFragment extends Fragment {
                     if (isCalled == "false") {
                         mOrderItems_false = orderItems;
                     } else {
+
                         mOrderItems_true = orderItems;
                     }
                 }
@@ -148,6 +150,13 @@ public class OrdersFragment extends Fragment {
                     if (isCalled == "false") {
                         mOrderItems_false = orderItems;
                     } else {
+
+                        Collections.sort(orderItems, new Comparator<OrderItem>() {
+                            @Override
+                            public int compare(OrderItem o1, OrderItem o2) {
+                                return o2.getCallFarmerAt().compareTo(o1.getCallFarmerAt());
+                            }
+                        });
                         mOrderItems_true = orderItems;
                     }
                     // mOrderItems = orderItems;

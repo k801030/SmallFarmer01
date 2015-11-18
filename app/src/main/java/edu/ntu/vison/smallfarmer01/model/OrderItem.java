@@ -4,7 +4,10 @@ import android.content.Intent;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -12,6 +15,8 @@ import java.util.Date;
  */
 public class OrderItem {
     Order order;
+
+
     Product product;
     Shipments[] shipments;
     Invoice invoice;
@@ -27,6 +32,11 @@ public class OrderItem {
         int shipping_rates;
         int size;
         boolean problem_c;
+
+        // for order sorting
+        String called_smallfarmer_at;
+
+
     }
 
     class Product {
@@ -143,5 +153,17 @@ public class OrderItem {
 
     public boolean getReturnProblem() {
         return order.problem_c;
+    }
+
+    public Date getCallFarmerAt() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        Date date = null;
+        try {
+            date = format.parse(order.called_smallfarmer_at);
+            return date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 }
