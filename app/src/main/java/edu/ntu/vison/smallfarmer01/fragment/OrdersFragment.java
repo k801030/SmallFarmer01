@@ -11,6 +11,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class OrdersFragment extends Fragment {
     ApiService mApiService;
     View mEmptyView;
 
+
     public OrdersFragment () {
 
     }
@@ -74,7 +76,7 @@ public class OrdersFragment extends Fragment {
         mOrdersAdapter = new OrdersAdapter(new ApiService(this.getActivity()));
         mOrderList.setAdapter(mOrdersAdapter);
         View mEmptyView =  view.findViewById(R.id.order_empty);
-        mEmptyView.setVisibility(View.GONE);
+        mOrderList.setEmptyView(mEmptyView);
 
         // set switcher
         mNotCalledButton = (TextView) view.findViewById(R.id.not_called);
@@ -100,16 +102,21 @@ public class OrdersFragment extends Fragment {
         private ApiService mApiService;
         public ArrayList<OrderItem> mOrderItems_false = new ArrayList<OrderItem>(); // notify is false
         public ArrayList<OrderItem> mOrderItems_true = new ArrayList<OrderItem>(); // notify is true
-        public ArrayList<OrderItem> mOrderItems = new ArrayList<OrderItem>(); // notify is true
+        public ArrayList<OrderItem> mOrderItems = new ArrayList<OrderItem>(1); // notify is true
+        private boolean firstTime = true;
 
         public OrdersAdapter(ApiService apiService) {
             this.mApiService = apiService;
-
+            mOrderItems.add(new OrderItem());
             init();
+
         }
 
         @Override
         public void notifyDataSetChanged() {
+            if (isCalledFirstTime()) {
+                return;
+            }
             // make updating quick
             if (mSwitcher.isLeftSelected()) {
                 mOrderItems = mOrderItems_false;
@@ -139,7 +146,7 @@ public class OrdersFragment extends Fragment {
                 @Override
                 public void onError(int statusCode) {
                     if (statusCode == 401) {
-                        AlertDialog alert = new  ErrorLoadAlert().create();
+                        AlertDialog alert = new ErrorLoadAlert().create();
                         alert.show();
                     }
                 }
@@ -178,8 +185,10 @@ public class OrdersFragment extends Fragment {
                         NotificationCountBadge.with(getActivity()).setCount(badgeCount);
                     }
 
+                    setIsCalledFirstTime();
                     mOrdersAdapter.notifyDataSetChanged();
-                    mOrderList.setEmptyView(mEmptyView);
+
+
                 }
 
                 @Override
@@ -194,6 +203,7 @@ public class OrdersFragment extends Fragment {
 
         @Override
         public int getCount() {
+            Log.d("get Count", Integer.toString(mOrderItems.size()));
             return mOrderItems.size();
         }
 
@@ -290,6 +300,14 @@ public class OrdersFragment extends Fragment {
 
             return view;
         }
+
+        public boolean isCalledFirstTime() {
+            return firstTime;
+        }
+
+        public void setIsCalledFirstTime() {
+            firstTime = false;
+        };
     }
 
     private class ErrorLoadAlert extends AlertDialog.Builder {
