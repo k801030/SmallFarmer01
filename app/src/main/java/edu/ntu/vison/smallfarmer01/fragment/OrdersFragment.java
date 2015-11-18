@@ -45,6 +45,7 @@ public class OrdersFragment extends Fragment {
     Switcher<TextView> mSwitcher;
     UserService mUserService;
     ApiService mApiService;
+    View mEmptyView;
 
     public OrdersFragment () {
 
@@ -72,8 +73,8 @@ public class OrdersFragment extends Fragment {
         mOrderList = (ListView) view.findViewById(R.id.order_list);
         mOrdersAdapter = new OrdersAdapter(new ApiService(this.getActivity()));
         mOrderList.setAdapter(mOrdersAdapter);
-        View emptyView =  view.findViewById(R.id.order_empty);
-        mOrderList.setEmptyView(emptyView);
+        View mEmptyView =  view.findViewById(R.id.order_empty);
+        mEmptyView.setVisibility(View.GONE);
 
         // set switcher
         mNotCalledButton = (TextView) view.findViewById(R.id.not_called);
@@ -103,7 +104,19 @@ public class OrdersFragment extends Fragment {
 
         public OrdersAdapter(ApiService apiService) {
             this.mApiService = apiService;
+
             init();
+        }
+
+        @Override
+        public void notifyDataSetChanged() {
+            // make updating quick
+            if (mSwitcher.isLeftSelected()) {
+                mOrderItems = mOrderItems_false;
+            } else {
+                mOrderItems = mOrderItems_true;
+            }
+            super.notifyDataSetChanged();
         }
 
         public void init() {
@@ -164,7 +177,9 @@ public class OrdersFragment extends Fragment {
                         int badgeCount = mOrdersAdapter.getCount();
                         NotificationCountBadge.with(getActivity()).setCount(badgeCount);
                     }
+
                     mOrdersAdapter.notifyDataSetChanged();
+                    mOrderList.setEmptyView(mEmptyView);
                 }
 
                 @Override
