@@ -110,7 +110,7 @@ public class ApiService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d(TAG, json.toString());
+        // Log.d(TAG, json.toString());
         RequestQueue queue = Volley.newRequestQueue(mContext);
         final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
@@ -281,14 +281,14 @@ public class ApiService {
         final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d(TAG, "successful");
-                Log.d(TAG, response.toString());
+                // Log.d(TAG, "successful");
+                // Log.d(TAG, response.toString());
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.getStackTrace();
-                Log.d(TAG, "error");
+                // Log.d(TAG, "error");
 
             }
         });
@@ -313,15 +313,15 @@ public class ApiService {
         final JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d(TAG, "successful");
-                Log.d(TAG, response.toString());
+                // Log.d(TAG, "successful");
+                // Log.d(TAG, response.toString());
                 callback.onSuccess();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.getStackTrace();
-                Log.d(TAG, "error");
+                // Log.d(TAG, "error");
                 callback.onError();
             }
         });

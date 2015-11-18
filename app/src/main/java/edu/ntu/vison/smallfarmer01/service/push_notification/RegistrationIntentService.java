@@ -52,7 +52,7 @@ public class RegistrationIntentService extends IntentService {
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 
             // [END get_token]
-            Log.i(TAG, "GCM Registration Token: " + regToken);
+
 
             // TODO: implement sendRegistration api
             UserService userService = new UserService(this);

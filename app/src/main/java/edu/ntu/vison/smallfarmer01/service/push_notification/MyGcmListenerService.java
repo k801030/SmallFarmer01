@@ -37,13 +37,13 @@ public class MyGcmListenerService extends GcmListenerService {
     private static final String PREF_NOTIFICATION_ID = "notification_id";
 
     public MyGcmListenerService() {
-        Log.d(TAG, "constructor");
+
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "oncreate");
+
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mSharedPreferences.edit();
     }
@@ -103,7 +103,7 @@ public class MyGcmListenerService extends GcmListenerService {
         mEditor.putInt(PREF_NOTIFICATION_ID, notificationId);
         mEditor.commit();
 
-        Log.d(TAG, Integer.toString(notificationId));
+
         return notificationId;
     }
 

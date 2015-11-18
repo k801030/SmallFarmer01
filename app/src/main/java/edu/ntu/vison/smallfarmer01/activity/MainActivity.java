@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        Log.d("onSaveInstanceState", savedInstanceState.toString());
         savedInstanceState.putInt("page", mPager.getCurrentItem());
 
     }

@@ -64,8 +64,8 @@ public class AccountFragment extends Fragment {
         mApiService.getUserProfile(mUserService.getUserId(), mUserService.getAccessToken(), new ApiService.GetUserProfileCallback() {
             @Override
             public void onSuccess(UserData user) {
-                Log.d(TAG, user.getUserName());
-                Log.d(TAG, user.getUserImgUrl());
+                // Log.d(TAG, user.getUserName());
+                // Log.d(TAG, user.getUserImgUrl());
                 if (user.getUserImgUrl() != "") {
                     UrlImageViewHelper.setUrlDrawable(mUserImg, user.getUserImgUrl());
                 } else {
