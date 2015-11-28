@@ -24,7 +24,7 @@ public class OrderItem {
     Invoice invoice;
     Product_boxing product_boxing;
 
-    private final static float CASH_FLOW_RATE = new Float(0.05);
+    private final static double CASH_FLOW_RATE = new Double(0.05);
 
     class Order {
         int id;
