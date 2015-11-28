@@ -20,6 +20,7 @@ public class OrderItem {
     Product product;
     Shipments[] shipments;
     Invoice invoice;
+    Product_boxing product_boxing;
 
     private final static float CASH_FLOW_RATE = new Float(0.05);
 
@@ -39,9 +40,12 @@ public class OrderItem {
 
     }
 
+    class Product_boxing {
+        int quantity;
+    }
     class Product {
         String name;
-
+        int unit;
     }
 
 
@@ -165,5 +169,13 @@ public class OrderItem {
             e.printStackTrace();
         }
         return date;
+    }
+
+    public int getUnit() {
+        return product.unit;
+    }
+
+    public int getBoxingQuantity() {
+        return product_boxing.quantity;
     }
 }

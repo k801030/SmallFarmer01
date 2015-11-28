@@ -239,7 +239,8 @@ public class OrdersFragment extends Fragment {
 
             final OrderItem item = mOrderItems.get(i);
             orderIdText.setText(item.getId().toString());
-            productNameText.setText(item.getProductName());
+            // add boxing quantity
+            productNameText.setText(item.getProductName() + item.getBoxingQuantity() + item.getUnit());
             quantityText.setText(item.getQuantity().toString());
 
             // appending receiver information
