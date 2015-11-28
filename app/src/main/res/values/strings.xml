@@ -25,4 +25,6 @@
 
     <!-- gcm -->
     <string name="gcm_defaultSenderId">702294285521</string>
+
+
 </resources>

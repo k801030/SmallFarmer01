@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 
+import edu.ntu.vison.smallfarmer01.R;
+
 /**
  * Created by Vison on 2015/9/11.
  */
@@ -171,11 +173,16 @@ public class OrderItem {
         return date;
     }
 
-    public int getUnit() {
-        return product.unit;
+
+    public String getUnit() {
+        String[] unit = new String[]{"台斤", "公斤", "公克", "毫升", "顆", "包", "罐", "盒"};
+
+        return unit[product.unit];
     }
 
     public int getBoxingQuantity() {
         return product_boxing.quantity;
     }
+
+
 }
