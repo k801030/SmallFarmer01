@@ -36,8 +36,8 @@ import edu.ntu.vison.smallfarmer01.model.UserData;
 public class ApiService {
     private static final String TAG = "ApiService";
 
-    // private static final String HOST = "https://www.smallfarmer01.com/";
-    private static final String HOST = "http://register.ac-experts.com.tw/";
+    private static final String HOST = "https://www.smallfarmer01.com/";
+    // private static final String HOST = "http://register.ac-experts.com.tw/";
 
     @StringDef({SIGN_IN_FIELD, GET_ORDERS_FIELD, CONFIRM_ORDER, UPDATED_REG_ID, LOG_OUT, GET_BILL_LIST, GET_BILL, FB_SIGN_IN_FIELD, GET_USER_PROFILE})
     @Retention(RetentionPolicy.SOURCE)
