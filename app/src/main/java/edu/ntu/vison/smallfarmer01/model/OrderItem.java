@@ -175,8 +175,7 @@ public class OrderItem {
 
 
     public String getUnit() {
-        String[] unit = new String[]{"台斤", "公斤", "公克", "毫升", "顆", "包", "罐", "盒"};
-
+        String[] unit = new String[]{"台斤", "公斤", "顆", "包", "罐", "毫升", "公克", "盒"};
         return unit[product.unit];
     }
 
